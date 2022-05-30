@@ -8,7 +8,6 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
@@ -29,5 +28,14 @@
   },
   "dependencies": {
     "regenerator-runtime": "^0.13.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anggiazahra/peduli-bencana-apps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anggiazahra/peduli-bencana-apps/issues"
+  },
+  "homepage": "https://github.com/anggiazahra/peduli-bencana-apps#readme",
+  "description": ""
 }
