@@ -108,19 +108,6 @@ html {
     margin: 20px 0;
 }
 
-.relawan-detail {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    margin: 50px 0;
-    min-width: 250px;
-}
-
-.relawan-detail img {
-    width: 90%;
-    margin: 0 10px;
-    align-items: center;
-}
-
 table {
     text-align: left;
 }
@@ -129,14 +116,6 @@ table {
     width: 100%;
     background-color: #1C4966;
     color: white;
-}
-
-.btn-add {
-    width:auto;
-    align-content: flex-end;
-    align-items: flex-end;
-    margin-left: auto; 
-    margin-right: 0;
 }
 
 #main-content {
@@ -192,30 +171,6 @@ table {
     .app-bar .app-bar__brand h1 {
         font-size: 27px;
     }
-
-    .grid-row {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-        margin: 20px 0;
-    }
-}
-
-@media screen and (max-width: 650px) {
-    .relawan-detail {
-        display: grid;
-        grid-template-columns: 1fr;
-        margin: 50px 0;
-    }
-
-    .relawan-detail .img-detail {
-        margin-bottom: 15px;
-    }
-
-    .relawan-detail img {
-        width: 100%;
-        margin: 0;
-        align-items: center;
-    }
 }
 
 @media screen and (max-width: 540px) {
@@ -227,24 +182,8 @@ table {
         font-size: 24px;
     }
 
-    .grid-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin: 20px 0;
-    }
-
-    .relawan-detail {
-        margin: 30px 0;
-    }
-
     #mainContent h1 {
         font-size: 24px;
-    }
-}
-
-@media screen and (max-width: 430px) {
-    .grid-row {
-        grid-template-columns: 1fr;
     }
 }
 

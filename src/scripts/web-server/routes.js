@@ -1,8 +1,10 @@
+// const fs = require('fs');
 const {
   addPostinganRelawanHandler,
   getAllPostinganRelawanHandler,
   getPostinganRelawanByIdHandler,
   editPostinganRelawanByIdHandler,
+  editPostinganRelawanWithoutPosterByIdHandler,
   deletePostinganRelawanByIdHandler,
 } = require('./handler-postingan-relawan');
 
@@ -49,6 +51,20 @@ const routes = [
       },
     },
     handler: editPostinganRelawanByIdHandler,
+  },
+  {
+    method: 'PUT',
+    path: '/relawan/postingan-tanpa-poster/{postinganRelawanId}',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        maxBytes: 2 * 1000 * 1000,
+        multipart: true,
+      },
+    },
+    handler: editPostinganRelawanWithoutPosterByIdHandler,
   },
   {
     method: 'DELETE',

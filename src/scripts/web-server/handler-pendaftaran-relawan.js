@@ -5,17 +5,25 @@ const {
   addPendaftaranRelawanToDatabase,
   getAllPendaftaranRelawanFromDatabase,
   getPostinganRelawanIdFromDatabase,
-  editPostinganRelawanFromDatabase,
-  deletePostinganRelawanIdFromDatabase,
 } = require('../database/database-request');
 
 const addPendaftaranRelawanHandler = async (request, h) => {
   const {
+    idPostinganRelawan,
     namaLengkap,
     noTelepon,
     kabKota,
     provinsi,
   } = request.payload;
+
+  if (idPostinganRelawan === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Id postingan relawan tidak ada',
+    });
+    response.code(400);
+    return response;
+  }
 
   if (namaLengkap === undefined) {
     const response = h.response({
@@ -58,24 +66,27 @@ const addPendaftaranRelawanHandler = async (request, h) => {
 
   const data = {
     id,
+    idPostinganRelawan,
     namaLengkap,
     noTelepon,
     kabKota,
     provinsi,
     tanggalDaftar,
   };
-
+  const cekId = await getPostinganRelawanIdFromDatabase(idPostinganRelawan);
   const results = await addPendaftaranRelawanToDatabase(data);
+  console.log(results);
 
-  if (results) {
+  if (cekId.length > 0 && results) {
     const response = h.response({
       status: 'success',
       message: 'Data berhasil ditambahkan',
       data: {
-        pendaftaranRelawanId: id,
+        idPendaftaranRelawan: id,
+        idPostinganRelawan,
       },
     });
-    response.code(201);
+    response.code(200);
     return response;
   }
 
@@ -100,168 +111,7 @@ const getAllPendaftaranRelawanHandler = async (request, h) => {
   return response;
 };
 
-const getPostinganRelawanByIdHandler = async (request, h) => {
-  const { postinganRelawanId } = request.params;
-
-  const results = await getPostinganRelawanIdFromDatabase(postinganRelawanId);
-
-  if (results.length > 0) {
-    const response = h.response({
-      status: 'success',
-      data: {
-        relawan: results,
-      },
-    });
-    response.code(200);
-    return response;
-  }
-
-  const response = h.response({
-    status: 'fail',
-    message: 'Data tidak ditemukan',
-  });
-  response.code(404);
-  return response;
-};
-
-const editPostinganRelawanByIdHandler = async (request, h) => {
-  const { postinganRelawanId } = request.params;
-
-  const {
-    judulPostingan,
-    tanggalMulai,
-    tanggalBerakhir,
-    kabKota,
-    provinsi,
-    alamatLengkap,
-    persyaratan,
-  } = request.payload;
-
-  if (judulPostingan === undefined) {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi judul postingan',
-    });
-    response.code(400);
-    return response;
-  }
-
-  if (tanggalMulai === undefined) {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi tanggal dimulainya kegiatan relawan',
-    });
-    response.code(400);
-    return response;
-  }
-
-  if (tanggalBerakhir === undefined) {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi tanggal berakhirnya kegiatan relawan',
-    });
-    response.code(400);
-    return response;
-  }
-
-  if (kabKota === undefined) {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi Kabupaten/Kota lokasi kegiatan relawan',
-    });
-    response.code(400);
-    return response;
-  }
-
-  if (provinsi === undefined) {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi Provinsi lokasi kegiatan relawan',
-    });
-    response.code(400);
-    return response;
-  }
-
-  if (alamatLengkap === undefined) {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi alamat lengkap kegiatan relawan',
-    });
-    response.code(400);
-    return response;
-  }
-
-  if (persyaratan === undefined) {
-    const response = h.response({
-      status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi persyaratan kegiatan relawan',
-    });
-    response.code(400);
-    return response;
-  }
-
-  const updatedAt = new Date().toISOString();
-
-  const data = {
-    id: postinganRelawanId,
-    judulPostingan,
-    tanggalMulai,
-    tanggalBerakhir,
-    kabKota,
-    provinsi,
-    alamatLengkap,
-    persyaratan,
-    updatedAt,
-  };
-
-  const cekId = await getPostinganRelawanIdFromDatabase(postinganRelawanId);
-
-  if (cekId.length === 1) {
-    await editPostinganRelawanFromDatabase(data);
-
-    const response = h.response({
-      status: 'success',
-      message: 'Data berhasil diperbarui',
-    });
-    response.code(200);
-    return response;
-  }
-
-  const response = h.response({
-    status: 'fail',
-    message: 'Gagal memperbarui data. Id tidak ditemukan',
-  });
-  response.code(404);
-  return response;
-};
-
-const deletePostinganRelawanByIdHandler = async (request, h) => {
-  const { postinganRelawanId } = request.params;
-
-  const cekId = await getPostinganRelawanIdFromDatabase(postinganRelawanId);
-
-  if (cekId.length === 1) {
-    await deletePostinganRelawanIdFromDatabase(postinganRelawanId);
-    const response = h.response({
-      status: 'success',
-      message: 'Data berhasil dihapus',
-    });
-    response.code(200);
-    return response;
-  }
-
-  const response = h.response({
-    status: 'fail',
-    message: 'Data gagal dihapus. Id tidak ditemukan',
-  });
-  response.code(404);
-  return response;
-};
-
 module.exports = {
   addPendaftaranRelawanHandler,
   getAllPendaftaranRelawanHandler,
-  getPostinganRelawanByIdHandler,
-  editPostinganRelawanByIdHandler,
-  deletePostinganRelawanByIdHandler,
 };
