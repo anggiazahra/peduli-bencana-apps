@@ -1,8 +1,14 @@
+<<<<<<< Updated upstream
 /* eslint-disable quotes */
 /* eslint-disable no-underscore-dangle */
 import DrawerInitiator from "../utils/drawer-initiator";
 import UrlParser from "../routes/url-parser";
 import routes from "../routes/routes";
+=======
+import DrawerInitiator from '../utils/drawer-initiator';
+import UrlParser from '../routes/url-parser';
+import routes from '../routes/routes';
+>>>>>>> Stashed changes
 
 class App {
   constructor({ button, drawer, content }) {
