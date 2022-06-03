@@ -35,7 +35,7 @@ const ArtikelTambah = {
             color: #fff;
         }
         .input-button button{
-            width: 18%;
+            min-width: 18%;
             padding: 10px;
             border: none;
             background: #1C4966;
@@ -57,11 +57,14 @@ const ArtikelTambah = {
                 <input type="email" class="form-control" id="judulArtikel">
             </div>
             <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Gambar Artikel</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+            <div class="mb-3">
                 <label for="isiArtikel" class="form-label">Isi Artikel</label>
                 <textarea class="form-control" id="isiArtikel" rows="10"></textarea>
             </div>
             <div class="input-button">
-                <a href="#/artikel">Batal</a>
                 <button>Tambah Artikel</button>
             </div>
         </div>
