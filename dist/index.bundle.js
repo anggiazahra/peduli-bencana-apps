@@ -1,1 +1,0 @@
-(self.webpackChunkpedulibencana=self.webpackChunkpedulibencana||[]).push([[826],{5253:()=>{var e=document.querySelector("#hamburgerButton"),n=document.querySelector("#navigationDrawer");e.addEventListener("click",(function(e){n.classList.toggle("open"),e.stopPropagation()}))}},e=>{e.O(0,[866,590,101,712],(()=>(5253,e(e.s=5253)))),e.O()}]);

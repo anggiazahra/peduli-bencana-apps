@@ -1,37 +1,18 @@
-<<<<<<< Updated upstream
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable quotes */
-import Home from "../views/pages/home";
-import Donasi from "../views/pages/donasi";
-import DonasiTambah from "../views/pages/donasiTambah";
-import DonasiDetail from "../views/pages/donasiDetail";
-import DonaturDaftar from "../views/pages/donaturDaftar";
-import DonaturDetail from "../views/pages/donaturDetail";
-
-const routes = {
-  "/": Home, // default page
-  "/home": Home,
-  "/donasi": Donasi,
-  "/donasi-tambah": DonasiTambah,
-  "/donasi-detail": DonasiDetail,
-  "/donatur-daftar": DonaturDaftar,
-  "/donatur-detail": DonaturDetail,
-=======
 import Home from '../views/pages/home';
-import Relawan from '../views/pages/relawan';
-import RelawanDetail from '../views/pages/relawanDetail';
-import RelawanDaftar from '../views/pages/relawanDaftar';
-import RelawanTambah from '../views/pages/relawanTambah';
+import DonasiPostingan from '../views/pages/donasiPostingan';
+import DonasiPostinganDetail from '../views/pages/donasiPostinganDetail';
+import DonasiPostinganTambah from '../views/pages/donasiPostinganTambah';
+import DonasiPostinganEdit from '../views/pages/donasiPostinganEdit';
+import DonasiTambah from '../views/pages/donasiTambah';
 
 const routes = {
   '/': Home, // default page
   '/home': Home,
-  '/relawan': Relawan,
-  '/relawan-detail': RelawanDetail,
-  '/relawan-daftar': RelawanDaftar,
-  '/relawan-tambah': RelawanTambah,
->>>>>>> Stashed changes
+  '/donasi-postingan': DonasiPostingan,
+  '/donasi-postingan-detail': DonasiPostinganDetail,
+  '/donasi-postingan-tambah': DonasiPostinganTambah,
+  '/donasi-postingan-edit': DonasiPostinganEdit,
+  '/donasi-tambah': DonasiTambah,
 };
 
 export default routes;

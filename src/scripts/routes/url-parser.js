@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-/* eslint-disable operator-linebreak */
-/* eslint-disable quotes */
-/* eslint-disable no-underscore-dangle */
-=======
->>>>>>> Stashed changes
 const UrlParser = {
   parseActiveUrlWithCombiner() {
     const url = window.location.hash.slice(1).toLowerCase();
@@ -17,11 +11,7 @@ const UrlParser = {
   },
 
   _urlSplitter(url) {
-<<<<<<< Updated upstream
-    const urlsSplits = url.split("/");
-=======
     const urlsSplits = url.split('/');
->>>>>>> Stashed changes
     return {
       resource: urlsSplits[1] || null,
       id: urlsSplits[2] || null,
@@ -30,17 +20,9 @@ const UrlParser = {
   },
 
   _urlCombiner(splitedUrl) {
-<<<<<<< Updated upstream
-    return (
-      (splitedUrl.resource ? `/${splitedUrl.resource}` : "/") +
-      (splitedUrl.id ? "/:id" : "") +
-      (splitedUrl.verb ? `/${splitedUrl.verb}` : "")
-    );
-=======
     return (splitedUrl.resource ? `/${splitedUrl.resource}` : '/')
         + (splitedUrl.id ? '/:id' : '')
         + (splitedUrl.verb ? `/${splitedUrl.verb}` : '');
->>>>>>> Stashed changes
   },
 };
 
