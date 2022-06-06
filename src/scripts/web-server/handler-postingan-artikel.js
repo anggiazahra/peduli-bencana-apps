@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-shadow */
 // eslint-disable-next-line no-unused-vars
@@ -9,6 +10,7 @@ const {
   getAllPostinganArtikelFromDatabase,
   getPostinganArtikelIdFromDatabase,
   editPostinganArtikelFromDatabase,
+  editPostinganArtikelWithoutgambarArtikelFromDatabase,
   deletePostinganArtikelIdFromDatabase,
 } = require('../database/database-request');
 
@@ -73,7 +75,7 @@ const addPostinganArtikelHandler = async (request, h) => {
   };
 
   const dataGambar = gambarArtikel._data;
-  fs.writeFile(`src/public/upload/artikel${namaGambar}`, dataGambar, (err) => {
+  fs.writeFile(`src/public/upload//artikel${namaGambar}`, dataGambar, (err) => {
     if (err) { console.log(err); } else {
       console.log('File berhasil disimpan');
     }
@@ -171,7 +173,7 @@ const editPostinganArtikelByIdHandler = async (request, h) => {
   if (isiArtikel === undefined) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi alamat lengkap kegiatan artikel',
+      message: 'Gagal memperbaharui data. Mohon isi artikel',
     });
     response.code(400);
     return response;
@@ -203,11 +205,78 @@ const editPostinganArtikelByIdHandler = async (request, h) => {
     await editPostinganArtikelFromDatabase(data);
 
     const dataGambar = gambarArtikel._data;
-    fs.writeFile(`src/public/upload/${namaGambar}`, dataGambar, (err) => {
+    fs.writeFile(`src/public/upload/artikel/${namaGambar}`, dataGambar, (err) => {
       if (err) { console.log(err); } else {
         console.log('File berhasil disimpan');
       }
     });
+
+    const response = h.response({
+      status: 'success',
+      message: 'Data berhasil diperbarui',
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: 'fail',
+    message: 'Gagal memperbarui data. Id tidak ditemukan',
+  });
+  response.code(404);
+  return response;
+};
+
+const editPostinganArtikelWithoutgambarArtikelByIdHandler = async (request, h) => {
+  const { postinganArtikelId } = request.params;
+
+  const {
+    judul,
+    sumber,
+    isiArtikel,
+  } = request.payload;
+
+  if (judul === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi judul postingan',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (sumber === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi sumber artikel',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (isiArtikel === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi Artikel',
+    });
+    response.code(400);
+    return response;
+  }
+
+  const updatedAt = new Date().toLocaleDateString();
+
+  const data = {
+    id: postinganArtikelId,
+    judul,
+    sumber,
+    isiArtikel,
+    updatedAt,
+  };
+
+  const cekId = await getPostinganArtikelIdFromDatabase(postinganArtikelId);
+
+  if (cekId.length === 1) {
+    await editPostinganArtikelWithoutgambarArtikelFromDatabase(data);
 
     const response = h.response({
       status: 'success',
@@ -253,5 +322,6 @@ module.exports = {
   getAllPostinganArtikelHandler,
   getPostinganArtikelByIdHandler,
   editPostinganArtikelByIdHandler,
+  editPostinganArtikelWithoutgambarArtikelByIdHandler,
   deletePostinganArtikelByIdHandler,
 };

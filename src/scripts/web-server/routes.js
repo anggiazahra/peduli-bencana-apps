@@ -5,6 +5,7 @@ const {
   getAllPostinganArtikelHandler,
   getPostinganArtikelByIdHandler,
   editPostinganArtikelByIdHandler,
+  editPostinganArtikelWithoutgambarArtikelByIdHandler,
   deletePostinganArtikelByIdHandler,
 } = require('./handler-postingan-artikel');
 
@@ -46,6 +47,20 @@ const routes = [
       },
     },
     handler: editPostinganArtikelByIdHandler,
+  },
+  {
+    method: 'PUT',
+    path: '/artikel/postingan-tanpa-gambarArtikel/{postinganArtikelId}',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        maxBytes: 2 * 2000 * 2000,
+        multipart: true,
+      },
+    },
+    handler: editPostinganArtikelWithoutgambarArtikelByIdHandler,
   },
   {
     method: 'DELETE',

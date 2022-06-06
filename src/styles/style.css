@@ -92,7 +92,7 @@ html {
 }
 
 .btn {
-    width: 100%;
+    min-width: 10%;
     background-color: #1C4966;
     color: white;
 }
@@ -109,7 +109,7 @@ html {
 
 footer{
     background: #1C4966;
-    min-height: 75vh;
+    min-height: 70vh;
 }
 
 

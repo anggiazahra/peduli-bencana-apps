@@ -49,6 +49,19 @@ function editPostinganArtikelFromDatabase(data) {
   });
 }
 
+function editPostinganArtikelWithoutgambarArtikelFromDatabase(data) {
+  const sql = `UPDATE fiturartikel SET judul = '${data.judul}', sumber = '${data.sumber}', isiArtikel = '${data.isiArtikel}', updatedAt = '${data.updatedAt}' WHERE id = '${data.id}'`;
+
+  return new Promise((resolve, reject) => {
+    con.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 function deletePostinganArtikelIdFromDatabase(id) {
   return new Promise((resolve, reject) => {
     con.query(`DELETE FROM fiturartikel WHERE id = '${id}'`, (err, results) => {
@@ -66,5 +79,6 @@ module.exports = {
   getAllPostinganArtikelFromDatabase,
   getPostinganArtikelIdFromDatabase,
   editPostinganArtikelFromDatabase,
+  editPostinganArtikelWithoutgambarArtikelFromDatabase,
   deletePostinganArtikelIdFromDatabase,
 };

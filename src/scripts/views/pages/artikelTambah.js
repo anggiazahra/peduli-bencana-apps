@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
+import DataPostinganArtikel from '../../web-server/request-postingan-artikel';
+
 const ArtikelTambah = {
   async render() {
     return `
@@ -28,9 +32,10 @@ const ArtikelTambah = {
         }
         .input-button a{
             text-decoration: none;
-            padding: 10px 60px;
+            padding: 7px 38px;
             margin: 0;
             border: none;
+            border-radius: 5px;
             background: #1C4966;
             color: #fff;
         }
@@ -47,34 +52,58 @@ const ArtikelTambah = {
     <section id="tambah-artikel" >
     <div class="content-tambah">
         <h1>TAMBAH ARTIKEL</h1>
-        <div class="isi-input">
+        <form class="isi-input">
             <div class="mb-3">
-                <label for="judulArtikel" class="form-label">Judul Artikel</label>
-                <input type="email" class="form-control" id="judulArtikel">
+                <label for="judul" class="form-label">Judul Artikel</label>
+                <input type="email" class="form-control" id="judul">
             </div>
             <div class="mb-3">
-                <label for="judulArtikel" class="form-label">Sumber Artikel</label>
-                <input type="email" class="form-control" id="judulArtikel">
+                <label for="judul" class="form-label">Sumber Artikel</label>
+                <input type="email" class="form-control" id="sumber">
             </div>
             <div class="mb-3">
                 <label for="formFileMultiple" class="form-label">Gambar Artikel</label>
-                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                <input class="form-control" type="file" id="gambarArtikel" multiple>
             </div>
             <div class="mb-3">
                 <label for="isiArtikel" class="form-label">Isi Artikel</label>
                 <textarea class="form-control" id="isiArtikel" rows="10"></textarea>
             </div>
-            <div class="input-button">
-                <button>Tambah Artikel</button>
-            </div>
-        </div>
+            <td colspan="3">
+                <button class="btn" id="button-submit">Tambah Data</button>
+            </td>
+        </form>
     </div>
 </section>
       `;
   },
 
   async afterRender() {
-    // test
+    const buttonSubmit = document.querySelector('#button-submit');
+    const inputJudulPostingan = document.querySelector('#judul');
+    const inputgambar = document.querySelector('#gambarArtikel');
+    const inputSumber = document.querySelector('#sumber');
+    const inputIsiArtikel = document.querySelector('#isiArtikel');
+
+    const id = Math.floor((Math.random() * 999999999999999) + 1);
+
+    buttonSubmit.addEventListener('click', async (event) => {
+      const file = inputgambar.files[0];
+      event.preventDefault();
+      if (inputJudulPostingan.value === '' || inputgambar.value === '' || inputSumber.value === '' || inputIsiArtikel.value === '') {
+        alert('Input tidak boleh kosong');
+      } else {
+        const nameFile = `${id}_${inputgambar.files[0].name}`;
+
+        const formdata = new FormData();
+        formdata.append('judul', inputJudulPostingan.value);
+        formdata.append('gambarArtikel', file, nameFile);
+        formdata.append('sumber', inputSumber.value);
+        formdata.append('isiArtikel', inputIsiArtikel.value);
+
+        await DataPostinganArtikel.addPostinganArtikel(formdata);
+      }
+    });
   },
 };
 
