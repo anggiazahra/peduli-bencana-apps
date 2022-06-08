@@ -15,6 +15,7 @@ const Mitigasi = {
         .btn{
             width: 100%;
             text-align: left;
+            margin: 0;
         }
         .side-bar{
             float: left;
@@ -25,6 +26,7 @@ const Mitigasi = {
         .side-bar ul{
             border: 3px solid #1C4966;
             border-radius: 5px;
+            padding-left: 0;
         }
         .side-bar li{
             list-style: none;
@@ -34,6 +36,58 @@ const Mitigasi = {
             height: 100%;
             width: 70%;
             margin: 1%;
+        }
+        @media screen and (max-width: 790px){
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 20px 0;
+            }
+            .side-bar {
+                width: 90%;
+            }
+            .side-bar ul{
+                grid-template-columns: 1fr;
+                padding-left: 0;
+            }
+            #content {
+                width: 90%;
+            }
+        }
+        @media screen and (max-width: 540px){
+            * {
+                font-size: 14px;
+            }
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 20px 0;
+            }
+            .side-bar {
+                width: 90%;
+            }
+            .side-bar ul{
+                grid-template-columns: 1fr;
+                padding-left: 0;
+            }
+            #content {
+                width: 90%;
+            }
+        }
+        @media screen and (max-width: 430px){
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .side-bar {
+                width: 90%;
+            }
+            .side-bar ul{
+                grid-template-columns: 1fr;
+                padding-left: 0;
+            }
+            #content {
+                width: 90%;
+            }
         }
     </style>
 
