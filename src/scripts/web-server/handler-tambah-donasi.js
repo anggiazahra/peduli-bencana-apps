@@ -13,6 +13,7 @@ const {
 const addTambahDonasiHandler = async (request, h) => {
   const {
     idPostinganDonasi,
+    namaDonatur,
     namaBank,
     noRekening,
     atasNama,
@@ -23,6 +24,15 @@ const addTambahDonasiHandler = async (request, h) => {
     const response = h.response({
       status: 'fail',
       message: 'Gagal menambahkan data. Id postingan donasi tidak diketahui',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (namaDonatur === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Mohon isi nama donatur',
     });
     response.code(400);
     return response;
@@ -65,11 +75,12 @@ const addTambahDonasiHandler = async (request, h) => {
   }
 
   const id = nanoid(16);
-  const tanggalDonasi = new Date().toLocaleDateString();
+  const tanggalDonasi = new Date().toISOString().split('T')[0];
 
   const data = {
     id,
     idPostinganDonasi,
+    namaDonatur,
     namaBank,
     noRekening,
     atasNama,

@@ -9,10 +9,10 @@ const routes = {
   '/': Home, // default page
   '/home': Home,
   '/donasi-postingan': DonasiPostingan,
-  '/donasi-postingan-detail': DonasiPostinganDetail,
+  '/donasi-postingan-detail/:id': DonasiPostinganDetail,
   '/donasi-postingan-tambah': DonasiPostinganTambah,
-  '/donasi-postingan-edit': DonasiPostinganEdit,
-  '/donasi-tambah': DonasiTambah,
+  '/donasi-postingan-edit/:id': DonasiPostinganEdit,
+  '/donasi-tambah/:id': DonasiTambah,
 };
 
 export default routes;

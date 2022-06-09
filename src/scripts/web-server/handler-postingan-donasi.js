@@ -25,6 +25,7 @@ const addPostinganDonasiHandler = async (request, h) => {
     pekerjaan,
     namaBank,
     noRekening,
+    atasNama,
     targetDonasi,
     deskripsiDonasi,
   } = request.payload;
@@ -141,6 +142,15 @@ const addPostinganDonasiHandler = async (request, h) => {
     return response;
   }
 
+  if (atasNama === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Mohon isi atas nama dari no rekening yang digunakan',
+    });
+    response.code(400);
+    return response;
+  }
+
   if (targetDonasi === undefined) {
     const response = h.response({
       status: 'fail',
@@ -160,7 +170,7 @@ const addPostinganDonasiHandler = async (request, h) => {
   }
 
   const id = nanoid(16);
-  const insertedAt = new Date().toLocaleDateString();
+  const insertedAt = new Date().toISOString().split('T')[0];
   const updatedAt = insertedAt;
 
   const data = {
@@ -177,6 +187,7 @@ const addPostinganDonasiHandler = async (request, h) => {
     pekerjaan,
     namaBank,
     noRekening,
+    atasNama,
     targetDonasi,
     deskripsiDonasi,
     insertedAt,
@@ -265,6 +276,7 @@ const editPostinganDonasiByIdHandler = async (request, h) => {
     pekerjaan,
     namaBank,
     noRekening,
+    atasNama,
     targetDonasi,
     deskripsiDonasi,
   } = request.payload;
@@ -379,6 +391,15 @@ const editPostinganDonasiByIdHandler = async (request, h) => {
     return response;
   }
 
+  if (atasNama === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi atas nama dari no rekening yang digunakan',
+    });
+    response.code(400);
+    return response;
+  }
+
   if (targetDonasi === undefined) {
     const response = h.response({
       status: 'fail',
@@ -397,7 +418,7 @@ const editPostinganDonasiByIdHandler = async (request, h) => {
     return response;
   }
 
-  const updatedAt = new Date().toLocaleDateString();
+  const updatedAt = new Date().toISOString().split('T')[0];
 
   const data = {
     id: postinganDonasiId,
@@ -413,6 +434,7 @@ const editPostinganDonasiByIdHandler = async (request, h) => {
     pekerjaan,
     namaBank,
     noRekening,
+    atasNama,
     targetDonasi,
     deskripsiDonasi,
     updatedAt,
@@ -461,6 +483,7 @@ const editPostinganDonasiWithoutPosterByIdHandler = async (request, h) => {
     pekerjaan,
     namaBank,
     noRekening,
+    atasNama,
     targetDonasi,
     deskripsiDonasi,
   } = request.payload;
@@ -564,6 +587,15 @@ const editPostinganDonasiWithoutPosterByIdHandler = async (request, h) => {
     return response;
   }
 
+  if (atasNama === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi atas nama dari no rekening yang digunakan',
+    });
+    response.code(400);
+    return response;
+  }
+
   if (targetDonasi === undefined) {
     const response = h.response({
       status: 'fail',
@@ -597,6 +629,7 @@ const editPostinganDonasiWithoutPosterByIdHandler = async (request, h) => {
     pekerjaan,
     namaBank,
     noRekening,
+    atasNama,
     targetDonasi,
     deskripsiDonasi,
     updatedAt,
