@@ -9,6 +9,9 @@ const DonasiPostinganTambah = {
           grid-template-columns: 1fr 1fr;
           gap : 20px;
         }
+        .btn-max {
+          width: 100%;
+        }
         h2 {
           font-size : 20px;
         }
@@ -154,7 +157,7 @@ const DonasiPostinganTambah = {
               </div>
             </div>
           </div>
-          <button class="btn" id="button-submit">Tambah Data</button>
+          <button class=" btn-max" id="button-submit">Tambah Data</button>
         </form>
       </div>
     `;

@@ -10,6 +10,9 @@ const DonasiTambah = {
         grid-template-columns: 1fr 1fr;
         gap : 20px;
       }
+      .btn-max {
+        width: 100%;
+      }
       h2 {
         font-size : 20px;
       }
@@ -74,7 +77,7 @@ const DonasiTambah = {
               </div>
             </div>
           </div>
-          <button class="btn" id="button-submit">Tambah Donasi</button>
+          <button class="btn btn-max" id="button-submit">Tambah Donasi</button>
         </form>
       </div>
     `;

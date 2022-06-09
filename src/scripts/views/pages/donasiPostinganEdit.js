@@ -10,6 +10,9 @@ const DonasiPostinganEdit = {
           grid-template-columns: 1fr 1fr;
           gap : 20px;
         }
+        .btn-max {
+          width: 100%;
+        }
         h2 {
           font-size : 20px;
         }
@@ -155,7 +158,7 @@ const DonasiPostinganEdit = {
               </div>
             </div>
           </div>
-          <button class="btn" id="button-submit">Edit Data</button>
+          <button class="btn btn-max" id="button-submit">Edit Data</button>
         </form>
       </div>
     `;

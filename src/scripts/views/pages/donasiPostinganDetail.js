@@ -14,6 +14,9 @@ const DonasiPostinganDetail = {
         padding: 30px 5%;
         margin: 0;
       }
+      .btn-max {
+        width: 100%;
+      }
       .box-1 {
         padding: 0 10px;
         margin: 0 5px;
@@ -204,8 +207,8 @@ const DonasiPostinganDetail = {
             <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <div class="grid-btn">
-            <a class="btn" id="donasi-tambah">Donasi Sekarang Juga</a>
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Lihat Donasi Masuk</button>
+            <a class="btn btn-max" id="donasi-tambah">Donasi Sekarang Juga</a>
+            <button type="button" class="btn btn-max" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Lihat Donasi Masuk</button>
           </div>
           
           <!-- Modal -->
@@ -218,8 +221,8 @@ const DonasiPostinganDetail = {
                 </div>
                 <div class="modal-body">
                   <div class="grid-btn btn-border">
-                    <button class="btn btn-confirm" id="btn-confirm">Sudah Dikonfirmasi</button>
-                    <button class="btn btn-unconfirm" id="btn-unconfirm">Belum Dikonfirmasi</button>
+                    <button class="btn btn-max btn-confirm" id="btn-confirm">Sudah Dikonfirmasi</button>
+                    <button class="btn btn-max btn-unconfirm" id="btn-unconfirm">Belum Dikonfirmasi</button>
                   </div>
                   <div id="list-donasi" class="list-donasi"></div>
                 </div>
@@ -281,8 +284,8 @@ const DonasiPostinganDetail = {
           </div>
         </div>
         <div class="grid-btn">
-          <a class="btn" id="btn-edit" href="">Edit Data</a>
-          <a class="btn" id="btn-hapus" href="">Hapus Data</a>
+          <a class="btn btn-max" id="btn-edit" href="">Edit Data</a>
+          <a class="btn btn-max" id="btn-hapus" href="">Hapus Data</a>
         </div>
       </div>
     `;
