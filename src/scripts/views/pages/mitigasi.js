@@ -7,7 +7,6 @@ const Mitigasi = {
             display: block;
             grid-template-columns: 1fr 3fr;
             gap: 20px;
-            margin: 20px 0;
         }
         li{
             list-style: square;
@@ -16,6 +15,8 @@ const Mitigasi = {
             width: 100%;
             text-align: left;
             margin: 0;
+            color: black;
+            background-color : white !important;
         }
         .side-bar{
             float: left;
@@ -41,7 +42,6 @@ const Mitigasi = {
             .container {
                 grid-template-columns: 1fr;
                 gap: 20px;
-                margin: 20px 0;
             }
             .side-bar {
                 width: 90%;
@@ -61,7 +61,6 @@ const Mitigasi = {
             .container {
                 grid-template-columns: 1fr;
                 gap: 20px;
-                margin: 20px 0;
             }
             .side-bar {
                 width: 90%;
@@ -148,6 +147,11 @@ const Mitigasi = {
                 <li>Dapat menimbulkan erosi bahkan longsor.</li>
                 <li>Pencemaran lingkungan.</li>
                 </ul>
+                <p><strong>Referensi:</strong></p>
+                <ul>
+                <li>http://www.mitigasi-bencana.com/</li>
+                <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                </ul>
         </div>
         </main>
     `;
@@ -207,6 +211,11 @@ const Mitigasi = {
                     <li>Dapat menimbulkan erosi bahkan longsor.</li>
                     <li>Pencemaran lingkungan.</li>
                 </ul>
+                <p><strong>Referensi:</strong></p>
+                <ul>
+                <li>http://www.mitigasi-bencana.com/</li>
+                <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                </ul>
                     `;
         } else if (itemMitigasi.value === 'tanah-longsor') {
           content.innerHTML = `
@@ -254,6 +263,11 @@ const Mitigasi = {
                             <li>Evakuasi orang-orang yang tinggal di daerah berbahaya ke tempat penampungan yang aman.</li>
                             <li>Temukan sumber air bersih yang dapat digunakan di tempat penyimpanan yang aman.</li>
                             <li>Segera hubungi instansi terkait seperti Kepala Desa/Lula dan Kamat agar kejadian bencana dapat segera ditangani  secara terkoordinasi.</li>
+                        </ul>
+                        <p><strong>Referensi:</strong></p>
+                        <ul>
+                        <li>http://www.mitigasi-bencana.com/</li>
+                        <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
                         </ul>
                     `;
         } else if (itemMitigasi.value === 'gempa-bumi') {
@@ -303,6 +317,11 @@ const Mitigasi = {
                                 <li>Membersihkan puing-puing serta kerusakan yang terjadi.</li>
                                 <li>Membantu masyarakat dan aparat sekitar untuk memperbaiki rumah atau kerusakan sarana dan prasarana yang ada di sekitar wilayah bencana.</li>
                             </ul>
+                        <p><strong>Referensi:</strong></p>
+                        <ul>
+                            <li>http://www.mitigasi-bencana.com/</li>
+                            <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                        </ul>
                     `;
         } else if (itemMitigasi.value === 'tsunami') {
           content.innerHTML = `
@@ -340,6 +359,11 @@ const Mitigasi = {
                                 <li>Ikuti jalur serta rambu evakuasi yang telah disediakan.</li>
                                 <li>Jika lokasi aman namun tidak diketahui orang lain, larilah sejauh mungkin dari lokasi tersebut dan naik ke tempat yang lebih tinggi.</li>
                             </ul>
+                        <p><strong>Referensi:</strong></p>
+                        <ul>
+                            <li>http://www.mitigasi-bencana.com/</li>
+                            <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                        </ul>
                     `;
         } else if (itemMitigasi.value === 'gunung-meletus') {
           content.innerHTML = `
@@ -364,6 +388,11 @@ const Mitigasi = {
                             <li>Mengevakuasi daerah yang terdampak dan terancam bencana</li>
                             <li>Memperbaiki sarana prasarana yang rusak</li>
                             <li>Pemantauan secara berkala, walaupun keadaan sudah mulai normal</li>
+                        </ul>
+                        <p><strong>Referensi:</strong></p>
+                        <ul>
+                            <li>http://www.mitigasi-bencana.com/</li>
+                            <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
                         </ul>
                         
                     `;
