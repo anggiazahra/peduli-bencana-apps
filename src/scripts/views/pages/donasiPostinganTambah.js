@@ -72,6 +72,7 @@ const DonasiPostinganTambah = {
           </div>
           <div class="card">
             <div class="card-body">
+              <h2>Lokasi Bencana</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
@@ -157,7 +158,7 @@ const DonasiPostinganTambah = {
               </div>
             </div>
           </div>
-          <button class=" btn-max" id="button-submit">Tambah Data</button>
+          <button class="btn btn-max" id="button-submit">Tambah Data</button>
         </form>
       </div>
     `;

@@ -32,8 +32,6 @@ const addPostinganDonasiHandler = async (request, h) => {
 
   const namaPoster = poster.hapi.filename;
 
-  console.log(request.payload);
-
   if (judulPostingan === undefined) {
     const response = h.response({
       status: 'fail',
@@ -660,7 +658,6 @@ const deletePostinganDonasiByIdHandler = async (request, h) => {
   const { postinganDonasiId } = request.params;
 
   const cekId = await getPostinganDonasiIdFromDatabase(postinganDonasiId);
-  console.log(cekId);
 
   if (cekId.length === 1) {
     await deletePostinganDonasiIdFromDatabase(postinganDonasiId);

@@ -199,7 +199,7 @@ const DonasiPostinganDetail = {
       <div class="box-1">
         <img src="" alt="poster donasi" class="poster-donasi" id="poster-donasi">
         <div class="sub-box">
-          <h1 id="judul-postingan">Donasi Korban Bencana Banjir</h1>
+          <h1 id="judul-postingan"></h1>
           <span id="donasi-terkumpul"></span> / 
           <span id="target-donasi"></span>
           <div class="progress">
@@ -301,6 +301,9 @@ const DonasiPostinganDetail = {
 
     const posterDonasi = document.querySelector('#poster-donasi');
     posterDonasi.setAttribute('src', `./upload/donasi/${dataPostingan.namaPoster}`);
+
+    const judulPostingan = document.querySelector('#judul-postingan');
+    judulPostingan.innerHTML = `${dataPostingan.judulPostingan}`;
 
     const targetDonasi = document.querySelector('#target-donasi');
     targetDonasi.innerHTML = `Rp ${dataPostingan.targetDonasi}`;

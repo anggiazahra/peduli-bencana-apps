@@ -73,6 +73,7 @@ const DonasiPostinganEdit = {
           </div>
           <div class="card">
             <div class="card-body">
+              <h2>Lokasi Bencana</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
