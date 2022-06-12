@@ -67,7 +67,7 @@ const ArtikelTambah = {
             </div>
             <div class="mb-3">
                 <label for="isiArtikel" class="form-label">Isi Artikel</label>
-                <textarea class="form-control" id="isiArtikel" rows="10"></textarea>
+                <textarea class="form-control" id="isiArtikel" rows="8"></textarea>
             </div>
             <td colspan="3">
                 <button class="btn" id="button-submit">Tambah Data</button>

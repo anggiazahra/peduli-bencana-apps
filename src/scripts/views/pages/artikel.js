@@ -45,7 +45,7 @@ const Artikel = {
 .card-artikel .card{
   margin: 20px auto;
   width: 18rem;
-  height:60vh;
+  height:50vh;
 }
 
   @media screen and (max-width: 1100px){
