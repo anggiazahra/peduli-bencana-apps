@@ -29,6 +29,9 @@ const DonasiPostinganTambah = {
             grid-template-columns: 1fr;
             gap: 0;
           }
+          h2 {
+            font-size: 17px;
+          }
         }
       </style>
 

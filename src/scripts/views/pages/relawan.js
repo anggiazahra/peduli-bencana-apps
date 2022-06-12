@@ -11,6 +11,9 @@ const Relawan = {
           margin-left: auto; 
           margin-right: 0;
         }
+        .btn-max {
+          width: 100%;
+        }
         .grid-row {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -69,7 +72,7 @@ const Relawan = {
         <div class="card-body">
           <h5 class="card-title">${data.judulPostingan}</h5>
           <p class="card-text">${data.kabKota}, ${data.provinsi}</p>
-          <a href="#/relawan-detail/${data.id}" class="btn">Detail</a>
+          <a href="#/relawan-detail/${data.id}" class="btn btn-max">Detail</a>
         </div>
       `;
       listRelawan.appendChild(relawanItem);

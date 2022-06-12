@@ -9,7 +9,7 @@ const {
   editPostinganRelawanFromDatabase,
   editPostinganRelawanWithoutPosterFromDatabase,
   deletePostinganRelawanIdFromDatabase,
-} = require('../database/database-request');
+} = require('../database/database-request-postingan-relawan');
 
 const addPostinganRelawanHandler = async (request, h) => {
   const {
@@ -21,7 +21,9 @@ const addPostinganRelawanHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
-    kontak,
+    penanggungJawab,
+    noTelepon,
+    pekerjaan,
     persyaratan,
   } = request.payload;
 
@@ -99,10 +101,28 @@ const addPostinganRelawanHandler = async (request, h) => {
     return response;
   }
 
-  if (kontak === undefined) {
+  if (penanggungJawab === undefined) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan data. Mohon isi jumlah relawan yang dibutuhkan',
+      message: 'Gagal menambahkan data. Mohon isi nama penanggung jawab',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (noTelepon === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Mohon isi no telepon penanggung jawab',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (pekerjaan === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Mohon isi pekerjaan penanggung jawab',
     });
     response.code(400);
     return response;
@@ -118,7 +138,7 @@ const addPostinganRelawanHandler = async (request, h) => {
   }
 
   const id = nanoid(16);
-  const insertedAt = new Date().toLocaleDateString();
+  const insertedAt = new Date().toISOString().split('T')[0];
   const updatedAt = insertedAt;
 
   const data = {
@@ -131,7 +151,9 @@ const addPostinganRelawanHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
-    kontak,
+    penanggungJawab,
+    noTelepon,
+    pekerjaan,
     persyaratan,
     insertedAt,
     updatedAt,
@@ -215,7 +237,9 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
-    kontak,
+    penanggungJawab,
+    noTelepon,
+    pekerjaan,
     persyaratan,
   } = request.payload;
 
@@ -293,10 +317,28 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
     return response;
   }
 
-  if (kontak === undefined) {
+  if (penanggungJawab === undefined) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi jumlah relawan yang dibutuhkan',
+      message: 'Gagal memperbaharui data. Mohon isi nama penanggung jawab',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (noTelepon === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi no telepon penanggung jawab',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (pekerjaan === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi pekerjaan penanggung jawab',
     });
     response.code(400);
     return response;
@@ -311,7 +353,7 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
     return response;
   }
 
-  const updatedAt = new Date().toLocaleDateString();
+  const updatedAt = new Date().toISOString().split('T')[0];
 
   const data = {
     id: postinganRelawanId,
@@ -323,7 +365,9 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
-    kontak,
+    penanggungJawab,
+    noTelepon,
+    pekerjaan,
     persyaratan,
     updatedAt,
   };
@@ -367,7 +411,9 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
-    kontak,
+    penanggungJawab,
+    noTelepon,
+    pekerjaan,
     persyaratan,
   } = request.payload;
 
@@ -434,10 +480,28 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
     return response;
   }
 
-  if (kontak === undefined) {
+  if (penanggungJawab === undefined) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal memperbaharui data. Mohon isi jumlah relawan yang dibutuhkan',
+      message: 'Gagal memperbaharui data. Mohon isi nama penanggung jawab',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (noTelepon === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi no telepon penanggung jawab',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (pekerjaan === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi pekerjaan penanggung jawab',
     });
     response.code(400);
     return response;
@@ -452,7 +516,7 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
     return response;
   }
 
-  const updatedAt = new Date().toLocaleDateString();
+  const updatedAt = new Date().toISOString().split('T')[0];
 
   const data = {
     id: postinganRelawanId,
@@ -463,7 +527,9 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
-    kontak,
+    penanggungJawab,
+    noTelepon,
+    pekerjaan,
     persyaratan,
     updatedAt,
   };

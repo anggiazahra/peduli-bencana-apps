@@ -2,10 +2,13 @@
 const { response } = require('@hapi/hapi/lib/validation');
 const { nanoid } = require('nanoid');
 const {
+  getPostinganRelawanIdFromDatabase,
+} = require('../database/database-request-postingan-relawan');
+
+const {
   addPendaftaranRelawanToDatabase,
   getAllPendaftaranRelawanFromDatabase,
-  getPostinganRelawanIdFromDatabase,
-} = require('../database/database-request');
+} = require('../database/database-request-daftar-relawan');
 
 const addPendaftaranRelawanHandler = async (request, h) => {
   const {
