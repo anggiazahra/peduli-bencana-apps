@@ -1,7 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-shadow */
-// eslint-disable-next-line no-unused-vars
 const { response } = require('@hapi/hapi/lib/validation');
 const { nanoid } = require('nanoid');
 const fs = require('fs');
@@ -75,7 +72,7 @@ const addPostinganArtikelHandler = async (request, h) => {
   };
 
   const dataGambar = gambarArtikel._data;
-  fs.writeFile(`src/public/upload//artikel${namaGambar}`, dataGambar, (err) => {
+  fs.writeFile(`src/public/upload/artikel/${namaGambar}`, dataGambar, (err) => {
     if (err) { console.log(err); } else {
       console.log('File berhasil disimpan');
     }

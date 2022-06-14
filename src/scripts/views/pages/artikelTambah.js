@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-alert */
 import DataPostinganArtikel from '../../web-server/request-postingan-artikel';
 
 const ArtikelTambah = {

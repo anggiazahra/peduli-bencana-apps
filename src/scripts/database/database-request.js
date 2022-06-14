@@ -2,7 +2,7 @@ const { con } = require('./database-connection');
 
 // Postingan Artikel
 function addPostinganArtikelToDatabase(data) {
-  const sql = `INSERT INTO fiturartikel (id, judul, sumber, isiArtikel, gambarArtikel, insertedAt, updatedAt) VALUES ('${data.id}', '${data.judul}', '${data.sumber}', '${data.isiArtikel}', '${data.gambarArtikel}', '${data.updatedAt}', '${data.insertedAt}')`;
+  const sql = `INSERT INTO fiturartikel (id, judul, gambarArtikel, isiArtikel, sumber, insertedAt, updatedAt) VALUES ('${data.id}', '${data.judul}', '${data.namaGambar}', '${data.isiArtikel}', '${data.sumber}', '${data.insertedAt}', '${data.updatedAt}')`;
 
   return new Promise((resolve, reject) => {
     con.query(sql, (err, results) => {
