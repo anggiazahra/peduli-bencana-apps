@@ -9,6 +9,8 @@ import RelawanDetail from '../views/pages/relawanDetail';
 import RelawanDaftar from '../views/pages/relawanDaftar';
 import RelawanTambah from '../views/pages/relawanTambah';
 import RelawanEdit from '../views/pages/relawanEdit';
+import Login from '../views/pages/login';
+import Register from '../views/pages/register';
 
 const routes = {
   '/': Home, // default page
@@ -23,6 +25,8 @@ const routes = {
   '/relawan-daftar/:id': RelawanDaftar,
   '/relawan-tambah': RelawanTambah,
   '/relawan-edit/:id': RelawanEdit,
+  '/login': Login,
+  '/register': Register,
 };
 
 export default routes;
