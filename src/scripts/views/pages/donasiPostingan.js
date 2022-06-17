@@ -52,7 +52,7 @@ const DonasiPostingan = {
 
     <h1 class="main-title">Donasi</h1>
     <div class="d-flex flex-row-reverse">
-        <a href="#/donasi-postingan-tambah" class="btn btn-tambah p-2">Tambah Data</a>
+        <a href="#/donasi-postingan-tambah" class="btn btn-tambah p-2" id="btn-tambah">Tambah Data</a>
     </div>
         
     <div class="list-donasi grid-row" id="list-donasi">
@@ -64,6 +64,14 @@ const DonasiPostingan = {
   async afterRender() {
     const result = await DataPostinganDonasi.getAllPostinganDonasi();
     const dataPostinganDonasi = result.data.donasi;
+
+    const buttonTambah = document.querySelector('#btn-tambah');
+    const loginSession = sessionStorage.getItem('loginSession');
+
+    if (loginSession === 'false') {
+      buttonTambah.innerHTML = 'Login Untuk Tambah Data';
+      buttonTambah.setAttribute('href', '#/login');
+    }
 
     dataPostinganDonasi.forEach((data) => {
       const listDonasi = document.querySelector('#list-donasi');

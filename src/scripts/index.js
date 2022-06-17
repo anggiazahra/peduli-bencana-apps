@@ -14,3 +14,20 @@ window.addEventListener('hashchange', () => {
 window.addEventListener('load', () => {
   app.renderPage();
 });
+
+const navbar = document.querySelector('#navigationDrawer ul');
+const loginSession = sessionStorage.getItem('loginSession');
+
+if (loginSession === null) {
+  sessionStorage.setItem('loginSession', 'false');
+}
+
+if (loginSession === 'true') {
+  navbar.innerHTML = `
+    <li><a href="#/home">Home</a></li>
+    <li><a href="#/mitigasi">Mitigasi</a></li>
+    <li><a href="#/artikel">Artikel</a></li>
+    <li><a href="#/donasi-postingan">Donasi</a></li>
+    <li><a href="#/relawan">Relawan</a></li>
+    <li><a href="#/logout" class="btn btn-logout">Logout</a></li>`;
+}

@@ -1,4 +1,13 @@
 const {
+  addRegistrasiHandler,
+  getAllRegistrasiHandler,
+} = require('./handler-registrasi');
+
+const {
+  checkLoginHandler,
+} = require('./handler-login');
+
+const {
   addPostinganDonasiHandler,
   getAllPostinganDonasiHandler,
   getPostinganDonasiByIdHandler,
@@ -27,6 +36,39 @@ const {
 } = require('./handler-pendaftaran-relawan');
 
 const routes = [
+  {
+    method: 'POST',
+    path: '/registrasi',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data'],
+        maxBytes: 10 * 1000 * 1000,
+        multipart: true,
+      },
+    },
+    handler: addRegistrasiHandler,
+  },
+  {
+    method: 'GET',
+    path: '/registrasi',
+    handler: getAllRegistrasiHandler,
+  },
+  {
+    method: 'POST',
+    path: '/login',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data'],
+        maxBytes: 10 * 1000 * 1000,
+        multipart: true,
+      },
+    },
+    handler: checkLoginHandler,
+  },
   {
     method: 'POST',
     path: '/donasi/postingan',

@@ -10,10 +10,15 @@ import RelawanDaftar from '../views/pages/relawanDaftar';
 import RelawanTambah from '../views/pages/relawanTambah';
 import RelawanEdit from '../views/pages/relawanEdit';
 import Login from '../views/pages/login';
-import Register from '../views/pages/register';
+import Logout from '../views/pages/logout';
+import Registrasi from '../views/pages/registrasi';
+import LandingPage from '../views/pages/landingPage';
 
 const routes = {
-  '/': Home, // default page
+  '/': LandingPage, // default page
+  '/login': Login,
+  '/logout': Logout,
+  '/registrasi': Registrasi,
   '/home': Home,
   '/donasi-postingan': DonasiPostingan,
   '/donasi-postingan-detail/:id': DonasiPostinganDetail,
@@ -25,8 +30,6 @@ const routes = {
   '/relawan-daftar/:id': RelawanDaftar,
   '/relawan-tambah': RelawanTambah,
   '/relawan-edit/:id': RelawanEdit,
-  '/login': Login,
-  '/register': Register,
 };
 
 export default routes;
