@@ -16,11 +16,13 @@ const TentangKami = {
         .container h2 {
             text-align: center;
             margin: 30px 0;
+            border-bottom: 1px solid #1C4966;
         }
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             padding: 10px;
+            background-color: white;
         }
         .card:hover{
             transform: translateY(-6px);
@@ -33,11 +35,33 @@ const TentangKami = {
             object-position: center;
         }
 
+        .btn-tim {
+            border: 2px solid #1C4966;
+            width: 100%;
+            background-color: white;
+        }
+
+        .button {
+            background-color: #1C4966;
+            border: none;
+            width: 100%
+        }
+
+        .button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: grey;
+        }
+
         .description-about {
             width: 100%;
             padding: 50px 5px;
-            border: 2px solid;
+            border: 2px solid #1C4966;
             border-radius: 5px;
+            background-color: #C8C8C8;
         }
 
         .about img {
@@ -49,8 +73,11 @@ const TentangKami = {
 
         .about-text {
             width: 550px;
-            margin-left: 10px;
-            
+            margin-left: 10px;   
+        }
+
+        .about-text h3 {
+            border-bottom: 1px solid #1C4966;
         }
 
         .about{
@@ -102,6 +129,7 @@ const TentangKami = {
                 grid-template-columns: 1fr 1fr;
                 gap: 20px;
                 margin: 20px 0;
+                font-size: 14px;
             }
         }
         @media screen and (max-width: 540px) {
@@ -127,6 +155,7 @@ const TentangKami = {
         @media screen and (max-width: 430px) {
             .grid-row {
                 grid-template-columns: 1fr;
+                font-size: 14px;
             }
             .about {
                 grid-template-columns: 1fr;
@@ -155,91 +184,43 @@ const TentangKami = {
             <h2>Tim Kami</h2>
             <div class="list-biodata grid-row">
                 <div class="card">
-                    <img src="./foto-tim/misha.png" class="card-img-top" alt="foto misha">
+                    <img src="./foto-tim/anggi.png" class="card-img-top" alt="foto anggi">
                     <div class="card-body">
                         <h5>Biodata</h5>
-                        <table>
-                            <tr>
-                                <th>Nama</th>
-                                <td>Mishabatuz Zolam</td>
-                            </tr>
-
-                            <tr>
-                                <th>Universitas</th>
-                                <td>Sekolah Tinggi Teknik Pati</td>
-                            </tr>
-
-                            <tr>
-                                <th>Selengkapnya</th>
-                                <td><a href="https://www.linkedin.com/in/mishabatuz-zolam-879100232/" target="_blank">My Linkedin</a></td>
-                            </tr>
-                        </table>
+                        <p><button class="btn-tim">Ketua</button></p>
+                        <p>Anggi Nurul Fitriyani Az-zahra</p>
+                        <p>Universitas Singaperbangsa Karawang</p>
+                        <p><button class="button"><a href="https://www.linkedin.com/in/anggi-nurul-fitriyani-az-zahra-6a8732230/" target="_blank">More</a></button></p>
                     </div>
                 </div>
                 <div class="card">
-                    <img src="./foto-tim/anggi.png" class="card-img-top" alt="foto anggi">
+                    <img src="./foto-tim/misha.png" class="card-img-top" alt="foto misha">
                     <div class="card-body">
-                        <h5 class="card-title">Biodata</h5>
-                        <table>
-                            <tr>
-                                <th>Nama</th>
-                                <td>Anggi Nurul Fitriyani Az-zahra</td>
-                            </tr>
-
-                            <tr>
-                                <th>Universitas</th>
-                                <td>Universitas Singaperbangsa Karawang</td>
-                            </tr>
-
-                            <tr>
-                                <th>Selengkapnya</th>
-                                <td><a href="https://www.linkedin.com/in/anggi-nurul-fitriyani-az-zahra-6a8732230/" target="_blank">My Linkedin</a></td>
-                            </tr>
-                        </table>
+                        <h5>Biodata</h5>
+                        <p><button class="btn-tim">Anggota</button></p>
+                        <p>Mishabatuz Zolam</p>
+                        <p>Sekolah Tinggi Teknik Pati</p>
+                        <p><button class="button"><a href="https://www.linkedin.com/in/mishabatuz-zolam-879100232/" target="_blank">More</a></button></p>
                     </div>
                 </div>
                 <div class="card">
                     <img src="./foto-tim/annisya.png" class="card-img-top" alt="foto annisya">
                     <div class="card-body">
-                        <h5 class="card-title">Biodata</h5>
-                        <table>
-                            <tr>
-                                <th>Nama</th>
-                                <td>Annisya Rahmadhanti</td>
-                            </tr>
-
-                            <tr>
-                                <th>Universitas</th>
-                                <td>Universitas PGRI Kanjuruhan Malang</td>
-                            </tr>
-
-                            <tr>
-                                <th>Selengkapnya</th>
-                                <td><a href="https://www.linkedin.com/in/annisya-rahmadhanti-504902203" target="_blank">My Linkedin</a></td>
-                            </tr>
-                        </table>
+                        <h5>Biodata</h5>
+                        <p><button class="btn-tim">Anggota</button></p>
+                        <p>Annisya Rahmadhanti</p>
+                        <p>Universitas PGRI Kanjuruhan Malang</p>
+                        <p><button class="button"><a href="https://www.linkedin.com/in/annisya-rahmadhanti-504902203" target="_blank">More</a></button></p>
                     </div>
                 </div>
                 <div class="card">
                     <img src="./foto-tim/isti.png" class="card-img-top" alt="foto isti">
                     <div class="card-body">
-                        <h5 class="card-title">Biodata</h5>
-                        <table>
-                            <tr>
-                                <th>Nama</th>
-                                <td>Isti Azzah Sofiah</td>
-                            </tr>
-
-                            <tr>
-                                <th>Universitas</th>
-                                <td>Universitas Yarsi</td>
-                            </tr>
-
-                            <tr>
-                                <th>Selengkapnya</th>
-                                <td><a href="https://www.linkedin.com/in/isti-azzah-sofiah-124a59231/" target="_blank">My Linkedin</a></td>
-                            </tr>
-                        </table>
+                        <h5>Biodata</h5>
+                        <p><button class="btn-tim">Anggota</button></p>
+                        <p>Isti Azzah Sofiah</p>
+                        <p>Universitas Yarsi</p>
+                        <p><button class="button"><a href="https://www.linkedin.com/in/isti-azzah-sofiah-124a59231/" target="_blank">More</a></button></p>
                     </div>
                 </div>
             </div>

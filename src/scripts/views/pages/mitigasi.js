@@ -98,6 +98,10 @@ const Mitigasi = {
                 <li><button class="btn btn-white" id="mitigasi" value="gempa-bumi">Gempa Bumi</button></li>
                 <li><button class="btn btn-white" id="mitigasi" value="tsunami">Tsunami</button></li>
                 <li><button class="btn btn-white" id="mitigasi" value="gunung-meletus">Gunung Meletus</button></li>
+                <li><button class="btn btn-white" id="mitigasi" value="abrasi-dan-gelombang-tinggi">Abrasi dan Gelombang Tinggi</button></li>
+                <li><button class="btn btn-white" id="mitigasi" value="angin-ribut">Angin Ribut</button></li>
+                <li><button class="btn btn-white" id="mitigasi" value="kekeringan">Kekeringan</button></li>
+                <li><button class="btn btn-white" id="mitigasi" value="kebakaran">Kebakaran</button></li>
             </ul>
         </div>
         <div id="content">
@@ -396,6 +400,176 @@ const Mitigasi = {
                         </ul>
                         
                     `;
+        } else if (itemMitigasi.value === 'abrasi-dan-gelombang-tinggi') {
+          content.innerHTML = `
+                        <h2>Abrasi dan Gelombang Tinggi</h2>
+                        <p>Gelombang tinggi/pasang merupakan tinggi gelombang air laut yang melebihi batas standar umum yang dapat menyebabkan bencana di daerah laut itu sendiri ataupun di darat. Biasanya gelombang tinggi terjadi dikarenakan pengaruh angin kencang/putting beliung, pergantian cuaca dalam waktu yang singkat, serta dikarenakan adanya pengaruh gravitasi bulan maupun matahari. Kecepatan gelombang tinggi mencapai sekitar 10-100km/jam. Gelombang tinggi ini akan menghanyutkan daerah yang berada di pesisir pantai sehingga disebut dengan Abrasi.</p>
+                        <p>Abrasi merupakan fenomena alam yang selalu menjadi masalah di lingkungan pesisir.</p>
+                        <p><strong>Faktor Penyebab Terjadinya Abrasi Dan Gelombang Tinggi</strong></p>
+                        <p><strong>Faktor dari Alam</strong></p>
+                        <p>Saat angin yang melaju di laut menciptakan gelombang dan arus menuju pantai, arus dan angin memiliki kekuatan untuk mengikis pantai dari waktu ke waktu. Deburan ombak di sepanjang pantai menggoyahkan bebatuan dan akhirnya terpisah dari daratan. Kekuatan gelombang maksimum terjadi selama badai dan mempercepat proses abrasi.</p>
+                        <p><strong>Faktor dari Manusia</strong></p>
+                        <ul>
+                            <li>Perusakan pada terumbu karang</li>
+                            <li>Penggundulan hutan mangrove</li>
+                            <li>Penambangan liar pasir pantai</li>
+                        </ul>
+                        <p><strong>Karakteristik Terjadinya Gelombang Tinggi</strong></p>
+                        <ul>
+                            <li>Angin kencang</li>
+                            <li>Terjadinya badai di tengah laut dan menyebabkan terjadinya gelombang pasang di pinggir pantai.</li>
+                            <li>Perubahan cuaca yang tiba-tiba menjadi gelap.</li>
+                        </ul>
+                        <p><strong>Dampak Abrasi Dan Gelombang Pasang</strong></p>
+                        <ul>
+                            <li>Penyempitan terhadap lebar pantai secara berkala sehingga semakin berkurangnya lahan untuk penduduk pesisir pantai.</li>
+                            <li>Rusaknya sarana prasarana termasuk pemukiman, infrastruktur transportasi, serta Pelabuhan.</li>
+                            <li>Berkurangnya pendapatan para nelayan karena tidak dapat melaut, kerusakan infrastruktur jalan yang mengakibatkan sulitnya akses ke daerah tersebut.</li>
+                            <li>Hutan bakau yang terkikis mengakibatkan hilangnya tempat berlindungnya ikan-ikan.</li>
+                            <li>Akibat terpaan ombak disertai angin yang kencang hutan bakau menjadi rusak.</li>
+                        </ul>
+                        <p><strong>Ketika Terjadi Gelombang Pasang</strong></p>
+                        <ul>
+                            <li>Sosialisasi awal kepada masyarakat dari hasil prediksi cuaca melalui radio serta alat komunikasi lainnya.</li>
+                            <li>Ketika sedang pelayaran, usahakan menghindari daerah laut yang sedang mengalami cuaca buruk.</li>
+                            <li>Membuat infrastruktur pemecah gelombang untuk meredam energi gelombang yang masuk, terutama di wilayah pesisir dengan gelombang besar.</li>
+                            <li>Ketika terjadi gelombang pasang, hindarilah daerah pantai serta berlarilah ke dataran yang lebih tinggi.</li>
+                        </ul>
+                        <p><strong>Referensi:</strong></p>
+                        <ul>
+                            <li>http://www.mitigasi-bencana.com/</li>
+                            <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                        </ul>         
+                    `;
+        } else if (itemMitigasi.value === 'angin-ribut') {
+          content.innerHTML = `
+                          <h2>Angin Ribut</h2>
+                          <p>Angin ribut/puting beliung adalah angin kencang yang berputar sehingga pangkal awan cumulonimbus menyentuh daratan dengan kecepatan hingga 175 km/jam, namun intensitasnya lebih rendah dari tornado. Badai mengaduk lautan, menciptakan gelombang besar dan kuat.</p>
+                          <p><strong>Tanda-Tanda Terjadinya Angin Puting Beliung</strong></p>
+                          <ul>
+                              <li>Terlihat gumpalan awan gelap, besar, dan tinggi.</li>
+                              <li>Petir dan gemuruh terlihat dari kejauhan.</li>
+                          </ul>
+                          <p><strong>Penanganan Saat Terjadinya Angin Puting Beliung</strong></p>
+                          <ul>
+                              <li>Masukkan barang-barang ke dalam rumah supaya tidak terbawa oleh angin.</li>
+                              <li>Masuklah kedalam bangunan yang kokoh, tutup pintu serta jendela lalu kunci.</li>
+                              <li>Segeralah menuju tempat yang lebih aman untuk berlindung.</li>
+                              <li>Matikan seluruh arus listrik serta peralatan elektronik.</li>
+                              <li>Jangan tiarap di atas tanah.</li>
+                              <li>Hindari tempat-tempat yang terdapat dinding kayu/bambu, jembatan, pohon, antenna, radio, tower, tiang listrik, serta Gedung yang tinggi.</li>
+                          </ul>
+                          <p><strong>Penanganan Setelah Terjadinya Angin Puting Beliung</strong></p>
+                          <ul>
+                              <li>Pastikan seluruh anggota keluarga aman dan tidak mengalami cedera.</li>
+                              <li>Bila terdapat korban, segera berikan pertolongan pertama.</li>
+                              <li>Laporkan kepada pihak yang bersangkutan bila terdapat kerusakan sehubungan dengan listrik, gas, dll.</li>
+                          </ul>
+                          <p><strong>Referensi:</strong></p>
+                          <ul>
+                              <li>http://www.mitigasi-bencana.com/</li>
+                              <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                          </ul>        
+                      `;
+        } else if (itemMitigasi.value === 'kekeringan') {
+          content.innerHTML = `
+                            <h2>Kekeringan</h2>
+                            <p>Kekeringan merupakan kapasitas air yang tersedia jauh di bawah kebutuhan air, baik untuk keberlangsungan hidup, pertanian, kegiatan ekonomi, serta lingkungan.</p>
+                            <p><strong>Gejala Terjadinya Kekeringan</strong></p>
+                            <ul>
+                                <li>Berkurangnya kapasitas curah hujan yang berada dibawah batas normal dalam satu musim.</li>
+                                <li>Berkurangnya pasokan air permukaan dan air tanah.</li>
+                                <li>Berkurangnya kandungan air didalam tanah menyebabkan kekeringan pada lahan pertanian.</li>
+                            </ul>
+                            <p><strong>Dampak Kekeringan</strong></p>
+                            <ul>
+                                <li>Banjir bandang, pepohonan mati, hutan menjadi gundul, pada musim hujan akan menyebabkan erosi dan banjir.</li>
+                                <li>Urbanisasi, akibat hilangnya bahan pangan karena tumbuhan pangan dan ternak mati, petani kehilangan mata pencaharian.</li>
+                                <li>Kesehatan manusia, hewan, dan tumbuhan menjadi mudah terkena penyakit.</li>
+                            </ul>
+                            <p><strong>Mitigasi Serta Upaya Pengurangan Resiko Kekeringan</strong></p>
+                            <ul>
+                                <li>Penyusunan peraturan pemerintah tentang pengaturan sistem pengiriman data iklim dari daerah ke pusat pengolahan data.</li>
+                                <li>Penyusunan PERDA untuk menetapkan skala prioritas penggunaan air dengan memperhatikan historical right dan asas keadilan.</li>
+                                <li>Pembentukan pokja dan posko kekeringan pada tingkat pusat dan daerah.</li>
+                                <li>Penyediaan anggaran khusus untuk pengembangan / pada daerah-daerah yang rawan kekeringan.</li>
+                                <li>Memberikan sistem penghargaan dan hukuman bagi masyarakat yang melakukan upaya konservasi dan rehabilitasi sumber daya air dan hutan.</li>
+                            </ul>
+                            <p><strong>Referensi:</strong></p>
+                            <ul>
+                                <li>http://www.mitigasi-bencana.com/</li>
+                                <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                            </ul>        
+                        `;
+        } else if (itemMitigasi.value === 'kebakaran') {
+          content.innerHTML = `
+                              <h2>Kebakaran</h2>
+                              <p>Kebakara merupakan musibah yang tidak terduga datangnya bisa kapan saja dan dimana saja, sehingga dibutuhkan kegiatan mitigasi maupun pelatihan-pelatihan pemadaman kebakaran bagi siapa saja yang mempunyai wewenang atas terjadinya musibah tersebut.</p>
+                              <p><strong>Sistem Pemadaman</strong></p>
+                              <p><strong>Sistem Isolasi</strong></p>
+                              <ul>
+                                  <li>Cara pemadaman dengan tidak memberi oksigen pada benda yang terbakar.</li>
+                                  <li>Menutup dengan karung basah.</li>
+                                  <li>Menimbun dengan tanah, pasir, atau lumpur.</li>
+                              </ul>
+                              <p><strong>Sistem Pendinginan</strong></p>
+                              <ul>
+                                  <li>Cara pemadaman dengan menurunkan suhu pada benda yang terbakar.</li>
+                                  <li>Menyiram dengan air.</li>
+                                  <li>Menimbun dengan daun, batang pohon yang banyak mengandung air.</li>
+                              </ul>
+                              <p><strong>Sistem Urai</strong></p>
+                              <ul>
+                                  <li>Memadamkan api dengan cara memecah benda yang terbakar menjadi bagian kecil, sehingga api mudah dikendalikan.</li>
+                                  <li>Bila sistem isolasi dan pendinginan tidak dapat dilakukan.</li>
+                              </ul>
+                              <p><strong>ALAT PEMADAM</strong></p>
+                              <p><strong>Media pemadaman jenis padat:</strong></p>
+                              <ul>
+                                  <li>Pasir, tanah, lumpur</li>
+                                  <li>Karung goni</li>
+                                  <li>Selimut api</li>
+                                  <li>Tepung kimia kering (Dry Chemical)</li>
+                                  <li>Alat Pemadam Api Ringan (APAR)</li>
+                              </ul>
+                              <p><strong>Media pemadaman jenis cair:</strong></p>
+                              <ul>
+                                  <li>Air</li>
+                                  <li>Busa (Foam)</li>
+                                  <li>Soda</li>
+                                  <li>Halon (BCF)</li>
+                              </ul>
+                              <p><strong>Media pemadaman jenis gas:</strong></p>
+                              <ul>
+                                  <li>Gas asam arang</li>
+                                  <li>Gas zat lemas</li>
+                                  <li>Zat argon</li>
+                              </ul>
+                              <p><strong>Dry Chemical</strong></p>
+                              <p>Cara pemakaian:</p>
+                              <p>Harus diperhatikan adanya arah angin. Jika angin bertiup terlalu kuat maka penggunakan dry chemical ini tidak efektif.</p>
+                              <p>Arahkan pancaran pemotong nyala api dan usahakan dapat terbentuk semacam awan / asap untuk menutup nyala api tersebut.</p>
+                              <p><strong>Pasir / Tanah</strong></p>
+                              <ul>
+                                  <li>Sangat baik untuk kebakaran lantai / tanah datar.</li>
+                                  <li>Dipakai untuk membendung tumpahan minyak agar kebakaran tidak meluas.</li>
+                                  <li>Dipakai untuk pemadaman awal semua jenis kebakaran.</li>
+                              </ul>
+                              <p>Cara pemakaian:</p>
+                              <p>Pasir / tanah ditaburkan mulai dari tepi hingga seluruh permukaan yang terbakar tertutup rata.</p>
+                              <p><strong>Selimut / Karung Goni</strong></p>
+                              <ul>
+                                  <li>Cocok untuk kebakaran kompor (minyak) dan semua jenis kebakaran, kecuali listrik.</li>
+                                  <li>Bahan murah dan mudah didapat.</li>
+                              </ul>
+                              <p>Cara pemakaian:</p>
+                              <p>Basahi karung goni dengan air kemudian tutupkan secara rata pada bagian yang terbakar. Jika dengan satu karung tidak cukup, tambah lagi.</p>
+                              <p><strong>Referensi:</strong></p>
+                              <ul>
+                                  <li>http://www.mitigasi-bencana.com/</li>
+                                  <li>https://bpbd.kedirikota.go.id/view/bencana-alam-gunung-meletus</li>
+                              </ul>        
+                          `;
         }
       });
     }
