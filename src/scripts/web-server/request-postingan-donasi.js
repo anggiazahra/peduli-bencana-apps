@@ -91,7 +91,7 @@ class DataPostinganDonasi {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/donasi-postingan');
+        window.location.replace('#/donasi-riwayat');
         alert(data.message);
         window.location.reload();
       })

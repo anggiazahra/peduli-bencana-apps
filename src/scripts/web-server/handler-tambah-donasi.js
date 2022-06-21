@@ -4,6 +4,8 @@ const { nanoid } = require('nanoid');
 const {
   addTambahDonasiToDatabase,
   getAllTambahDonasiFromDatabase,
+  getTambahDonasiIdFromDatabase,
+  editTambahDonasiFromDatabase,
 } = require('../database/database-request-tambah-donasi');
 
 const {
@@ -125,7 +127,38 @@ const getAllTambahDonasiHandler = async (request, h) => {
   return response;
 };
 
+const putTambahDonasiHandler = async (request, h) => {
+  const { donasiTambahId } = request.params;
+
+  const data = {
+    id: donasiTambahId,
+    status: 'Sudah Dikonfirmasi',
+  };
+  const cekId = await getTambahDonasiIdFromDatabase(donasiTambahId);
+
+  if (cekId.length > 0) {
+    await editTambahDonasiFromDatabase(data);
+    const response = h.response({
+      status: 'success',
+      message: 'Donasi berhasil dikonfirmasi',
+      data: {
+        donasiTambahId,
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: 'error',
+    message: 'Donasi gagal dikonfirmasi',
+  });
+  response.code(500);
+  return response;
+};
+
 module.exports = {
   addTambahDonasiHandler,
   getAllTambahDonasiHandler,
+  putTambahDonasiHandler,
 };

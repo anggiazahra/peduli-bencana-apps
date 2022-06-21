@@ -24,7 +24,33 @@ function getAllTambahDonasiFromDatabase() {
   });
 }
 
+function getTambahDonasiIdFromDatabase(id) {
+  return new Promise((resolve, reject) => {
+    con.query(`SELECT * FROM tambahdonasi WHERE id = '${id}'`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
+function editTambahDonasiFromDatabase(data) {
+  const sql = `UPDATE tambahdonasi SET status = '${data.status}' WHERE id = '${data.id}'`;
+
+  return new Promise((resolve, reject) => {
+    con.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 module.exports = {
   addTambahDonasiToDatabase,
   getAllTambahDonasiFromDatabase,
+  getTambahDonasiIdFromDatabase,
+  editTambahDonasiFromDatabase,
 };

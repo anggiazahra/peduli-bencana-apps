@@ -17,6 +17,7 @@
         "linebreak-style": 0,
         "no-underscore-dangle": 0,
         "no-shadow": 0,
-        "no-alert": 0
+        "no-alert": 0,
+        "radix": 0
     }
 }

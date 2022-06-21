@@ -19,6 +19,7 @@ const {
 const {
   addTambahDonasiHandler,
   getAllTambahDonasiHandler,
+  putTambahDonasiHandler,
 } = require('./handler-tambah-donasi');
 
 const {
@@ -114,7 +115,7 @@ const routes = [
       payload: {
         output: 'stream',
         parse: true,
-        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        allow: ['application/json', 'multipart/form-data'],
         maxBytes: 10 * 1000 * 1000,
         multipart: true,
       },
@@ -133,7 +134,7 @@ const routes = [
       payload: {
         output: 'stream',
         parse: true,
-        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        allow: ['application/json', 'multipart/form-data'],
         maxBytes: 10 * 1000 * 1000,
         multipart: true,
       },
@@ -144,6 +145,20 @@ const routes = [
     method: 'GET',
     path: '/donasi/tambah',
     handler: getAllTambahDonasiHandler,
+  },
+  {
+    method: 'PUT',
+    path: '/donasi/tambah/{donasiTambahId}',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data'],
+        maxBytes: 10 * 1000 * 1000,
+        multipart: true,
+      },
+    },
+    handler: putTambahDonasiHandler,
   },
   {
     method: 'POST',
@@ -190,7 +205,7 @@ const routes = [
       payload: {
         output: 'stream',
         parse: true,
-        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        allow: ['application/json', 'multipart/form-data'],
         maxBytes: 10 * 1000 * 1000,
         multipart: true,
       },
@@ -209,7 +224,7 @@ const routes = [
       payload: {
         output: 'stream',
         parse: true,
-        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        allow: ['application/json', 'multipart/form-data'],
         maxBytes: 10 * 1000 * 1000,
         multipart: true,
       },

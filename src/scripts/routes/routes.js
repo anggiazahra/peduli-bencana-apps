@@ -4,6 +4,7 @@ import DonasiPostinganDetail from '../views/pages/donasiPostinganDetail';
 import DonasiPostinganTambah from '../views/pages/donasiPostinganTambah';
 import DonasiPostinganEdit from '../views/pages/donasiPostinganEdit';
 import DonasiTambah from '../views/pages/donasiTambah';
+import DonasiRiwayat from '../views/pages/donasiRiwayat';
 import Relawan from '../views/pages/relawan';
 import RelawanDetail from '../views/pages/relawanDetail';
 import RelawanDaftar from '../views/pages/relawanDaftar';
@@ -25,6 +26,7 @@ const routes = {
   '/donasi-postingan-tambah': DonasiPostinganTambah,
   '/donasi-postingan-edit/:id': DonasiPostinganEdit,
   '/donasi-tambah/:id': DonasiTambah,
+  '/donasi-riwayat': DonasiRiwayat,
   '/relawan': Relawan,
   '/relawan-detail/:id': RelawanDetail,
   '/relawan-daftar/:id': RelawanDaftar,

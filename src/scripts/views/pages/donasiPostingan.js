@@ -5,11 +5,12 @@ const DonasiPostingan = {
     return `
     <style>
       .btn-tambah {
-        width:auto;
-        align-content: flex-end;
-        align-items: flex-end;
         margin-left: auto; 
-        margin-right: 0;
+        margin-right: 10px;
+      }
+      .btn-riwayat {
+        background-color: #DFDFDF;
+        color: black;
       }
       .btn-max {
         width: 100%;
@@ -25,6 +26,12 @@ const DonasiPostingan = {
         height: 150px;
         object-fit: cover;
         object-position: center;
+      }
+      .flex-row-reverse {
+        flex-direction: row !important;
+      }
+      h2 {
+        font-size: 20px;
       }
       @media screen and (max-width: 1000px) {
         .grid-row {
@@ -51,8 +58,8 @@ const DonasiPostingan = {
     </style>
 
     <h1 class="main-title">Donasi</h1>
-    <div class="d-flex flex-row-reverse">
-        <a href="#/donasi-postingan-tambah" class="btn btn-tambah p-2" id="btn-tambah">Tambah Data</a>
+    <div class="d-flex flex-row-reverse" id="btn-list">
+      <a href="#/donasi-postingan-tambah" class="btn btn-tambah p-2" id="btn-tambah">Tambah Data</a>
     </div>
         
     <div class="list-donasi grid-row" id="list-donasi">
@@ -73,6 +80,17 @@ const DonasiPostingan = {
       buttonTambah.setAttribute('href', '#/login');
     }
 
+    if (loginSession === 'true') {
+      const buttonList = document.querySelector('#btn-list');
+
+      const buttonRiwayat = document.createElement('a');
+      buttonRiwayat.setAttribute('href', '#/donasi-riwayat');
+      buttonRiwayat.setAttribute('class', 'btn btn-riwayat p-2');
+      buttonRiwayat.innerHTML = 'Riwayat Donasi';
+
+      buttonList.appendChild(buttonRiwayat);
+    }
+
     dataPostinganDonasi.forEach((data) => {
       const listDonasi = document.querySelector('#list-donasi');
       const donasiItem = document.createElement('div');
@@ -81,7 +99,7 @@ const DonasiPostingan = {
       donasiItem.innerHTML = `
         <img src="./upload/donasi/${data.namaPoster}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">${data.judulPostingan}</h5>
+          <h2 class="card-title">${data.judulPostingan}</h2>
           <p class="card-text">${data.kabKota}, ${data.provinsi}</p>
           <a href="#/donasi-postingan-detail/${data.id}" class="btn btn-max">Detail</a>
         </div>

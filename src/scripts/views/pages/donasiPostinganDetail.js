@@ -348,7 +348,7 @@ const DonasiPostinganDetail = {
     buttonTambahDonasi.setAttribute('href', `#/donasi-tambah/${dataPostingan.id}`);
 
     // Data Tambah Donasi
-    const resultTambahDonasi = await DataTambahDonasi.getAllPostinganDonasi();
+    const resultTambahDonasi = await DataTambahDonasi.getAllTambahDonasi();
     const listTambahDonasi = resultTambahDonasi.data.donasi;
 
     // Filter data tambah donasi
@@ -358,22 +358,30 @@ const DonasiPostinganDetail = {
     if (donasiTambahFilter.length > 0) {
       const arrayDonasi = [];
       donasiTambahFilter.forEach((item) => {
-        arrayDonasi.push(item.jumlahDonasi);
+        arrayDonasi.push(parseInt(item.jumlahDonasi));
       });
 
       // Menghitung total donasi yang terkumpul
       const totalDonasi = arrayDonasi.reduce((total, num) => total + num);
 
+      const formatToCurrency = (amount) => `Rp ${amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+
       const donasiTerkumpul = document.querySelector('#donasi-terkumpul');
-      donasiTerkumpul.innerHTML = `Rp ${totalDonasi}`;
+      donasiTerkumpul.innerHTML = `${formatToCurrency(totalDonasi)}`;
 
       const progressBar = document.querySelector('#progress-bar');
       const presentase = (totalDonasi / dataPostingan.targetDonasi) * 100;
       progressBar.setAttribute('aria-valuenow', presentase.toFixed(1));
-      progressBar.style.width = `${presentase.toFixed(1)}%`;
 
       const progressValue = document.querySelector('#progress-value');
-      progressValue.innerHTML = `${presentase.toFixed(1)}%`;
+
+      if (presentase < 100) {
+        progressBar.style.width = `${presentase.toFixed(1)}%`;
+        progressValue.innerHTML = `${presentase.toFixed(1)}%`;
+      } else if (presentase >= 100) {
+        progressBar.style.width = '100%';
+        progressValue.innerHTML = '100%';
+      }
 
       // Memfilter donasi yang sudah terkonfirmasi
       const donasiConfirmed = donasiTambahFilter.filter((item) => item.status === 'Sudah Dikonfirmasi');

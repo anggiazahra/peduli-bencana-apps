@@ -17,7 +17,7 @@ class DataTambahDonasi {
     return response;
   }
 
-  static async getAllPostinganDonasi() {
+  static async getAllTambahDonasi() {
     const response = await fetch('http://localhost:5000/donasi/tambah', {
       method: 'GET',
       headers: {
@@ -32,16 +32,20 @@ class DataTambahDonasi {
     return response;
   }
 
-  static async getPostinganDonasiById(idPostinganDonasi) {
-    const response = await fetch(`http://localhost:5000/donasi/postingan/${idPostinganDonasi}`, {
-      method: 'GET',
+  static async putTambahDonasi(idTambahDonasi) {
+    const response = await fetch(`http://localhost:5000/donasi/tambah/${idTambahDonasi}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       redirect: 'follow',
     })
       .then((response) => response.text())
-      .then((result) => (JSON.parse(result)))
+      .then((result) => {
+        const data = JSON.parse(result);
+        alert(data.message);
+        window.location.reload();
+      })
       .catch((error) => console.log('error', error));
 
     return response;
