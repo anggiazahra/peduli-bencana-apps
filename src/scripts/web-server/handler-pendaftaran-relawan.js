@@ -8,11 +8,13 @@ const {
 const {
   addPendaftaranRelawanToDatabase,
   getAllPendaftaranRelawanFromDatabase,
+  getPendaftaranRelawanByUsernameAndIdPostinganFromDatabase,
 } = require('../database/database-request-daftar-relawan');
 
 const addPendaftaranRelawanHandler = async (request, h) => {
   const {
     idPostinganRelawan,
+    username,
     namaLengkap,
     noTelepon,
     kabKota,
@@ -23,6 +25,15 @@ const addPendaftaranRelawanHandler = async (request, h) => {
     const response = h.response({
       status: 'fail',
       message: 'Gagal menambahkan data. Id postingan relawan tidak ada',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (username === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Username tidak ditemukan',
     });
     response.code(400);
     return response;
@@ -70,17 +81,32 @@ const addPendaftaranRelawanHandler = async (request, h) => {
   const data = {
     id,
     idPostinganRelawan,
+    username,
     namaLengkap,
     noTelepon,
     kabKota,
     provinsi,
     tanggalDaftar,
   };
-  const cekId = await getPostinganRelawanIdFromDatabase(idPostinganRelawan);
-  const results = await addPendaftaranRelawanToDatabase(data);
-  console.log(results);
 
-  if (cekId.length > 0 && results) {
+  const cekIdPostingan = await getPostinganRelawanIdFromDatabase(idPostinganRelawan);
+  const cekUsernameAndIdPostingan = await
+  getPendaftaranRelawanByUsernameAndIdPostinganFromDatabase(username, idPostinganRelawan);
+
+  if (cekUsernameAndIdPostingan.length > 0) {
+    const response = h.response({
+      status: 'error',
+      message: 'Anda sudah mendaftar pada kegiatan relawan ini',
+      data: {
+        idPostinganRelawan,
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  if (cekIdPostingan.length > 0) {
+    await addPendaftaranRelawanToDatabase(data);
     const response = h.response({
       status: 'success',
       message: 'Data berhasil ditambahkan',
@@ -96,6 +122,9 @@ const addPendaftaranRelawanHandler = async (request, h) => {
   const response = h.response({
     status: 'error',
     message: 'Data gagal ditambahkan',
+    data: {
+      idPostinganRelawan,
+    },
   });
   response.code(500);
   return response;

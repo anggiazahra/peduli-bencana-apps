@@ -361,7 +361,9 @@ const DonasiRiwayat = {
           }
         });
       } else if (listDonasiFilter.length < 1) {
-        listDonasi.innerHTML = '<div class="message">Anda belum pernah melakukan donasi</div>';
+        const message = document.createElement('div');
+        message.innerHTML = '<div class="message">Anda belum pernah melakukan donasi</div>';
+        detailRiwayat.appendChild(message);
       }
     };
 

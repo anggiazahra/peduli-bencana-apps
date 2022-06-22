@@ -13,6 +13,7 @@ const {
 
 const addPostinganRelawanHandler = async (request, h) => {
   const {
+    usernamePembuat,
     judulPostingan,
     poster,
     tanggalMulai,
@@ -28,6 +29,15 @@ const addPostinganRelawanHandler = async (request, h) => {
   } = request.payload;
 
   const namaPoster = poster.hapi.filename;
+
+  if (usernamePembuat === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Username tidak ditemukan',
+    });
+    response.code(400);
+    return response;
+  }
 
   if (judulPostingan === undefined) {
     const response = h.response({
@@ -143,6 +153,7 @@ const addPostinganRelawanHandler = async (request, h) => {
 
   const data = {
     id,
+    usernamePembuat,
     judulPostingan,
     namaPoster,
     tanggalMulai,

@@ -154,6 +154,7 @@ const RelawanTambah = {
     const inputNoTelepon = document.querySelector('#no-telepon');
     const inputPekerjaan = document.querySelector('#pekerjaan');
     const inputPersyaratan = document.querySelector('#persyaratan');
+    const sessionUsername = sessionStorage.getItem('username');
 
     const id = Math.floor((Math.random() * 999999999999999) + 1);
 
@@ -166,6 +167,7 @@ const RelawanTambah = {
         const nameFile = `${id}_${inputPoster.files[0].name}`;
 
         const formdata = new FormData();
+        formdata.append('usernamePembuat', sessionUsername);
         formdata.append('judulPostingan', inputJudulPostingan.value);
         formdata.append('poster', file, nameFile);
         formdata.append('tanggalMulai', inputTanggalMulai.value);

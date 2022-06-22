@@ -138,10 +138,7 @@ const RelawanDetail = {
               <span>Penanggung Jawab</span>
               <div class="grid-row mt-3">
                 <img src="./img-profile.png" class="img-profile">
-                <div id="penanggung-jawab">
-                  <h2>hadi</h2>
-                  <span>Karyawan - 0898999126522</span>
-                </div>
+                <div id="penanggung-jawab"></div>
               </div>
             </div>
           </div>
@@ -167,10 +164,6 @@ const RelawanDetail = {
               </table>
             </div>
           </div>
-          <div class="grid-btn">
-            <a class="btn btn-max" id="btn-edit" href="">Edit Data</a>
-            <a class="btn btn-max" id="btn-hapus" href="">Hapus Data</a>
-          </div>
         </div>
       </div>
     `;
@@ -185,11 +178,18 @@ const RelawanDetail = {
 
     const posterRelawan = document.querySelector('#posterRelawan');
     posterRelawan.innerHTML = `
-        <img src="./upload/relawan/${dataPostingan.poster}" alt="" class="img-detail">
-      `;
+      <img src="./upload/relawan/${dataPostingan.poster}" alt="" class="img-detail">
+    `;
 
     const tombolDaftar = document.querySelector('#btn-daftar');
-    tombolDaftar.setAttribute('href', `#/relawan-daftar/${dataPostingan.id}`);
+    const loginSession = sessionStorage.getItem('loginSession');
+
+    if (loginSession === 'true') {
+      tombolDaftar.setAttribute('href', `#/relawan-daftar/${dataPostingan.id}`);
+    } else if (loginSession === 'false') {
+      tombolDaftar.setAttribute('href', '#/login');
+      tombolDaftar.innerHTML = 'Login untuk Mendaftar';
+    }
 
     const lokasiBencana = document.querySelector('#lokasi-bencana');
     lokasiBencana.innerHTML = `
@@ -214,15 +214,6 @@ const RelawanDetail = {
 
     const persyaratan = document.querySelector('#persyaratan');
     persyaratan.innerHTML = `${dataPostingan.persyaratan}`;
-
-    const tombolEdit = document.querySelector('#btn-edit');
-    tombolEdit.setAttribute('href', `#/relawan-edit/${dataPostingan.id}`);
-
-    const tombolHapus = document.querySelector('#btn-hapus');
-    tombolHapus.addEventListener('click', async (event) => {
-      event.preventDefault();
-      await DataPostinganRelawan.deletePostinganRelawanById(dataPostingan.id);
-    });
 
     const dataPendaftaranRelawan = await DataPendaftaranRelawan.getAllPendaftaranRelawan();
     const listRelawan = dataPendaftaranRelawan.data.relawan;

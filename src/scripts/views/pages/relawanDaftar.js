@@ -94,6 +94,7 @@ const RelawanDaftar = {
     const inputKabKota = document.querySelector('#kab-kota');
     const inputProvinsi = document.querySelector('#provinsi');
     const inputCheckbox = document.querySelector('#checkbox');
+    const sessionUsername = sessionStorage.getItem('username');
 
     buttonSubmit.addEventListener('click', async (event) => {
       event.preventDefault();
@@ -106,6 +107,7 @@ const RelawanDaftar = {
         const formdata = new FormData();
 
         formdata.append('idPostinganRelawan', idPostinganRelawan);
+        formdata.append('username', sessionUsername);
         formdata.append('namaLengkap', inputNamaLengkap.value);
         formdata.append('noTelepon', inputNoTelepon.value);
         formdata.append('kabKota', inputKabKota.value);

@@ -10,6 +10,7 @@ import RelawanDetail from '../views/pages/relawanDetail';
 import RelawanDaftar from '../views/pages/relawanDaftar';
 import RelawanTambah from '../views/pages/relawanTambah';
 import RelawanEdit from '../views/pages/relawanEdit';
+import RelawanRiwayat from '../views/pages/relawanRiwayat';
 import Login from '../views/pages/login';
 import Logout from '../views/pages/logout';
 import Registrasi from '../views/pages/registrasi';
@@ -32,6 +33,7 @@ const routes = {
   '/relawan-daftar/:id': RelawanDaftar,
   '/relawan-tambah': RelawanTambah,
   '/relawan-edit/:id': RelawanEdit,
+  '/relawan-riwayat': RelawanRiwayat,
 };
 
 export default routes;

@@ -26,6 +26,13 @@ const Relawan = {
           object-fit: cover;
           object-position: center;
         }
+        .flex-row-reverse {
+          flex-direction: row !important;
+        }
+        .btn-riwayat {
+          background-color: #DFDFDF;
+          color: black;
+        }
         @media screen and (max-width: 1000px) {
           .grid-row {
               grid-template-columns: 1fr 1fr 1fr;
@@ -51,8 +58,8 @@ const Relawan = {
       </style>
       
       <h1 class="main-title">Relawan</h1>
-      <div class="d-flex flex-row-reverse">
-          <a href="#/relawan-tambah" class="btn btn-tambah p-2" id="btn-tambah">Tambah Data</a>
+      <div class="d-flex flex-row-reverse" id="btn-list">
+          <a href="#/relawan-tambah" class="btn btn-tambah p-2 me-2" id="btn-tambah">Tambah Data</a>
       </div>
       <div class="list-relawan grid-row">
     `;
@@ -68,6 +75,17 @@ const Relawan = {
     if (loginSession === 'false') {
       buttonTambah.innerHTML = 'Login Untuk Tambah Data';
       buttonTambah.setAttribute('href', '#/login');
+    }
+
+    if (loginSession === 'true') {
+      const buttonList = document.querySelector('#btn-list');
+
+      const buttonRiwayat = document.createElement('a');
+      buttonRiwayat.setAttribute('href', '#/relawan-riwayat');
+      buttonRiwayat.setAttribute('class', 'btn btn-riwayat p-2');
+      buttonRiwayat.innerHTML = 'Riwayat Relawan';
+
+      buttonList.appendChild(buttonRiwayat);
     }
 
     dataPostinganRelawan.forEach((data) => {
