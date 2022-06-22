@@ -8,7 +8,7 @@ const ArtikelDetail = {
     return `
       <style>
         .artikel-detail{
-          margin: 0 auto 40px;
+          margin: 15px auto 40px;
           min-height: 80vh;
         }
         .artikel-detail h1{
