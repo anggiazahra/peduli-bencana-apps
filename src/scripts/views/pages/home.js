@@ -14,10 +14,14 @@ const Home = {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 20px;
       }
-      .btn{
+      .btn-fitur-main{
         background: #1C4966;
         color: white;
         padding: 35px;
+        min-width: 44px;
+        min-height: 44px;
+        border-radius:4px;
+        text-decoration: none;
       }
       .btn-fitur img{
         width: 30px;
@@ -29,9 +33,12 @@ const Home = {
         font-weight: 600;
         color: #1C4966;
         margin-top: 25px;
-        margin-bottom: 0;
+        margin-bottom: 40px;
       }
-      .btn:hover{
+      .btn-fitur-main a{
+        text-decoration: none;
+      }
+      .btn-fitur-main:hover{
         font-weight: bold;
         background: #1C4966;
         color: white;
@@ -111,6 +118,7 @@ const Home = {
         .btn-fitur{
           display: grid;
           grid-template-columns: 1fr 1fr;
+          gap: 35px;
         }
         #fitur-artikel img{
           width: 100%;
@@ -127,6 +135,7 @@ const Home = {
         .btn-fitur{
           display: grid;
           grid-template-columns: 1fr;
+          gap: 30px;
         }
         .landing-left h1{
           font-size: 20px;
@@ -141,7 +150,7 @@ const Home = {
       <section class="landing-page">
         <div class="landing-main">
           <div class="landing-left">
-          <h1>Peduli Bencana</h1>
+          <h1>PEDULI BENCANA</h1>
           <p>Peduli Bencana merupakan website yang memberikan informasi dan layanan yang berkaitan dengan bencana yang terjadi di Indonesia</p>
           <a href="#home" class="btn btn-add p-2">Get Started</a>
           </div>
@@ -155,22 +164,22 @@ const Home = {
       <h1 style="text-align:center;">Our Service</h1>
         <div class="btn-fitur">
           <div class="fitur">
-            <a href="#fitur-mitigasi" class="btn">
+            <a href="#fitur-mitigasi" class="btn-fitur-main">
             <img src="./img/solutions.png" class="card-img-top" alt="Gambar Berita">
             Mitigasi</a>
           </div>
           <div class="fitur">
-            <a href="#fitur-artikel" class="btn">
+            <a href="#fitur-artikel" class="btn-fitur-main">
             <img src="./img/copywriting.png" class="card-img-top" alt="Gambar Berita">
             Artikel</a>
           </div>
           <div class="fitur">
-            <a href="#fitur-donasi" class="btn">
+            <a href="#fitur-donasi" class="btn-fitur-main">
             <img src="./img/donate.png" class="card-img-top" alt="Gambar Berita">
             Donasi</a>
           </div>
           <div class="fitur">
-            <a href="#fitur-relawan" class="btn">
+            <a href="#fitur-relawan" class="btn-fitur-main">
             <img src="./img/volunteer.png" class="card-img-top" alt="Gambar Berita">
             Relawan</a>
           </div>
@@ -178,7 +187,7 @@ const Home = {
       </section>
 
       <!-- Section Fitur -->
-      <section id="fitur-mitigasi" class="fitur-fitur" min-heigth: 75vh;>
+      <section tabindex="0" id="fitur-mitigasi" class="fitur-fitur" min-heigth: 75vh;>
       <h1>Apa itu fitur Mitigasi?</h1>
       <hr class="mb-4">
         <div class="fitur-penjelasan">

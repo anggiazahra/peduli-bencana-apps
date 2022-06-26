@@ -116,7 +116,7 @@ const Artikel = {
     </div>
 </section>
     
-<section id="artikel">
+<section tabindex="0" id="artikel">
     <div class="content">
         <h1>ARTIKEL</h1>
         <div class="d-flex flex-row-reverse">
