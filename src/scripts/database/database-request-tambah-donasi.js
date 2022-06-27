@@ -1,7 +1,7 @@
 const { con } = require('./database-connection');
 
 function addTambahDonasiToDatabase(data) {
-  const sql = `INSERT INTO tambahdonasi (id, idPostinganDonasi, namaDonatur, namaBank, noRekening, atasNama, jumlahDonasi, tanggalDonasi, status) VALUES ('${data.id}', '${data.idPostinganDonasi}', '${data.namaDonatur}', '${data.namaBank}', '${data.noRekening}', '${data.atasNama}', '${data.jumlahDonasi}', '${data.tanggalDonasi}', '${data.status}')`;
+  const sql = `INSERT INTO tambahdonasi (id, idPostinganDonasi, username, namaDonatur, namaBank, noRekening, atasNama, jumlahDonasi, buktiPembayaran, tanggalDonasi, status) VALUES ('${data.id}', '${data.idPostinganDonasi}', '${data.username}', '${data.namaDonatur}', '${data.namaBank}', '${data.noRekening}', '${data.atasNama}', '${data.jumlahDonasi}', '${data.buktiPembayaran}', '${data.tanggalDonasi}', '${data.status}')`;
 
   return new Promise((resolve, reject) => {
     con.query(sql, (err, results) => {

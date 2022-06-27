@@ -87,6 +87,12 @@ const RelawanDaftar = {
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const idPostinganRelawan = url.id;
+    const loginSession = sessionStorage.getItem('loginSession');
+
+    if (loginSession === 'false') {
+      swal('Akses Ditolak', 'Maaf anda tidak bisa mengakses halaman ini sebelum melakukan login', 'error');
+      window.location.replace('#/login');
+    }
 
     const buttonSubmit = document.querySelector('#button-submit');
     const inputNamaLengkap = document.querySelector('#nama-lengkap');

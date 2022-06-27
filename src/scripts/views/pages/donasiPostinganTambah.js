@@ -4,6 +4,12 @@ const DonasiPostinganTambah = {
   async render() {
     return `
       <style>
+        .hero-img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          object-position: center;
+        }
         .grid-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -12,8 +18,13 @@ const DonasiPostinganTambah = {
         .btn-max {
           width: 100%;
         }
+        h1 {
+          font-size: 24px;
+          text-align: center;
+          margin: 20px 0 40px 0;
+        }
         h2 {
-          font-size : 20px;
+          font-size : 18px;
         }
         .card {
           margin-bottom: 15px;
@@ -24,33 +35,52 @@ const DonasiPostinganTambah = {
         .input-group-text{
           height: 44px;
         }
+        @media screen and (max-width: 910px) {
+          .hero-img {
+            height: 350px;
+          }
+        }
         @media screen and (max-width: 540px) {
+          .hero-img {
+            height: 300px;
+          }
           .grid-row {
             grid-template-columns: 1fr;
             gap: 0;
           }
+          h1 {
+            font-size: 20px !important;
+            margin: 0 0 20px 0;
+          }
           h2 {
-            font-size: 17px;
+            font-size: 14px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          .hero-img {
+            height: 200px;
           }
         }
       </style>
 
-      <div class="donasi-tambah" id="main-content">
-        <h1>Tambah Data Postingan Donasi</h1>
+      <div class="donasi-tambah">
+        <img src="./tambah-postingan-donasi.png" class="hero-img">
         <form enctype="multipart/form-data">
-          <div class="card">
-            <div class="card-body">
-              <h2>Judul Postingan</h2>
-              <div class="mb-3">
-                <input type="text" class="form-control" id="judul-postingan" placeholder="Judul Postingan">
+          <div class="grid-row">
+            <div class="card">
+              <div class="card-body">
+                <h2>Judul Postingan</h2>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="judul-postingan" placeholder="Judul Postingan">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h2>Gambar/Poster</h2>
-              <div class="mb-3">
-                <input type="file" class="form-control" id="poster" placeholder="Gambar/Poster">
+            <div class="card">
+              <div class="card-body">
+                <h2>Gambar/Poster</h2>
+                <div class="mb-3">
+                  <input type="file" class="form-control" id="poster" placeholder="Gambar/Poster">
+                </div>
               </div>
             </div>
           </div>
@@ -168,6 +198,13 @@ const DonasiPostinganTambah = {
   },
 
   async afterRender() {
+    const loginSession = sessionStorage.getItem('loginSession');
+
+    if (loginSession === 'false') {
+      swal('Akses Ditolak', 'Maaf anda tidak bisa mengakses halaman ini sebelum melakukan login', 'error');
+      window.location.replace('#/login');
+    }
+
     const buttonSubmit = document.querySelector('#button-submit');
     const inputJudulPostingan = document.querySelector('#judul-postingan');
     const inputPoster = document.querySelector('#poster');
@@ -184,6 +221,7 @@ const DonasiPostinganTambah = {
     const inputAtasNama = document.querySelector('#atas-nama');
     const inputTargetDonasi = document.querySelector('#target-donasi');
     const inputDeskripsiDonasi = document.querySelector('#deskripsi-donasi');
+    const sessionUsername = sessionStorage.getItem('username');
 
     const id = Math.floor((Math.random() * 999999999999999) + 1);
 
@@ -191,28 +229,38 @@ const DonasiPostinganTambah = {
       const file = inputPoster.files[0];
       event.preventDefault();
       if (inputJudulPostingan.value === '' || inputPoster.value === '' || inputTanggalMulai.value === '' || inputTanggalBerakhir.value === '' || inputKabKota.value === '' || inputProvinsi.value === '' || inputAlamatLengkap.value === '' || inputPenanggungJawab === '' || inputNoTelepon.value === '' || inputPekerjaan.value === '' || inputNamaBank.value === '' || inputNoRekening.value === '' || inputAtasNama.value === '' || inputTargetDonasi.value === '' || inputDeskripsiDonasi.value === '') {
-        alert('Input tidak boleh kosong');
+        swal('Error', 'Tidak boleh ada inputan yang kosong', 'error');
       } else {
-        const nameFile = `${id}_${inputPoster.files[0].name}`;
+        const tambahPostingan = await swal({
+          title: 'Tambah Donasi',
+          text: 'Apakah anda ingin menambahkan donasi?',
+          icon: 'info',
+          buttons: true,
+        });
 
-        const formdata = new FormData();
-        formdata.append('judulPostingan', inputJudulPostingan.value);
-        formdata.append('poster', file, nameFile);
-        formdata.append('tanggalMulai', inputTanggalMulai.value);
-        formdata.append('tanggalBerakhir', inputTanggalBerakhir.value);
-        formdata.append('kabKota', inputKabKota.value);
-        formdata.append('provinsi', inputProvinsi.value);
-        formdata.append('alamatLengkap', inputAlamatLengkap.value);
-        formdata.append('penanggungJawab', inputPenanggungJawab.value);
-        formdata.append('noTelepon', inputNoTelepon.value);
-        formdata.append('pekerjaan', inputPekerjaan.value);
-        formdata.append('namaBank', inputNamaBank.value);
-        formdata.append('noRekening', inputNoRekening.value);
-        formdata.append('atasNama', inputAtasNama.value);
-        formdata.append('targetDonasi', inputTargetDonasi.value);
-        formdata.append('deskripsiDonasi', inputDeskripsiDonasi.value);
+        if (tambahPostingan) {
+          const nameFile = `${id}_${inputPoster.files[0].name}`;
 
-        await DataPostinganDonasi.addPostinganDonasi(formdata);
+          const formdata = new FormData();
+          formdata.append('usernamePembuat', sessionUsername);
+          formdata.append('judulPostingan', inputJudulPostingan.value);
+          formdata.append('poster', file, nameFile);
+          formdata.append('tanggalMulai', inputTanggalMulai.value);
+          formdata.append('tanggalBerakhir', inputTanggalBerakhir.value);
+          formdata.append('kabKota', inputKabKota.value);
+          formdata.append('provinsi', inputProvinsi.value);
+          formdata.append('alamatLengkap', inputAlamatLengkap.value);
+          formdata.append('penanggungJawab', inputPenanggungJawab.value);
+          formdata.append('noTelepon', inputNoTelepon.value);
+          formdata.append('pekerjaan', inputPekerjaan.value);
+          formdata.append('namaBank', inputNamaBank.value);
+          formdata.append('noRekening', inputNoRekening.value);
+          formdata.append('atasNama', inputAtasNama.value);
+          formdata.append('targetDonasi', inputTargetDonasi.value);
+          formdata.append('deskripsiDonasi', inputDeskripsiDonasi.value);
+
+          await DataPostinganDonasi.addPostinganDonasi(formdata);
+        }
       }
     });
   },

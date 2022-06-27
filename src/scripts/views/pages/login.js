@@ -78,17 +78,12 @@ const Login = {
     buttonSubmit.addEventListener('click', async (event) => {
       event.preventDefault();
       if (inputUsername.value === '' || inputPassword.value === '') {
-        alert('Input tidak boleh kosong');
+        swal('Input Kosong', 'Tidak boleh ada inputan yang kosong', 'error');
       } else {
         const formdata = new FormData();
         formdata.append('username', inputUsername.value);
         formdata.append('password', inputPassword.value);
-
-        const result = await DataLogin.checkLogin(formdata);
-        sessionStorage.setItem('username', result.data.username);
-        sessionStorage.setItem('hakAkses', result.data.hakAkses);
-        sessionStorage.setItem('loginSession', 'true');
-        window.location.reload();
+        await DataLogin.checkLogin(formdata);
       }
     });
   },

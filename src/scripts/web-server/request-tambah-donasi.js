@@ -8,9 +8,13 @@ class DataTambahDonasi {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Ditambahkan', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Ditambahkan', data.message, 'success');
+          window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -32,7 +36,7 @@ class DataTambahDonasi {
     return response;
   }
 
-  static async putTambahDonasi(idTambahDonasi) {
+  static async putTambahDonasi(idTambahDonasi, idPostinganDonasi) {
     const response = await fetch(`http://localhost:5000/donasi/tambah/${idTambahDonasi}`, {
       method: 'PUT',
       headers: {
@@ -43,8 +47,19 @@ class DataTambahDonasi {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Konfirmasi', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          if (data.data.status === 'Sudah Dikonfirmasi') {
+            swal('Berhasil Dikonfirmasi', data.message, 'success');
+            window.location.replace(`#/donasi-konfirmasi/${idPostinganDonasi}`);
+          }
+          if (data.data.status === 'Belum Dikonfirmasi') {
+            swal('Berhasil Dibatalkan', data.message, 'success');
+            window.location.replace(`#/donasi-konfirmasi/${idPostinganDonasi}`);
+          }
+        }
       })
       .catch((error) => console.log('error', error));
 

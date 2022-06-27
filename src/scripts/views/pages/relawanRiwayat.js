@@ -113,6 +113,13 @@ const RelawanRiwayat = {
   },
 
   async afterRender() {
+    const loginSession = sessionStorage.getItem('loginSession');
+
+    if (loginSession === 'false') {
+      swal('Akses Ditolak', 'Maaf anda tidak bisa mengakses halaman ini sebelum melakukan login', 'error');
+      window.location.replace('#/login');
+    }
+
     const buttonPostingan = document.querySelector('#btn-postingan');
     const buttonRelawan = document.querySelector('#btn-relawan');
     const detailRiwayat = document.querySelector('#detail-riwayat');
@@ -186,8 +193,6 @@ const RelawanRiwayat = {
           const postinganRelawanFilterById = listPendaftaranRelawan
             .filter((item) => item.idPostinganRelawan === data.id.toLowerCase());
 
-          // console.log(postinganRelawanFilterById);
-
           const listRelawan = document.querySelector(`#list-relawan-${data.id}`);
           const jumlahRelawan = postinganRelawanFilterById.length;
 
@@ -245,7 +250,7 @@ const RelawanRiwayat = {
       const listRelawan = document.createElement('div');
       listRelawan.setAttribute('class', 'grid-row');
       detailRiwayat.appendChild(listRelawan);
-      console.log(listRelawanFilter);
+
       if (listRelawanFilter.length > 0) {
         listRelawanFilter.forEach((data) => {
           // Filter data postingan relawan

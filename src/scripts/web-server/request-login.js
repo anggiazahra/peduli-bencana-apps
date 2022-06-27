@@ -6,11 +6,27 @@ class DataLogin {
       redirect: 'follow',
     })
       .then((response) => response.text())
-      .then((result) => {
+      .then(async (result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/home');
-        alert(data.message);
-        return data;
+        if (data.status === 'error') {
+          swal('Login Gagal', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Login Berhasil', data.message, 'success');
+          const login = await swal({
+            title: 'Login Berhasil',
+            text: data.message,
+            icon: 'success',
+          });
+
+          if (login) {
+            sessionStorage.setItem('loginSession', 'true');
+            sessionStorage.setItem('username', data.data.username);
+            sessionStorage.setItem('hakAkses', data.data.hakAkses);
+            window.location.replace('#/home');
+            window.location.reload();
+          }
+        }
       })
       .catch((error) => console.log('error', error));
 

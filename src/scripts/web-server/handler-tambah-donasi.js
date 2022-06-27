@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { response } = require('@hapi/hapi/lib/validation');
 const { nanoid } = require('nanoid');
+const fs = require('fs');
 const {
   addTambahDonasiToDatabase,
   getAllTambahDonasiFromDatabase,
@@ -15,17 +16,30 @@ const {
 const addTambahDonasiHandler = async (request, h) => {
   const {
     idPostinganDonasi,
+    username,
     namaDonatur,
     namaBank,
     noRekening,
     atasNama,
     jumlahDonasi,
+    buktiPembayaran,
   } = request.payload;
+
+  const namaBuktiPembayaran = buktiPembayaran.hapi.filename;
 
   if (idPostinganDonasi === undefined) {
     const response = h.response({
-      status: 'fail',
+      status: 'error',
       message: 'Gagal menambahkan data. Id postingan donasi tidak diketahui',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (username === undefined) {
+    const response = h.response({
+      status: 'error',
+      message: 'Gagal menambahkan data. Username tidak diketahui',
     });
     response.code(400);
     return response;
@@ -33,7 +47,7 @@ const addTambahDonasiHandler = async (request, h) => {
 
   if (namaDonatur === undefined) {
     const response = h.response({
-      status: 'fail',
+      status: 'error',
       message: 'Gagal menambahkan data. Mohon isi nama donatur',
     });
     response.code(400);
@@ -42,7 +56,7 @@ const addTambahDonasiHandler = async (request, h) => {
 
   if (namaBank === undefined) {
     const response = h.response({
-      status: 'fail',
+      status: 'error',
       message: 'Gagal menambahkan data. Mohon isi nama bank',
     });
     response.code(400);
@@ -51,7 +65,7 @@ const addTambahDonasiHandler = async (request, h) => {
 
   if (noRekening === undefined) {
     const response = h.response({
-      status: 'fail',
+      status: 'error',
       message: 'Gagal menambahkan data. Mohon isi no rekening anda',
     });
     response.code(400);
@@ -60,7 +74,7 @@ const addTambahDonasiHandler = async (request, h) => {
 
   if (atasNama === undefined) {
     const response = h.response({
-      status: 'fail',
+      status: 'error',
       message: 'Gagal menambahkan data. Mohon isi atas nama rekening anda',
     });
     response.code(400);
@@ -69,8 +83,17 @@ const addTambahDonasiHandler = async (request, h) => {
 
   if (jumlahDonasi === undefined) {
     const response = h.response({
-      status: 'fail',
+      status: 'error',
       message: 'Gagal menambahkan data. Mohon isi jumlah donasi',
+    });
+    response.code(400);
+    return response;
+  }
+
+  if (buktiPembayaran === undefined) {
+    const response = h.response({
+      status: 'error',
+      message: 'Gagal menambahkan data. Mohon masukkan bukti pembayaran',
     });
     response.code(400);
     return response;
@@ -82,21 +105,31 @@ const addTambahDonasiHandler = async (request, h) => {
   const data = {
     id,
     idPostinganDonasi,
+    username,
     namaDonatur,
     namaBank,
     noRekening,
     atasNama,
     jumlahDonasi,
+    buktiPembayaran: namaBuktiPembayaran,
     tanggalDonasi,
     status: 'Belum Dikonfirmasi',
   };
+
+  const dataBuktiPembayaran = buktiPembayaran._data;
+  fs.writeFile(`src/public/upload/bukti-pembayaran/${namaBuktiPembayaran}`, dataBuktiPembayaran, (err) => {
+    if (err) { console.log(err); } else {
+      console.log('File berhasil disimpan');
+    }
+  });
+
   const cekId = await getPostinganDonasiIdFromDatabase(idPostinganDonasi);
 
   if (cekId.length > 0) {
     await addTambahDonasiToDatabase(data);
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil ditambahkan',
+      message: 'Donasi berhasil ditambahkan',
       data: {
         idTambahDonasi: id,
         idPostinganDonasi,
@@ -108,7 +141,7 @@ const addTambahDonasiHandler = async (request, h) => {
 
   const response = h.response({
     status: 'error',
-    message: 'Data gagal ditambahkan',
+    message: 'Donasi gagal ditambahkan',
   });
   response.code(500);
   return response;
@@ -130,19 +163,39 @@ const getAllTambahDonasiHandler = async (request, h) => {
 const putTambahDonasiHandler = async (request, h) => {
   const { donasiTambahId } = request.params;
 
-  const data = {
-    id: donasiTambahId,
-    status: 'Sudah Dikonfirmasi',
-  };
   const cekId = await getTambahDonasiIdFromDatabase(donasiTambahId);
+  const cekStatus = cekId[0].status;
 
-  if (cekId.length > 0) {
+  if (cekId.length > 0 && cekStatus === 'Belum Dikonfirmasi') {
+    const data = {
+      id: donasiTambahId,
+      status: 'Sudah Dikonfirmasi',
+    };
     await editTambahDonasiFromDatabase(data);
     const response = h.response({
       status: 'success',
       message: 'Donasi berhasil dikonfirmasi',
       data: {
-        donasiTambahId,
+        id: donasiTambahId,
+        status: 'Sudah Dikonfirmasi',
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  if (cekId.length > 0 && cekStatus === 'Sudah Dikonfirmasi') {
+    const data = {
+      id: donasiTambahId,
+      status: 'Belum Dikonfirmasi',
+    };
+    await editTambahDonasiFromDatabase(data);
+    const response = h.response({
+      status: 'success',
+      message: 'Konfirmasi donasi berhasil dibatalkan',
+      data: {
+        id: donasiTambahId,
+        status: 'Belum Dikonfirmasi',
       },
     });
     response.code(200);

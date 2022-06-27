@@ -36,7 +36,7 @@ const checkLoginHandler = async (request, h) => {
   if (checkUsername.length < 1) {
     const response = h.response({
       status: 'error',
-      message: 'Gagal login, username tidak ditemukan',
+      message: 'Username yang anda masukkan tidak ditemukan, silahkan masukkan username yang sudah terdaftar',
     });
     response.code(500);
     return response;
@@ -45,7 +45,7 @@ const checkLoginHandler = async (request, h) => {
   if (dataRegistrasi.password !== passwordHash) {
     const response = h.response({
       status: 'error',
-      message: 'Gagal login, password yang anda masukkan salah',
+      message: 'Password yang anda masukkan salah, silahkan masukkan password yang sesuai',
     });
     response.code(500);
     return response;
@@ -54,7 +54,7 @@ const checkLoginHandler = async (request, h) => {
   if (dataRegistrasi.username === username && dataRegistrasi.password === passwordHash) {
     const response = h.response({
       status: 'success',
-      message: 'Berhasil Login',
+      message: 'Selamat anda berhasil login',
       data: {
         username,
         hakAkses: dataRegistrasi.hakAkses,
@@ -66,7 +66,7 @@ const checkLoginHandler = async (request, h) => {
 
   const response = h.response({
     status: 'error',
-    message: 'Gagal Login',
+    message: 'Maaf anda gagal melakukan login',
   });
   response.code(500);
   return response;

@@ -91,7 +91,7 @@ class DataPostinganRelawan {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/relawan');
+        window.location.replace('#/relawan-riwayat');
         alert(data.message);
         window.location.reload();
       })

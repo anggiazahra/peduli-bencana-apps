@@ -25,13 +25,12 @@ const DonasiPostinganDetail = {
         font-size: 24px;
       }
       .donasi-detail {
-        display: grid;
-        grid-template-columns: 3fr 4fr;
         margin: 0;
         min-width: 250px;
       }
-      .btn {
-        margin-bottom: 15px;
+      .grid-row {
+        display: grid;
+        grid-template-columns: 3fr 4fr;
       }
       .poster-donasi {
         width: 100%;
@@ -61,7 +60,7 @@ const DonasiPostinganDetail = {
       .progress {
         margin: 15px 0 20px 0;
       }
-      .grid-row {
+      .grid-item-row {
         display: grid;
         grid-template-columns: 1fr 7fr;
         gap : 10px;
@@ -117,6 +116,12 @@ const DonasiPostinganDetail = {
       .message {
         text-align: center;
       }
+      .img-page-not-found {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+      }
       @media screen and (max-width: 900px) {
         h1 {
           font-size: 20px;
@@ -136,7 +141,10 @@ const DonasiPostinganDetail = {
         }
       }
       @media screen and (max-width: 600px) {
-        .donasi-detail {
+        .img-page-not-found {
+          height: 300px;
+        }
+        .grid-row {
           grid-template-columns: 1fr;
         }
         .box-1{
@@ -195,7 +203,7 @@ const DonasiPostinganDetail = {
         }
       }
     </style>
-    <div class="donasi-detail">
+    <div class="donasi-detail grid-row" id="donasi-detail">
       <div class="box-1">
         <img src="" alt="poster donasi" class="poster-donasi" id="poster-donasi">
         <div class="sub-box">
@@ -236,7 +244,7 @@ const DonasiPostinganDetail = {
         <div class="card mb-3">
           <div class="card-body">
             <span>Lokasi Bencana</span>
-            <div class="grid-row mt-3">
+            <div class="grid-item-row mt-3">
               <img src="./img-location.png" class="img-location">
               <div id="lokasi-bencana"></div>
             </div>
@@ -245,7 +253,7 @@ const DonasiPostinganDetail = {
         <div class="card mb-3">
           <div class="card-body">
             <span>Penanggung Jawab</span>
-            <div class="grid-row mt-3">
+            <div class="grid-item-row mt-3">
               <img src="./img-profile.png" class="img-profile">
               <div id="penanggung-jawab"></div>
             </div>
@@ -283,10 +291,6 @@ const DonasiPostinganDetail = {
             </table>
           </div>
         </div>
-        <div class="grid-btn">
-          <a class="btn btn-max" id="btn-edit" href="">Edit Data</a>
-          <a class="btn btn-max" id="btn-hapus" href="">Hapus Data</a>
-        </div>
       </div>
     `;
   },
@@ -295,215 +299,247 @@ const DonasiPostinganDetail = {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const idPostinganDonasi = url.id;
 
-    // Data Postingan Donasi
-    const resultPostingan = await DataPostinganDonasi.getPostinganDonasiById(idPostinganDonasi);
-    const dataPostingan = resultPostingan.data.donasi[0];
+    const formatToCurrency = (amount) => `Rp ${amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
 
-    const posterDonasi = document.querySelector('#poster-donasi');
-    posterDonasi.setAttribute('src', `./upload/donasi/${dataPostingan.namaPoster}`);
+    // Cek Id Postingan
+    const cekIdPostingan = async (idPostinganDonasi) => {
+      const result = await DataPostinganDonasi.getPostinganDonasiById(idPostinganDonasi);
+      return result;
+    };
+    const cekId = await cekIdPostingan(idPostinganDonasi);
 
-    const judulPostingan = document.querySelector('#judul-postingan');
-    judulPostingan.innerHTML = `${dataPostingan.judulPostingan}`;
+    if (cekId.status === 'error') {
+      const donasiDetail = document.querySelector('#donasi-detail');
+      donasiDetail.classList.remove('grid-row');
+      donasiDetail.innerHTML = '';
+      donasiDetail.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found">';
+    }
 
-    const targetDonasi = document.querySelector('#target-donasi');
-    targetDonasi.innerHTML = `Rp ${dataPostingan.targetDonasi}`;
+    if (cekId.status === 'success') {
+      // Data
+      const dataPostinganDonasi = async (idPostinganDonasi) => {
+        const result = await DataPostinganDonasi.getPostinganDonasiById(idPostinganDonasi);
+        const dataPostingan = result.data.donasi;
+        return dataPostingan;
+      };
+      const dataTambahDonasiByIdPostingan = async (idPostinganDonasi) => {
+        const result = await DataTambahDonasi.getAllTambahDonasi();
+        const listTambahDonasi = result.data.donasi;
+        const dataTambahDonasi = listTambahDonasi.filter((item) => item.idPostinganDonasi
+          .toLowerCase() === idPostinganDonasi.toLowerCase());
+        return dataTambahDonasi;
+      };
+      const dataDonasiSudahDikonfirmasi = async (idPostinganDonasi) => {
+        const result = await dataTambahDonasiByIdPostingan(idPostinganDonasi);
+        const donasiSudahDikonfirmasi = result.filter((item) => item.status === 'Sudah Dikonfirmasi');
+        return donasiSudahDikonfirmasi;
+      };
+      const dataDonasiBelumDikonfirmasi = async (idPostinganDonasi) => {
+        const result = await dataTambahDonasiByIdPostingan(idPostinganDonasi);
+        const donasiBelumDikonfirmasi = result.filter((item) => item.status === 'Belum Dikonfirmasi');
+        return donasiBelumDikonfirmasi;
+      };
 
-    const lokasiBencana = document.querySelector('#lokasi-bencana');
-    lokasiBencana.innerHTML = `
-      <h2>${dataPostingan.kabKota} - ${dataPostingan.provinsi}</h2>
-      <span>${dataPostingan.alamatLengkap}</span>
-    `;
+      // Tampilan
+      const tampilPostingan = (dataPostingan) => {
+        const posterDonasi = document.querySelector('#poster-donasi');
+        posterDonasi.setAttribute('src', `./upload/donasi/${dataPostingan.namaPoster}`);
 
-    const penanggungJawab = document.querySelector('#penanggung-jawab');
-    penanggungJawab.innerHTML = `
-      <h2>${dataPostingan.penanggungJawab}</h2>
-      <span>${dataPostingan.pekerjaan} - ${dataPostingan.noTelepon}</span>
-    `;
+        const judulPostingan = document.querySelector('#judul-postingan');
+        judulPostingan.innerHTML = `${dataPostingan.judulPostingan}`;
 
-    const periodeDonasi = document.querySelector('#periode-donasi');
-    periodeDonasi.innerHTML = `${dataPostingan.tanggalMulai} - ${dataPostingan.tanggalBerakhir}`;
+        const targetDonasi = document.querySelector('#target-donasi');
+        targetDonasi.innerHTML = `Rp ${dataPostingan.targetDonasi}`;
 
-    const namaBank = document.querySelector('#nama-bank');
-    namaBank.innerHTML = `${dataPostingan.namaBank}`;
-
-    const noRekening = document.querySelector('#no-rekening');
-    noRekening.innerHTML = `${dataPostingan.noRekening}`;
-
-    const atasNama = document.querySelector('#atas-nama');
-    atasNama.innerHTML = `${dataPostingan.atasNama}`;
-
-    const deskripsiDonasi = document.querySelector('#deskripsi-donasi');
-    deskripsiDonasi.innerHTML = `${dataPostingan.deskripsiDonasi}`;
-
-    const buttonEdit = document.querySelector('#btn-edit');
-    buttonEdit.setAttribute('href', `#/donasi-postingan-edit/${dataPostingan.id}`);
-
-    const buttonHapus = document.querySelector('#btn-hapus');
-    buttonHapus.addEventListener('click', async (event) => {
-      event.preventDefault();
-      await DataPostinganDonasi.deletePostinganDonasiById(dataPostingan.id);
-    });
-
-    const buttonTambahDonasi = document.querySelector('#donasi-tambah');
-    buttonTambahDonasi.setAttribute('href', `#/donasi-tambah/${dataPostingan.id}`);
-
-    // Data Tambah Donasi
-    const resultTambahDonasi = await DataTambahDonasi.getAllTambahDonasi();
-    const listTambahDonasi = resultTambahDonasi.data.donasi;
-
-    // Filter data tambah donasi
-    const donasiTambahFilter = listTambahDonasi.filter((item) => item.idPostinganDonasi
-      .toLowerCase() === idPostinganDonasi.toLowerCase());
-
-    if (donasiTambahFilter.length > 0) {
-      const arrayDonasi = [];
-      donasiTambahFilter.forEach((item) => {
-        arrayDonasi.push(parseInt(item.jumlahDonasi));
-      });
-
-      // Menghitung total donasi yang terkumpul
-      const totalDonasi = arrayDonasi.reduce((total, num) => total + num);
-
-      const formatToCurrency = (amount) => `Rp ${amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
-
-      const donasiTerkumpul = document.querySelector('#donasi-terkumpul');
-      donasiTerkumpul.innerHTML = `${formatToCurrency(totalDonasi)}`;
-
-      const progressBar = document.querySelector('#progress-bar');
-      const presentase = (totalDonasi / dataPostingan.targetDonasi) * 100;
-      progressBar.setAttribute('aria-valuenow', presentase.toFixed(1));
-
-      const progressValue = document.querySelector('#progress-value');
-
-      if (presentase < 100) {
-        progressBar.style.width = `${presentase.toFixed(1)}%`;
-        progressValue.innerHTML = `${presentase.toFixed(1)}%`;
-      } else if (presentase >= 100) {
-        progressBar.style.width = '100%';
-        progressValue.innerHTML = '100%';
-      }
-
-      // Memfilter donasi yang sudah terkonfirmasi
-      const donasiConfirmed = donasiTambahFilter.filter((item) => item.status === 'Sudah Dikonfirmasi');
-
-      const listDonasi = document.querySelector('#list-donasi');
-
-      // Tampilan Default Modal Donasi Masuk
-      if (donasiConfirmed.length > 0) {
-        listDonasi.innerHTML = '';
-        listDonasi.innerHTML = '<div class="confirm-title">Sudah Dikonfirmasi</div>';
-        donasiConfirmed.forEach((data) => {
-          const itemDonasi = document.createElement('div');
-          itemDonasi.classList.add('item-donasi-grid');
-          itemDonasi.innerHTML = `
-          <img src="./img-profile.png" class="img-profile"></img>
-          <div>
-            <div>${data.namaDonatur}</div>
-            <div>Berdonasi sebesar Rp ${data.jumlahDonasi}</div>
-            <div>${data.tanggalDonasi}</div>
-          </div>
-        `;
-          listDonasi.appendChild(itemDonasi);
-        });
-      } else {
-        listDonasi.innerHTML = '';
-        listDonasi.innerHTML = `
-          <div class="confirm-title">Sudah Dikonfirmasi</div>
-          <div class="message">Belum ada donasi yang dikonfirmasi</div>
-        `;
-      }
-
-      // Tampilan saat tombol donasi sudah dikonfirmasi ditekan
-      const buttonConfirm = document.querySelector('#btn-confirm');
-      buttonConfirm.addEventListener('click', (event) => {
-        event.preventDefault();
-        listDonasi.innerHTML = '';
-        listDonasi.innerHTML = '<div class="confirm-title">Sudah Dikonfirmasi</div>';
-        if (donasiConfirmed.length > 0) {
-          donasiConfirmed.forEach((data) => {
-            const itemDonasi = document.createElement('div');
-            itemDonasi.classList.add('item-donasi-grid');
-            itemDonasi.innerHTML = `
-          <img src="./img-profile.png" class="img-profile"></img>
-          <div>
-            <div>${data.namaDonatur}</div>
-            <div>Berdonasi sebesar Rp ${data.jumlahDonasi}</div>
-            <div>${data.tanggalDonasi}</div>
-          </div>
-        `;
-            listDonasi.appendChild(itemDonasi);
-          });
-        } else {
-          listDonasi.innerHTML = '';
-          listDonasi.innerHTML = `
-            <div class="confirm-title">Sudah Dikonfirmasi</div>
-            <div class="message">Belum ada donasi yang dikonfirmasi</div>
-          `;
-        }
-      });
-
-      // Memfilter donasi yang belum terkonfirmasi
-      const donasiUnconfirmed = donasiTambahFilter.filter((item) => item.status === 'Belum Dikonfirmasi');
-
-      // Tampilan saat tombol donasi belum dikonfirmasi ditekan
-      const buttonUnonfirm = document.querySelector('#btn-unconfirm');
-      buttonUnonfirm.addEventListener('click', (event) => {
-        event.preventDefault();
-        listDonasi.innerHTML = '';
-        listDonasi.innerHTML = '<div class="confirm-title">Belum Dikonfirmasi</div>';
-        donasiUnconfirmed.forEach((data) => {
-          const itemDonasi = document.createElement('div');
-          itemDonasi.classList.add('item-donasi-grid');
-          itemDonasi.innerHTML = `
-          <img src="./img-profile.png" class="img-profile"></img>
-          <div>
-            <div>${data.namaDonatur}</div>
-            <div>Berdonasi sebesar Rp ${data.jumlahDonasi}</div>
-            <div>${data.tanggalDonasi}</div>
-          </div>
-        `;
-          listDonasi.appendChild(itemDonasi);
-        });
-      });
-    } else {
-      const donasiTerkumpul = document.querySelector('#donasi-terkumpul');
-      donasiTerkumpul.innerHTML = 'Rp 0';
-
-      const progressValue = document.querySelector('#progress-value');
-      progressValue.innerHTML = '0%';
-
-      // Modal Donasi Masuk
-
-      const listDonasi = document.querySelector('#list-donasi');
-
-      // Tampilan Default Modal Donasi Masuk
-      listDonasi.innerHTML = '';
-      listDonasi.innerHTML = `
-        <div class="confirm-title">Sudah Dikonfirmasi</div>
-        <div class="message">Belum ada donasi yang masuk</div>
+        const lokasiBencana = document.querySelector('#lokasi-bencana');
+        lokasiBencana.innerHTML = `
+        <h2>${dataPostingan.kabKota} - ${dataPostingan.provinsi}</h2>
+        <span>${dataPostingan.alamatLengkap}</span>
       `;
 
-      // Tampilan saat tombol donasi sudah dikonfirmasi ditekan
-      const buttonConfirm = document.querySelector('#btn-confirm');
-      buttonConfirm.addEventListener('click', (event) => {
-        event.preventDefault();
+        const penanggungJawab = document.querySelector('#penanggung-jawab');
+        penanggungJawab.innerHTML = `
+        <h2>${dataPostingan.penanggungJawab}</h2>
+        <span>${dataPostingan.pekerjaan} - ${dataPostingan.noTelepon}</span>
+      `;
+
+        const periodeDonasi = document.querySelector('#periode-donasi');
+        periodeDonasi.innerHTML = `${dataPostingan.tanggalMulai} - ${dataPostingan.tanggalBerakhir}`;
+
+        const namaBank = document.querySelector('#nama-bank');
+        namaBank.innerHTML = `${dataPostingan.namaBank}`;
+
+        const noRekening = document.querySelector('#no-rekening');
+        noRekening.innerHTML = `${dataPostingan.noRekening}`;
+
+        const atasNama = document.querySelector('#atas-nama');
+        atasNama.innerHTML = `${dataPostingan.atasNama}`;
+
+        const deskripsiDonasi = document.querySelector('#deskripsi-donasi');
+        deskripsiDonasi.innerHTML = `${dataPostingan.deskripsiDonasi}`;
+
+        const buttonTambahDonasi = document.querySelector('#donasi-tambah');
+        buttonTambahDonasi.setAttribute('href', `#/donasi-tambah/${dataPostingan.id}`);
+      };
+      const tampilDonasi = async (dataPostingan) => {
+        const arrayDonasi = [];
+        const listDonasiSudahDikonfirmasi = await dataDonasiSudahDikonfirmasi(idPostinganDonasi);
+        listDonasiSudahDikonfirmasi.forEach((item) => {
+          arrayDonasi.push(parseInt(item.jumlahDonasi));
+        });
+
+        // Menghitung total donasi yang terkumpul
+        const totalDonasi = arrayDonasi.reduce((total, num) => total + num);
+
+        const donasiTerkumpul = document.querySelector('#donasi-terkumpul');
+        donasiTerkumpul.innerHTML = `${formatToCurrency(totalDonasi)}`;
+
+        const progressBar = document.querySelector('#progress-bar');
+        const presentase = (totalDonasi / dataPostingan.targetDonasi) * 100;
+        progressBar.setAttribute('aria-valuenow', presentase.toFixed(1));
+
+        const progressValue = document.querySelector('#progress-value');
+
+        if (presentase < 100) {
+          progressBar.style.width = `${presentase.toFixed(1)}%`;
+          progressValue.innerHTML = `${presentase.toFixed(1)}%`;
+        } else if (presentase >= 100) {
+          progressBar.style.width = '100%';
+          progressValue.innerHTML = '100%';
+        }
+      };
+      const tampilDonasiSudahDikonfirmasi = (listDonasiSudahDikonfirmasi) => {
+        const listDonasi = document.querySelector('#list-donasi');
         listDonasi.innerHTML = '';
-        listDonasi.innerHTML = `
+        listDonasi.innerHTML = '<div class="confirm-title">Sudah Dikonfirmasi</div>';
+        listDonasiSudahDikonfirmasi.forEach((data) => {
+          const itemDonasi = document.createElement('div');
+          itemDonasi.classList.add('item-donasi-grid');
+          itemDonasi.innerHTML = `
+          <img src="./img-profile.png" class="img-profile"></img>
+          <div>
+            <div>${data.namaDonatur}</div>
+            <div>Berdonasi sebesar Rp ${data.jumlahDonasi}</div>
+            <div>${data.tanggalDonasi}</div>
+          </div>
+        `;
+          listDonasi.appendChild(itemDonasi);
+        });
+      };
+      const tampilDonasiBelumDikonfirmasi = async (donasiBelumDikonfirmasi) => {
+        const listDonasi = document.querySelector('#list-donasi');
+        listDonasi.innerHTML = '';
+        listDonasi.innerHTML = '<div class="confirm-title">Belum Dikonfirmasi</div>';
+        donasiBelumDikonfirmasi.forEach((data) => {
+          const itemDonasi = document.createElement('div');
+          itemDonasi.classList.add('item-donasi-grid');
+          itemDonasi.innerHTML = `
+          <img src="./img-profile.png" class="img-profile"></img>
+          <div>
+            <div>${data.namaDonatur}</div>
+            <div>Berdonasi sebesar Rp ${data.jumlahDonasi}</div>
+            <div>${data.tanggalDonasi}</div>
+          </div>
+        `;
+          listDonasi.appendChild(itemDonasi);
+        });
+      };
+      const tampilBelumAdaDonasi = () => {
+        const donasiTerkumpul = document.querySelector('#donasi-terkumpul');
+        donasiTerkumpul.innerHTML = 'Rp 0';
+        const progressValue = document.querySelector('#progress-value');
+        progressValue.innerHTML = '0%';
+
+        const listDonasi = document.querySelector('#list-donasi');
+
+        const tampilanSudahDikonfirmasi = () => {
+          listDonasi.innerHTML = '';
+          listDonasi.innerHTML = `
           <div class="confirm-title">Sudah Dikonfirmasi</div>
           <div class="message">Belum ada donasi yang masuk</div>
         `;
-      });
-
-      // Tampilan saat tombol donasi belum dikonfirmasi ditekan
-      const buttonUnonfirm = document.querySelector('#btn-unconfirm');
-      buttonUnonfirm.addEventListener('click', (event) => {
-        event.preventDefault();
-        listDonasi.innerHTML = '';
-        listDonasi.innerHTML = `
+        };
+        const tampilanBelumDikonfirmasi = () => {
+          listDonasi.innerHTML = '';
+          listDonasi.innerHTML = `
           <div class="confirm-title">Belum Dikonfirmasi</div>
           <div class="message">Belum ada donasi yang masuk</div>
         `;
-      });
+        };
+
+        // Tampilan default
+        tampilanSudahDikonfirmasi();
+
+        // Tampilan saat tombol donasi sudah dikonfirmasi ditekan
+        const tombolSudahDikonfirmasi = document.querySelector('#btn-confirm');
+        tombolSudahDikonfirmasi.addEventListener('click', () => {
+          tampilanSudahDikonfirmasi();
+        });
+
+        // Tampilan saat tombol donasi belum dikonfirmasi ditekan
+        const tombolBelumDikonfirmasi = document.querySelector('#btn-unconfirm');
+        tombolBelumDikonfirmasi.addEventListener('click', () => {
+          tampilanBelumDikonfirmasi();
+        });
+      };
+
+      const dataPostingan = await dataPostinganDonasi(idPostinganDonasi);
+      const dataTambahDonasi = await dataTambahDonasiByIdPostingan(idPostinganDonasi);
+      if (dataPostingan) {
+        tampilPostingan(dataPostingan[0]);
+      } else {
+        const donasiDetail = document.querySelector('#donasi-detail');
+        donasiDetail.innerHTML = '';
+        donasiDetail.innerHTML = '<div class="message">Id tidak ditemukan</div>';
+      }
+
+      if (dataTambahDonasi.length > 0) {
+        tampilDonasi(dataPostingan[0]);
+        const listDonasiSudahDikonfirmasi = await dataDonasiSudahDikonfirmasi(idPostinganDonasi);
+        if (listDonasiSudahDikonfirmasi.length > 0) {
+          tampilDonasiSudahDikonfirmasi(listDonasiSudahDikonfirmasi);
+        } else {
+          const listDonasi = document.querySelector('#list-donasi');
+          listDonasi.innerHTML = '';
+          listDonasi.innerHTML = `
+          <div class="confirm-title">Sudah Dikonfirmasi</div>
+          <div class="message">Belum ada donasi yang dikonfirmasi</div>
+        `;
+        }
+
+        const tombolSudahDikonfirmasi = document.querySelector('#btn-confirm');
+        tombolSudahDikonfirmasi.addEventListener('click', () => {
+          if (listDonasiSudahDikonfirmasi.length > 0) {
+            tampilDonasiSudahDikonfirmasi(listDonasiSudahDikonfirmasi);
+          } else {
+            const listDonasi = document.querySelector('#list-donasi');
+            listDonasi.innerHTML = '';
+            listDonasi.innerHTML = `
+            <div class="confirm-title">Sudah Dikonfirmasi</div>
+            <div class="message">Belum ada donasi yang dikonfirmasi</div>
+          `;
+          }
+        });
+
+        // Tampilan saat tombol donasi belum dikonfirmasi ditekan
+        const tombolBelumDikonfirmasi = document.querySelector('#btn-unconfirm');
+        tombolBelumDikonfirmasi.addEventListener('click', async () => {
+          const listDonasiBelumDikonfirmasi = await
+          dataDonasiBelumDikonfirmasi(idPostinganDonasi);
+          if (listDonasiBelumDikonfirmasi.length > 0) {
+            tampilDonasiBelumDikonfirmasi(listDonasiBelumDikonfirmasi);
+          } else {
+            const listDonasi = document.querySelector('#list-donasi');
+            listDonasi.innerHTML = '';
+            listDonasi.innerHTML = `
+            <div class="confirm-title">Belum Dikonfirmasi</div>
+            <div class="message">Semua donasi sudah dikonfirmasi</div>
+          `;
+          }
+        });
+      } else {
+        tampilBelumAdaDonasi();
+      }
     }
   },
 };

@@ -105,9 +105,9 @@ const Registrasi = {
     buttonSubmit.addEventListener('click', async (event) => {
       event.preventDefault();
       if (inputNamaDepan.value === '' || inputNamaBelakang.value === '' || inputUsername.value === '' || inputPassword.value === '' || inputPasswordKonfirmasi.value === '') {
-        alert('Input tidak boleh kosong');
+        swal('Input Kosong', 'Tidak boleh ada inputan yang kosong', 'error');
       } else if (inputPassword.value !== inputPasswordKonfirmasi.value) {
-        alert('Password dan password konfirmasi tidak sesuai');
+        swal('Password Tidak Sama', 'Password dan password konfirmasi tidak sama, silahkan masukkan password yang sama', 'error');
       } else {
         const formdata = new FormData();
         formdata.append('namaDepan', inputNamaDepan.value);

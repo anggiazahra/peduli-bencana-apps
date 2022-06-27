@@ -29,5 +29,20 @@ if (loginSession === 'true') {
     <li><a href="#/artikel">Artikel</a></li>
     <li><a href="#/donasi-postingan">Donasi</a></li>
     <li><a href="#/relawan">Relawan</a></li>
-    <li><a href="#/logout" class="btn btn-logout">Logout</a></li>`;
+    <li><button class="btn btn-logout" id="btn-logout">Logout</button></li>
+  `;
+
+  const buttonLogout = document.querySelector('#btn-logout');
+  buttonLogout.addEventListener('click', async () => {
+    const logout = await swal({
+      title: 'Konfirmasi Logout',
+      text: 'Apakah anda ingin keluar dari aplikasi?',
+      icon: 'info',
+      buttons: true,
+    });
+
+    if (logout) {
+      window.location.replace('#/logout');
+    }
+  });
 }

@@ -13,6 +13,7 @@ const {
 
 const addPostinganDonasiHandler = async (request, h) => {
   const {
+    usernamePembuat,
     judulPostingan,
     poster,
     tanggalMulai,
@@ -31,6 +32,15 @@ const addPostinganDonasiHandler = async (request, h) => {
   } = request.payload;
 
   const namaPoster = poster.hapi.filename;
+
+  if (usernamePembuat === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Username pembuat tidak diketahui',
+    });
+    response.code(400);
+    return response;
+  }
 
   if (judulPostingan === undefined) {
     const response = h.response({
@@ -173,6 +183,7 @@ const addPostinganDonasiHandler = async (request, h) => {
 
   const data = {
     id,
+    usernamePembuat,
     judulPostingan,
     namaPoster,
     tanggalMulai,
@@ -251,8 +262,8 @@ const getPostinganDonasiByIdHandler = async (request, h) => {
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Data tidak ditemukan',
+    status: 'error',
+    message: 'Id tidak ditemukan',
   });
   response.code(404);
   return response;
@@ -452,7 +463,7 @@ const editPostinganDonasiByIdHandler = async (request, h) => {
 
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil diperbarui',
+      message: 'Data donasi berhasil diperbarui',
     });
     response.code(200);
     return response;

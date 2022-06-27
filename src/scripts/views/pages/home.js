@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-unused-vars
+const swal = require('sweetalert');
+
 const Home = {
   async render() {
     return `

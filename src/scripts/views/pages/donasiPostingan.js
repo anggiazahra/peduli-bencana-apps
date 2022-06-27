@@ -4,6 +4,18 @@ const DonasiPostingan = {
   async render() {
     return `
     <style>
+      .container {
+        padding-top: 20px;
+      }
+      .hero-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        object-position: center;
+      }
+      .main-title {
+        margin-bottom: 20px;
+      }
       .btn-tambah {
         margin-left: auto; 
         margin-right: 10px;
@@ -33,14 +45,26 @@ const DonasiPostingan = {
       h2 {
         font-size: 20px;
       }
+      .message {
+        text-align : center;
+        margin-top: 40px;
+      }
       @media screen and (max-width: 1000px) {
         .grid-row {
             grid-template-columns: 1fr 1fr 1fr;
         }
       }
+      @media screen and (max-width: 910px) {
+        .hero-img {
+          height: 350px;
+        }
+      }
       @media screen and (max-width: 790px) {
         .grid-row {
           grid-template-columns: 1fr 1fr;
+        }
+        .hero-img {
+          height: 300px;
         }
       }
       @media screen and (max-width: 540px) {
@@ -48,6 +72,14 @@ const DonasiPostingan = {
           grid-template-columns: 1fr 1fr;
           gap: 20px;
           margin: 20px 0;
+        }
+        .hero-img {
+          height: 280px;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        .hero-img {
+          height: 200px;
         }
       }
       @media screen and (max-width: 430px) {
@@ -57,7 +89,7 @@ const DonasiPostingan = {
       }
     </style>
 
-    <h1 class="main-title">Donasi</h1>
+    <img src="./donasi-utama.png" class="hero-img">
     <div class="d-flex flex-row-reverse" id="btn-list">
       <a href="#/donasi-postingan-tambah" class="btn btn-tambah p-2" id="btn-tambah">Tambah Data</a>
     </div>
@@ -69,8 +101,12 @@ const DonasiPostingan = {
   },
 
   async afterRender() {
-    const result = await DataPostinganDonasi.getAllPostinganDonasi();
-    const dataPostinganDonasi = result.data.donasi;
+    const dataPostinganDonasi = async () => {
+      const result = await DataPostinganDonasi.getAllPostinganDonasi();
+      const dataPostingan = result.data.donasi;
+      return dataPostingan;
+    };
+    const dataPostingan = await dataPostinganDonasi();
 
     const buttonTambah = document.querySelector('#btn-tambah');
     const loginSession = sessionStorage.getItem('loginSession');
@@ -91,12 +127,13 @@ const DonasiPostingan = {
       buttonList.appendChild(buttonRiwayat);
     }
 
-    dataPostinganDonasi.forEach((data) => {
-      const listDonasi = document.querySelector('#list-donasi');
-      const donasiItem = document.createElement('div');
-      donasiItem.classList.add('card');
+    if (dataPostingan.length > 0) {
+      dataPostingan.forEach((data) => {
+        const listDonasi = document.querySelector('#list-donasi');
+        const donasiItem = document.createElement('div');
+        donasiItem.classList.add('card');
 
-      donasiItem.innerHTML = `
+        donasiItem.innerHTML = `
         <img src="./upload/donasi/${data.namaPoster}" class="card-img-top" alt="...">
         <div class="card-body">
           <h2 class="card-title">${data.judulPostingan}</h2>
@@ -104,8 +141,17 @@ const DonasiPostingan = {
           <a href="#/donasi-postingan-detail/${data.id}" class="btn btn-max">Detail</a>
         </div>
       `;
-      listDonasi.appendChild(donasiItem);
-    });
+        listDonasi.appendChild(donasiItem);
+      });
+    }
+
+    if (dataPostingan.length < 1) {
+      const listDonasi = document.querySelector('#list-donasi');
+      const message = document.createElement('div');
+      message.classList.add('message');
+      message.innerHTML = 'Belum ada postingan donasi';
+      listDonasi.appendChild(message);
+    }
   },
 };
 

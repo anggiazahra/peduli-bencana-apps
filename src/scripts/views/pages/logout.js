@@ -3,8 +3,16 @@ const Logout = {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('hakAkses');
     sessionStorage.setItem('loginSession', 'false');
-    window.location.replace('#/login');
-    window.location.reload();
+    const logout = await swal({
+      title: 'Berhasil Logout',
+      text: 'Berhasil keluar dari aplikasi',
+      icon: 'success',
+    });
+
+    if (logout) {
+      window.location.replace('#/login');
+      window.location.reload();
+    }
   },
 };
 

@@ -81,9 +81,6 @@ const addRegistrasiHandler = async (request, h) => {
     const response = h.response({
       status: 'error',
       message: 'Username sudah digunakan, silahkan masukkan username lain',
-      data: {
-        username,
-      },
     });
     response.code(500);
     return response;
@@ -93,7 +90,7 @@ const addRegistrasiHandler = async (request, h) => {
     await addRegistrasiToDatabase(data);
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil ditambahkan',
+      message: 'Berhasil melakukan registrasi, silahkan login untuk melanjutkan',
       data: {
         username,
       },

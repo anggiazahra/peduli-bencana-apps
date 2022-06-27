@@ -1,7 +1,7 @@
 const { con } = require('./database-connection');
 
 function addPostinganDonasiToDatabase(data) {
-  const sql = `INSERT INTO postingandonasi (id, judulPostingan, namaPoster, tanggalMulai, tanggalBerakhir, kabKota, provinsi, alamatLengkap, penanggungJawab, noTelepon, pekerjaan, namaBank, noRekening, atasNama, targetDonasi, deskripsiDonasi, insertedAt, updatedAt) VALUES ('${data.id}', '${data.judulPostingan}', '${data.namaPoster}', '${data.tanggalMulai}', '${data.tanggalBerakhir}', '${data.kabKota}', '${data.provinsi}', '${data.alamatLengkap}', '${data.penanggungJawab}', '${data.noTelepon}', '${data.pekerjaan}', '${data.namaBank}', '${data.noRekening}', '${data.atasNama}', '${data.targetDonasi}', '${data.deskripsiDonasi}', '${data.insertedAt}', '${data.updatedAt}')`;
+  const sql = `INSERT INTO postingandonasi (id, usernamePembuat, judulPostingan, namaPoster, tanggalMulai, tanggalBerakhir, kabKota, provinsi, alamatLengkap, penanggungJawab, noTelepon, pekerjaan, namaBank, noRekening, atasNama, targetDonasi, deskripsiDonasi, insertedAt, updatedAt) VALUES ('${data.id}', '${data.usernamePembuat}', '${data.judulPostingan}', '${data.namaPoster}', '${data.tanggalMulai}', '${data.tanggalBerakhir}', '${data.kabKota}', '${data.provinsi}', '${data.alamatLengkap}', '${data.penanggungJawab}', '${data.noTelepon}', '${data.pekerjaan}', '${data.namaBank}', '${data.noRekening}', '${data.atasNama}', '${data.targetDonasi}', '${data.deskripsiDonasi}', '${data.insertedAt}', '${data.updatedAt}')`;
 
   return new Promise((resolve, reject) => {
     con.query(sql, (err, results) => {

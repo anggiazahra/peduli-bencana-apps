@@ -33,6 +33,10 @@ const Relawan = {
           background-color: #DFDFDF;
           color: black;
         }
+        .message {
+          text-align : center;
+          margin-top: 40px;
+        }
         @media screen and (max-width: 1000px) {
           .grid-row {
               grid-template-columns: 1fr 1fr 1fr;
@@ -61,13 +65,17 @@ const Relawan = {
       <div class="d-flex flex-row-reverse" id="btn-list">
           <a href="#/relawan-tambah" class="btn btn-tambah p-2 me-2" id="btn-tambah">Tambah Data</a>
       </div>
-      <div class="list-relawan grid-row">
+      <div class="list-relawan" id="list-relawan">
     `;
   },
 
   async afterRender() {
-    const result = await DataPostinganRelawan.getAllPostinganRelawan();
-    const dataPostinganRelawan = result.data.relawan;
+    const dataPostinganRelawan = async () => {
+      const result = await DataPostinganRelawan.getAllPostinganRelawan();
+      const dataPostingan = result.data.relawan;
+      return dataPostingan;
+    };
+    const dataPostingan = await dataPostinganRelawan();
 
     const buttonTambah = document.querySelector('#btn-tambah');
     const loginSession = sessionStorage.getItem('loginSession');
@@ -88,12 +96,14 @@ const Relawan = {
       buttonList.appendChild(buttonRiwayat);
     }
 
-    dataPostinganRelawan.forEach((data) => {
-      const listRelawan = document.querySelector('.list-relawan');
-      const relawanItem = document.createElement('div');
-      relawanItem.classList.add('card');
+    if (dataPostingan.length > 0) {
+      dataPostingan.forEach((data) => {
+        const listRelawan = document.querySelector('#list-relawan');
+        listRelawan.classList.add('grid-row');
+        const relawanItem = document.createElement('div');
+        relawanItem.classList.add('card');
 
-      relawanItem.innerHTML = `
+        relawanItem.innerHTML = `
         <img src="./upload/relawan/${data.poster}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${data.judulPostingan}</h5>
@@ -101,8 +111,17 @@ const Relawan = {
           <a href="#/relawan-detail/${data.id}" class="btn btn-max">Detail</a>
         </div>
       `;
-      listRelawan.appendChild(relawanItem);
-    });
+        listRelawan.appendChild(relawanItem);
+      });
+    }
+
+    if (dataPostingan.length < 1) {
+      const listRelawan = document.querySelector('#list-relawan');
+      const message = document.createElement('div');
+      message.classList.add('message');
+      message.innerHTML = 'Belum ada postingan relawan';
+      listRelawan.appendChild(message);
+    }
   },
 };
 

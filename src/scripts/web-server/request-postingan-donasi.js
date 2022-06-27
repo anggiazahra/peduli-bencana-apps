@@ -8,9 +8,13 @@ class DataPostinganDonasi {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/donasi-postingan');
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Ditambahkan', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Ditambahkan', data.message, 'success');
+          window.location.replace(`#/donasi-postingan-detail/${data.data.idPostinganDonasi}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -56,9 +60,13 @@ class DataPostinganDonasi {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Diperbaharui', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Diperbaharui', data.message, 'success');
+          window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -74,9 +82,13 @@ class DataPostinganDonasi {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Diperbaharui', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Diperbaharui', data.message, 'success');
+          window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -91,9 +103,13 @@ class DataPostinganDonasi {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/donasi-riwayat');
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil', data.message, 'success');
+          window.location.replace('#/donasi-riwayat');
+        }
       })
       .catch((error) => console.log('error', error));
 
