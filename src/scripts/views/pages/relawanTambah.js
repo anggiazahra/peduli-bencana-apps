@@ -4,6 +4,12 @@ const RelawanTambah = {
   async render() {
     return `
     <style>
+        .hero-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            object-position: center;
+        }
         .grid-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -13,7 +19,7 @@ const RelawanTambah = {
             width: 100%;
         }
         h2 {
-            font-size : 20px;
+            font-size : 18px;
         }
         .card {
             margin-bottom: 15px;
@@ -24,32 +30,47 @@ const RelawanTambah = {
         .input-group-text{
             height: 44px;
         }
+        @media screen and (max-width: 910px) {
+            .hero-img {
+              height: 350px;
+            }
+        }
         @media screen and (max-width: 540px) {
+            .hero-img {
+                height: 300px;
+            }
             .grid-row {
               grid-template-columns: 1fr;
               gap: 0;
             }
             h2 {
-                font-size: 17px;
+                font-size: 14px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .hero-img {
+                height: 200px;
             }
         }
     </style>
     <div class="relawan-daftar" id="main-content">
-        <h1>Tambah Data Postingan Relawan</h1>
+        <img src="./tambah-postingan-relawan.png" class="hero-img">
         <form enctype="multipart/form-data">
-            <div class="card">
-                <div class="card-body">
-                    <h2>Judul Postingan</h2>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="judul-postingan" placeholder="Judul Postingan">
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Judul Postingan</h2>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="judul-postingan" placeholder="Judul Postingan">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h2>Gambar/Poster</h2>
-                    <div class="mb-3">
-                        <input type="file" class="form-control" id="poster" placeholder="Gambar/Poster">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Gambar/Poster</h2>
+                        <div class="mb-3">
+                            <input type="file" class="form-control" id="poster" placeholder="Gambar/Poster">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,11 +116,21 @@ const RelawanTambah = {
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <h2>Jumlah Relawan yang Dibutuhkan</h2>
-                    <div class="mb-3">
-                        <input type="number" class="form-control" id="jumlah-relawan" placeholder="Jumlah relawan yang dibutuhkan (dalam angka)">
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Jumlah Relawan yang Dibutuhkan</h2>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" id="jumlah-relawan" placeholder="Jumlah relawan yang dibutuhkan (dalam angka)">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Link grup Whatsapp/Telegram</h2>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="link-grup" placeholder="Link grup Whatsapp/Telegram">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,6 +188,7 @@ const RelawanTambah = {
     const inputProvinsi = document.querySelector('#provinsi');
     const inputAlamatLengkap = document.querySelector('#alamat-lengkap');
     const inputJumlahRelawan = document.querySelector('#jumlah-relawan');
+    const inputLinkGrup = document.querySelector('#link-grup');
     const inputPenanggungJawab = document.querySelector('#penanggung-jawab');
     const inputNoTelepon = document.querySelector('#no-telepon');
     const inputPekerjaan = document.querySelector('#pekerjaan');
@@ -169,7 +201,7 @@ const RelawanTambah = {
       const file = inputPoster.files[0];
       event.preventDefault();
       if (inputJudulPostingan.value === '' || inputPoster.value === '' || inputTanggalMulai.value === '' || inputTanggalBerakhir.value === '' || inputKabKota.value === '' || inputProvinsi.value === '' || inputAlamatLengkap.value === '' || inputJumlahRelawan === '' || inputPenanggungJawab.value === '' || inputNoTelepon.value === '' || inputPekerjaan.value === '' || inputPersyaratan.value === '') {
-        alert('Input tidak boleh kosong');
+        swal('Error', 'Tidak boleh ada inputan yang kosong', 'error');
       } else {
         const nameFile = `${id}_${inputPoster.files[0].name}`;
 
@@ -183,6 +215,7 @@ const RelawanTambah = {
         formdata.append('provinsi', inputProvinsi.value);
         formdata.append('alamatLengkap', inputAlamatLengkap.value);
         formdata.append('jumlahRelawan', inputJumlahRelawan.value);
+        formdata.append('linkGrup', inputLinkGrup.value);
         formdata.append('penanggungJawab', inputPenanggungJawab.value);
         formdata.append('noTelepon', inputNoTelepon.value);
         formdata.append('pekerjaan', inputPekerjaan.value);

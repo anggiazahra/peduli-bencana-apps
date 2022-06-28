@@ -4,6 +4,12 @@ const Relawan = {
   async render() {
     return `
       <style>
+        .hero-img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          object-position: center;
+        }
         .btn-tambah {
           width:auto;
           align-content: flex-end;
@@ -42,9 +48,17 @@ const Relawan = {
               grid-template-columns: 1fr 1fr 1fr;
           }
         }
+        @media screen and (max-width: 910px) {
+          .hero-img {
+            height: 350px;
+          }
+        }
         @media screen and (max-width: 790px) {
           .grid-row {
             grid-template-columns: 1fr 1fr;
+          }
+          .hero-img {
+            height: 300px;
           }
         }
         @media screen and (max-width: 540px) {
@@ -52,6 +66,14 @@ const Relawan = {
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin: 20px 0;
+          }
+          .hero-img {
+            height: 280px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          .hero-img {
+            height: 200px;
           }
         }
         @media screen and (max-width: 430px) {
@@ -61,7 +83,7 @@ const Relawan = {
         }
       </style>
       
-      <h1 class="main-title">Relawan</h1>
+      <img src="./relawan-utama.png" class="hero-img">
       <div class="d-flex flex-row-reverse" id="btn-list">
           <a href="#/relawan-tambah" class="btn btn-tambah p-2 me-2" id="btn-tambah">Tambah Data</a>
       </div>

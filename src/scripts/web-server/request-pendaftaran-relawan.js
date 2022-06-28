@@ -23,9 +23,14 @@ class DataPendaftaranRelawan {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/relawan-detail/${data.data.idPostinganRelawan}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Mendaftar', data.message, 'error');
+          window.location.replace(`#/relawan-detail/${data.data.idPostinganRelawan}`);
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Mendaftar', data.message, 'success');
+          window.location.replace(`#/relawan-detail/${data.data.idPostinganRelawan}`);
+        }
       })
       .catch((error) => console.log('error', error));
 

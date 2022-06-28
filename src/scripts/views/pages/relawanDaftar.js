@@ -1,3 +1,4 @@
+import DataPostinganRelawan from '../../web-server/request-postingan-relawan';
 import DataPendaftaranRelawan from '../../web-server/request-pendaftaran-relawan';
 import UrlParser from '../../routes/url-parser';
 
@@ -5,6 +6,12 @@ const RelawanDaftar = {
   async render() {
     return `
       <style>
+        .hero-img {
+          width: 100%;
+          height: 400px; 
+          object-fit: cover;
+          object-position: center;
+        }
         .grid-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -14,7 +21,7 @@ const RelawanDaftar = {
           width: 100%;
         }
         h2 {
-          font-size : 20px;
+          font-size : 18px;
         }
         .card {
           margin-bottom: 15px;
@@ -25,18 +32,42 @@ const RelawanDaftar = {
         .input-group-text{
           height: 44px;
         }
+        .img-page-not-found {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          object-position: center;
+        }
+        @media screen and (max-width: 910px) {
+          .hero-img {
+            height: 350px;
+          }
+        }
+        @media screen and (max-width: 600px) {
+          .img-page-not-found {
+            height: 300px;
+          }
+        }
         @media screen and (max-width: 540px) {
           .grid-row {
             grid-template-columns: 1fr;
             gap: 0;
           }
           h2 {
-            font-size: 17px;
+            font-size: 14px;
+          }
+          .hero-img {
+            height: 300px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          .hero-img {
+            height: 200px;
           }
         }
       </style>
-      <div class="relawan-daftar" id="main-content">
-        <h1>Pendaftaran Relawan</h1>
+      <div class="relawan-daftar" id="relawan-daftar">
+        <img src="./daftar-relawan.png" class="hero-img">
         <form enctype="multipart/form-data">
           <div class="card">
             <div class="card-body">
@@ -44,12 +75,14 @@ const RelawanDaftar = {
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
+                    <label class="form-label">Nama Lengkap</label>
                     <input type="text" class="form-control" id="nama-lengkap" placeholder="Nama Lengkap">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <input type="text" class="form-control" id="no-telepon" placeholder="No Telepon">
+                    <label class="form-label">No Telepon Whatsapp Aktif</label>
+                    <input type="text" class="form-control" id="no-telepon" placeholder="No Telepon Whatsapp Aktif">
                   </div>
                 </div>
               </div>
@@ -61,11 +94,13 @@ const RelawanDaftar = {
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
+                    <label class="form-label">Kabupaten/Kota</label>
                     <input type="text" class="form-control" id="kab-kota" placeholder="Kabupaten/Kota">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
+                    <label class="form-label">Provinsi</label>
                     <input type="text" class="form-control" id="provinsi" placeholder="Provinsi">
                   </div>
                 </div>
@@ -94,34 +129,49 @@ const RelawanDaftar = {
       window.location.replace('#/login');
     }
 
-    const buttonSubmit = document.querySelector('#button-submit');
-    const inputNamaLengkap = document.querySelector('#nama-lengkap');
-    const inputNoTelepon = document.querySelector('#no-telepon');
-    const inputKabKota = document.querySelector('#kab-kota');
-    const inputProvinsi = document.querySelector('#provinsi');
-    const inputCheckbox = document.querySelector('#checkbox');
-    const sessionUsername = sessionStorage.getItem('username');
+    // Cek Id Postingan
+    const cekIdPostingan = async (idPostinganRelawan) => {
+      const result = await DataPostinganRelawan.getPostinganRelawanById(idPostinganRelawan);
+      return result;
+    };
+    const cekId = await cekIdPostingan(idPostinganRelawan);
 
-    buttonSubmit.addEventListener('click', async (event) => {
-      event.preventDefault();
+    if (cekId.status === 'error') {
+      const relawanDaftar = document.querySelector('#relawan-daftar');
+      relawanDaftar.innerHTML = '';
+      relawanDaftar.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found">';
+    }
 
-      if (inputNamaLengkap.value === '' || inputNoTelepon.value === '' || inputKabKota.value === '' || inputProvinsi.value === '') {
-        alert('Inputan tidak boleh kosong');
-      } else if (inputCheckbox.checked === false) {
-        alert('Pastikan sudah memenuhi persyaratan dan centang box checkbox');
-      } else {
-        const formdata = new FormData();
+    if (cekId.status === 'success') {
+      const buttonSubmit = document.querySelector('#button-submit');
+      const inputNamaLengkap = document.querySelector('#nama-lengkap');
+      const inputNoTelepon = document.querySelector('#no-telepon');
+      const inputKabKota = document.querySelector('#kab-kota');
+      const inputProvinsi = document.querySelector('#provinsi');
+      const inputCheckbox = document.querySelector('#checkbox');
+      const sessionUsername = sessionStorage.getItem('username');
 
-        formdata.append('idPostinganRelawan', idPostinganRelawan);
-        formdata.append('username', sessionUsername);
-        formdata.append('namaLengkap', inputNamaLengkap.value);
-        formdata.append('noTelepon', inputNoTelepon.value);
-        formdata.append('kabKota', inputKabKota.value);
-        formdata.append('provinsi', inputProvinsi.value);
+      buttonSubmit.addEventListener('click', async (event) => {
+        event.preventDefault();
 
-        await DataPendaftaranRelawan.addPendaftaranRelawan(formdata);
-      }
-    });
+        if (inputNamaLengkap.value === '' || inputNoTelepon.value === '' || inputKabKota.value === '' || inputProvinsi.value === '') {
+          swal('Error', 'Tidak boleh ada inputan yang kosong', 'error');
+        } else if (inputCheckbox.checked === false) {
+          swal('Error', 'Pastikan sudah memenuhi persyaratan dan centang box checkbox', 'error');
+        } else {
+          const formdata = new FormData();
+
+          formdata.append('idPostinganRelawan', idPostinganRelawan);
+          formdata.append('username', sessionUsername);
+          formdata.append('namaLengkap', inputNamaLengkap.value);
+          formdata.append('noTelepon', inputNoTelepon.value);
+          formdata.append('kabKota', inputKabKota.value);
+          formdata.append('provinsi', inputProvinsi.value);
+
+          await DataPendaftaranRelawan.addPendaftaranRelawan(formdata);
+        }
+      });
+    }
   },
 };
 

@@ -24,7 +24,7 @@ const addPendaftaranRelawanHandler = async (request, h) => {
   if (idPostinganRelawan === undefined) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan data. Id postingan relawan tidak ada',
+      message: 'Gagal menambahkan data. Id postingan relawan tidak ditemukan',
     });
     response.code(400);
     return response;
@@ -109,7 +109,7 @@ const addPendaftaranRelawanHandler = async (request, h) => {
     await addPendaftaranRelawanToDatabase(data);
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil ditambahkan',
+      message: 'Anda berhasil daftar menjadi relawan',
       data: {
         idPendaftaranRelawan: id,
         idPostinganRelawan,
@@ -121,7 +121,7 @@ const addPendaftaranRelawanHandler = async (request, h) => {
 
   const response = h.response({
     status: 'error',
-    message: 'Data gagal ditambahkan',
+    message: 'Gagal daftar menjadi relawan',
     data: {
       idPostinganRelawan,
     },

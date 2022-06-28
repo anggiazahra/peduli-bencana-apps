@@ -8,12 +8,18 @@ const RelawanRiwayat = {
         .relawan-riwayat {
           padding-top: 30px;
         }
+        .hero-img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          object-position: center;
+        }
         .relawan-riwayat h1 {
           font-size: 24px !important;
           text-align: center;
         }
         .relawan-riwayat h2 {
-          font-size: 20px !important;
+          font-size: 18px !important;
         }
         .grid-btn {
           display: grid;
@@ -24,8 +30,8 @@ const RelawanRiwayat = {
           background-color: white;
           color: black;
         }
-        .btn-konfirmasi, .btn-color {
-          background-color: #1C4966;
+        .btn-color {
+          background-color: #0353A0;
           color: white;
         }
         .btn-max {
@@ -42,10 +48,6 @@ const RelawanRiwayat = {
         }
         .title {
           margin: 25px 0 10px 0;
-        }
-        .btn-detail {
-          background-color: #1C4966;;
-          color: white;
         }
         .card {
           margin: 10px 0;
@@ -79,10 +81,21 @@ const RelawanRiwayat = {
           grid-template-columns: 1fr 1fr;
           gap: 20px;
         }
+        .sub-title {
+          font-size: 20px;
+        }
+        @media screen and (max-width: 910px) {
+          .hero-img {
+            height: 350px;
+          }
+        }
         @media screen and (max-width: 850px) {
           .grid-row {
             grid-template-columns: 1fr;
             gap: 0;
+          }
+          .sub-title {
+            font-size: 16px;
           }
         }
         @media screen and (max-width: 600px) {
@@ -97,15 +110,28 @@ const RelawanRiwayat = {
             font-size: 17px !important;
           }
           .relawan-riwayat h2 {
-            font-size: 15px !important;
+            font-size: 14px !important;
+          }
+          .sub-title {
+            font-size: 14px;
+          }
+        }
+        @media screen and (max-width: 540px) {
+          .hero-img {
+            height: 300px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          .hero-img {
+            height: 200px;
           }
         }
       </style>
 
         <div class="relawan-riwayat">
           <div class="grid-btn btn-border">
-            <button class="btn btn-max" id="btn-postingan">Postingan Relawan</button>
-            <button class="btn btn-max" id="btn-relawan">Relawan</button>
+            <button class="btn btn-max sub-title" id="btn-postingan">Postingan Relawan</button>
+            <button class="btn btn-max sub-title" id="btn-relawan">Relawan</button>
           </div>
           <div id="detail-riwayat"></div>
         </div>
@@ -127,28 +153,44 @@ const RelawanRiwayat = {
     // Username pengguna saat login
     const sessionUsername = sessionStorage.getItem('username');
 
-    // Data Postingan Relawan
-    const resultPostingan = await DataPostinganRelawan.getAllPostinganRelawan();
-    const dataPostingan = resultPostingan.data.relawan;
+    // Data postingan relawan berdasarkan id
+    const dataPostinganRelawanById = async (idPostinganRelawan) => {
+      const result = await DataPostinganRelawan.getAllPostinganRelawan();
+      const dataPostingan = result.data.relawan;
+      const listPostingan = dataPostingan.filter((item) => item.id.toLowerCase()
+      === idPostinganRelawan.toLowerCase());
+      return listPostingan;
+    };
 
-    // Filter data postingan relawan berdasarkan username
-    const postinganRelawanFilter = dataPostingan.filter((item) => item.usernamePembuat
-    === sessionUsername);
+    // Data postingan relawan berdasarkan session username
+    const dataPostinganRelawanByUsername = async () => {
+      const result = await DataPostinganRelawan.getAllPostinganRelawan();
+      const dataPostingan = result.data.relawan;
+      const listPostingan = dataPostingan.filter((item) => item.usernamePembuat
+      === sessionUsername);
+      return listPostingan;
+    };
 
-    // Data Pendaftaran Relawan
-    const resultPendaftaranRelawan = await DataPendaftaranRelawan.getAllPendaftaranRelawan();
-    const listPendaftaranRelawan = resultPendaftaranRelawan.data.relawan;
+    // Data pendaftaran berdasarkan session username
+    const dataRelawanByUsername = async () => {
+      const resultTambahDonasi = await DataPendaftaranRelawan.getAllPendaftaranRelawan();
+      const listTambahDonasi = resultTambahDonasi.data.relawan;
+      const listRelawan = listTambahDonasi.filter((item) => item.username
+      === sessionUsername);
+      return listRelawan;
+    };
 
     const riwayatPostingan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<h1 class="title">Riwayat Postingan Relawan</h1>';
+      detailRiwayat.innerHTML = '<img src="./riwayat-postingan-relawan.png" class="hero-img">';
 
       const listPostinganRelawan = document.createElement('div');
       listPostinganRelawan.setAttribute('class', 'grid-row');
       detailRiwayat.appendChild(listPostinganRelawan);
 
-      if (postinganRelawanFilter.length > 0) {
-        postinganRelawanFilter.forEach((data) => {
+      const postinganRelawanByUsername = await dataPostinganRelawanByUsername();
+      if (postinganRelawanByUsername.length > 0) {
+        postinganRelawanByUsername.forEach(async (data) => {
           const itemPostinganRelawan = document.createElement('div');
           itemPostinganRelawan.classList.add('card');
           itemPostinganRelawan.innerHTML = `
@@ -158,8 +200,8 @@ const RelawanRiwayat = {
               <div>Lokasi bencana :</div>
               <div>${data.alamatLengkap}, ${data.kabKota} - ${data.provinsi}</div>
               <div class="d-flex flex-row-reverse mt-4">
-                <a href="#/relawan-detail/${data.id}" class="btn btn-detail p-2 ms-2">Detail</a>
-                <button type="button" class="btn btn-konfirmasi p-2 ms-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop${data.id}" id="btn-list-relawan-${data.id}">Lihat Relawan</button>
+                <a href="#/relawan-detail/${data.id}" class="btn btn-color p-2 ms-2">Detail</a>
+                <button type="button" class="btn btn-color p-2 ms-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop${data.id}" id="btn-list-relawan-${data.id}">Lihat Relawan</button>
                 <a href="#/relawan-edit/${data.id}" class="btn btn-color p-2 ms-2">Edit</a>
                 <button class="btn btn-color p-2 ms-2" id="btn-hapus-${data.id}">Hapus</button>
               </div>
@@ -184,14 +226,21 @@ const RelawanRiwayat = {
           listPostinganRelawan.appendChild(itemPostinganRelawan);
 
           const buttonHapus = document.querySelector(`#btn-hapus-${data.id}`);
-          buttonHapus.addEventListener('click', async (event) => {
-            event.preventDefault();
-            await DataPostinganRelawan.deletePostinganRelawanById(data.id);
+          buttonHapus.addEventListener('click', async () => {
+            const hapusPostingan = await swal({
+              title: 'Hapus Data',
+              text: 'Apakah anda ingin menghapus postingan donasi ini?',
+              icon: 'warning',
+              buttons: true,
+            });
+
+            if (hapusPostingan) {
+              await DataPostinganRelawan.deletePostinganRelawanById(data.id);
+            }
           });
 
           // Memfilter data relawan
-          const postinganRelawanFilterById = listPendaftaranRelawan
-            .filter((item) => item.idPostinganRelawan === data.id.toLowerCase());
+          const postinganRelawanFilterById = await dataPostinganRelawanById(data.id);
 
           const listRelawan = document.querySelector(`#list-relawan-${data.id}`);
           const jumlahRelawan = postinganRelawanFilterById.length;
@@ -232,7 +281,7 @@ const RelawanRiwayat = {
             listRelawan.appendChild(message);
           }
         });
-      } else if (postinganRelawanFilter.length < 1) {
+      } else if (postinganRelawanByUsername.length < 1) {
         const message = document.createElement('div');
         message.innerHTML = '<div class="message">Anda belum pernah membuat postingan relawan</div>';
         detailRiwayat.appendChild(message);
@@ -240,25 +289,22 @@ const RelawanRiwayat = {
     };
     riwayatPostingan();
 
-    const listRelawanFilter = listPendaftaranRelawan.filter((item) => item.username
-    === sessionUsername);
-
     const riwayatRelawan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<h1 class="title">Riwayat Relawan</h1>';
+      detailRiwayat.innerHTML = '<img src="./riwayat-kegiatan-relawan.png" class="hero-img">';
 
       const listRelawan = document.createElement('div');
       listRelawan.setAttribute('class', 'grid-row');
       detailRiwayat.appendChild(listRelawan);
 
-      if (listRelawanFilter.length > 0) {
-        listRelawanFilter.forEach((data) => {
+      const listRelawanByUsername = await dataRelawanByUsername();
+      if (listRelawanByUsername.length > 0) {
+        listRelawanByUsername.forEach(async (data) => {
           // Filter data postingan relawan
-          const postinganRelawanFilter = dataPostingan.filter((item) => item.id.toLowerCase()
-          === data.idPostinganRelawan.toLowerCase());
-          const postinganRelawan = postinganRelawanFilter[0];
+          const dataPostinganById = await dataPostinganRelawanById(data.idPostinganRelawan);
+          const postinganRelawan = dataPostinganById[0];
 
-          if (postinganRelawanFilter.length > 0) {
+          if (dataPostinganById.length > 0) {
             const itemRelawan = document.createElement('div');
             itemRelawan.classList.add('card');
             itemRelawan.innerHTML = `
@@ -270,7 +316,7 @@ const RelawanRiwayat = {
                   <div>Atas nama ${data.namaLengkap}</div>
                   <div>Tanggal daftar : ${data.tanggalDaftar}</div>
                   <div class="d-flex flex-row-reverse">
-                    <a class="btn btn-color p-2 mt-2" href="#/relawan-detail/${postinganRelawan.id}">Detail Relawan</a>
+                    <a class="btn btn-color p-2 mt-2" href="#/relawan-detail/${postinganRelawan.id}">Detail Kegiatan</a>
                   </div>
                 </div>
               </div>
@@ -278,7 +324,7 @@ const RelawanRiwayat = {
             listRelawan.appendChild(itemRelawan);
           }
         });
-      } else if (listRelawanFilter.length < 1) {
+      } else if (listRelawanByUsername.length < 1) {
         const message = document.createElement('div');
         message.innerHTML = '<div class="message">Anda belum pernah mengikuti kegiatan relawan</div>';
         detailRiwayat.appendChild(message);

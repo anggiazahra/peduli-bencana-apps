@@ -5,6 +5,12 @@ const RelawanEdit = {
   async render() {
     return `
       <style>
+        .hero-img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          object-position: center;
+        }
         .grid-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -14,7 +20,7 @@ const RelawanEdit = {
           width: 100%;
         }
         h2 {
-          font-size : 20px;
+          font-size : 18px;
         }
         .card {
           margin-bottom: 15px;
@@ -25,33 +31,59 @@ const RelawanEdit = {
         .input-group-text{
             height: 44px;
         }
+        .img-page-not-found {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          object-position: center;
+        }
+        @media screen and (max-width: 910px) {
+          .hero-img {
+            height: 350px;
+          }
+        }
+        @media screen and (max-width: 600px) {
+          .img-page-not-found {
+            height: 300px;
+          }
+        }
         @media screen and (max-width: 540px) {
+          .hero-img {
+            height: 300px;
+          }
           .grid-row {
             grid-template-columns: 1fr;
             gap: 0;
           }
           h2 {
-            font-size: 17px;
+            font-size: 14px;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          .hero-img {
+            height: 200px;
           }
         }
       </style>
-      <div class="relawan-daftar" id="main-content">
-        <h1>Tambah Data Postingan Relawan</h1>
+      <div class="relawan-edit" id="relawan-edit">
+        <img src="./edit-postingan-relawan.png" class="hero-img">
         <form enctype="multipart/form-data">
-          <div class="card">
-            <div class="card-body">
-              <h2>Judul Postingan</h2>
-              <div class="mb-3">
-                <input type="text" class="form-control" id="judul-postingan">
+          <div class="grid-row">
+            <div class="card">
+              <div class="card-body">
+                <h2>Judul Postingan</h2>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="judul-postingan">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h2>Gambar/Poster</h2>
-              <div class="mb-3">
-                <input type="file" class="form-control" id="poster">
-                <div class="mt-2">Kosongkan jika tidak ingin mengubah gambar poster</div>
+            <div class="card">
+              <div class="card-body">
+                <h2>Gambar/Poster</h2>
+                <div class="mb-3">
+                  <input type="file" class="form-control" id="poster">
+                  <div class="mt-2">Kosongkan jika tidak ingin mengubah gambar poster</div>
+                </div>
               </div>
             </div>
           </div>
@@ -97,11 +129,21 @@ const RelawanEdit = {
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-body">
-              <h2>Jumlah Relawan yang Dibutuhkan</h2>
-              <div class="mb-3">
-                <input type="number" class="form-control" id="jumlah-relawan">
+          <div class="grid-row">
+            <div class="card">
+              <div class="card-body">
+                <h2>Jumlah Relawan yang Dibutuhkan</h2>
+                <div class="mb-3">
+                  <input type="number" class="form-control" id="jumlah-relawan">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h2>Link grup Whatsapp/Telegram</h2>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="link-grup">
+                </div>
               </div>
             </div>
           </div>
@@ -152,80 +194,117 @@ const RelawanEdit = {
       window.location.replace('#/login');
     }
 
-    const buttonSubmit = document.querySelector('#button-submit');
-    const inputJudulPostingan = document.querySelector('#judul-postingan');
-    const inputPoster = document.querySelector('#poster');
-    const inputTanggalMulai = document.querySelector('#tanggal-mulai');
-    const inputTanggalBerakhir = document.querySelector('#tanggal-berakhir');
-    const inputKabKota = document.querySelector('#kab-kota');
-    const inputProvinsi = document.querySelector('#provinsi');
-    const inputAlamatLengkap = document.querySelector('#alamat-lengkap');
-    const inputJumlahRelawan = document.querySelector('#jumlah-relawan');
-    const inputPenanggungJawab = document.querySelector('#penanggung-jawab');
-    const inputNoTelepon = document.querySelector('#no-telepon');
-    const inputPekerjaan = document.querySelector('#pekerjaan');
-    const inputPersyaratan = document.querySelector('#persyaratan');
+    // Cek Id Postingan
+    const cekIdPostingan = async (idPostinganRelawan) => {
+      const result = await DataPostinganRelawan.getPostinganRelawanById(idPostinganRelawan);
+      return result;
+    };
+    const cekId = await cekIdPostingan(idPostinganRelawan);
 
-    const result = await DataPostinganRelawan.getPostinganRelawanById(idPostinganRelawan);
-    const data = result.data.relawan[0];
+    if (cekId.status === 'error') {
+      const relawanEdit = document.querySelector('#relawan-edit');
+      relawanEdit.innerHTML = '';
+      relawanEdit.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found" alt="Halaman tidak ditemukan">';
+    }
 
-    inputJudulPostingan.setAttribute('value', data.judulPostingan);
-    inputTanggalMulai.setAttribute('value', data.tanggalMulai);
-    inputTanggalBerakhir.setAttribute('value', data.tanggalBerakhir);
-    inputKabKota.setAttribute('value', data.kabKota);
-    inputProvinsi.setAttribute('value', data.provinsi);
-    inputAlamatLengkap.innerHTML = data.alamatLengkap;
-    inputJumlahRelawan.setAttribute('value', data.jumlahRelawan);
-    inputPenanggungJawab.setAttribute('value', data.penanggungJawab);
-    inputNoTelepon.setAttribute('value', data.noTelepon);
-    inputPekerjaan.setAttribute('value', data.pekerjaan);
-    inputPersyaratan.innerHTML = data.persyaratan;
+    if (cekId.status === 'success') {
+      const buttonSubmit = document.querySelector('#button-submit');
+      const inputJudulPostingan = document.querySelector('#judul-postingan');
+      const inputPoster = document.querySelector('#poster');
+      const inputTanggalMulai = document.querySelector('#tanggal-mulai');
+      const inputTanggalBerakhir = document.querySelector('#tanggal-berakhir');
+      const inputKabKota = document.querySelector('#kab-kota');
+      const inputProvinsi = document.querySelector('#provinsi');
+      const inputAlamatLengkap = document.querySelector('#alamat-lengkap');
+      const inputJumlahRelawan = document.querySelector('#jumlah-relawan');
+      const inputLinkGrup = document.querySelector('#link-grup');
+      const inputPenanggungJawab = document.querySelector('#penanggung-jawab');
+      const inputNoTelepon = document.querySelector('#no-telepon');
+      const inputPekerjaan = document.querySelector('#pekerjaan');
+      const inputPersyaratan = document.querySelector('#persyaratan');
 
-    const id = Math.floor((Math.random() * 999999999999999) + 1);
+      const result = await DataPostinganRelawan.getPostinganRelawanById(idPostinganRelawan);
+      const data = result.data.relawan[0];
 
-    buttonSubmit.addEventListener('click', async (event) => {
-      const file = inputPoster.files[0];
-      event.preventDefault();
-      if (inputJudulPostingan.value === '' || inputTanggalMulai.value === '' || inputTanggalBerakhir.value === '' || inputKabKota.value === '' || inputProvinsi.value === '' || inputAlamatLengkap.value === '' || inputJumlahRelawan.value === '' || inputPenanggungJawab.value === '' || inputNoTelepon.value === '' || inputPekerjaan.value === '' || inputPersyaratan.value === '') {
-        alert('Input tidak boleh kosong');
-      } else if (file === undefined) {
-        const formdata = new FormData();
+      inputJudulPostingan.setAttribute('value', data.judulPostingan);
+      inputTanggalMulai.setAttribute('value', data.tanggalMulai);
+      inputTanggalBerakhir.setAttribute('value', data.tanggalBerakhir);
+      inputKabKota.setAttribute('value', data.kabKota);
+      inputProvinsi.setAttribute('value', data.provinsi);
+      inputAlamatLengkap.innerHTML = data.alamatLengkap;
+      inputJumlahRelawan.setAttribute('value', parseInt(data.jumlahRelawan));
+      inputLinkGrup.setAttribute('value', data.linkGrup);
+      inputPenanggungJawab.setAttribute('value', data.penanggungJawab);
+      inputNoTelepon.setAttribute('value', data.noTelepon);
+      inputPekerjaan.setAttribute('value', data.pekerjaan);
+      inputPersyaratan.innerHTML = data.persyaratan;
 
-        formdata.append('judulPostingan', inputJudulPostingan.value);
-        formdata.append('tanggalMulai', inputTanggalMulai.value);
-        formdata.append('tanggalBerakhir', inputTanggalBerakhir.value);
-        formdata.append('kabKota', inputKabKota.value);
-        formdata.append('provinsi', inputProvinsi.value);
-        formdata.append('alamatLengkap', inputAlamatLengkap.value);
-        formdata.append('jumlahRelawan', inputJumlahRelawan.value);
-        formdata.append('penanggungJawab', inputPenanggungJawab.value);
-        formdata.append('noTelepon', inputNoTelepon.value);
-        formdata.append('pekerjaan', inputPekerjaan.value);
-        formdata.append('persyaratan', inputPersyaratan.value);
+      const id = Math.floor((Math.random() * 999999999999999) + 1);
 
-        await DataPostinganRelawan
-          .editPostinganRelawanWithoutPosterById(formdata, idPostinganRelawan);
-      } else {
-        const nameFile = `${id}_${inputPoster.files[0].name}`;
+      buttonSubmit.addEventListener('click', async (event) => {
+        const file = inputPoster.files[0];
+        event.preventDefault();
+        if (inputJudulPostingan.value === '' || inputTanggalMulai.value === '' || inputTanggalBerakhir.value === '' || inputKabKota.value === '' || inputProvinsi.value === '' || inputAlamatLengkap.value === '' || inputJumlahRelawan.value === '' || inputLinkGrup.value === '' || inputPenanggungJawab.value === '' || inputNoTelepon.value === '' || inputPekerjaan.value === '' || inputPersyaratan.value === '') {
+          swal('Error', 'Tidak boleh ada inputan yang kosong', 'error');
+        } else if (file === undefined) {
+          const editPostingan = await swal({
+            title: 'Memperbaharui Data',
+            text: 'Apakah anda ingin memperbaharui data donasi?',
+            icon: 'warning',
+            buttons: true,
+          });
 
-        const formdata = new FormData();
-        formdata.append('judulPostingan', inputJudulPostingan.value);
-        formdata.append('poster', file, nameFile);
-        formdata.append('tanggalMulai', inputTanggalMulai.value);
-        formdata.append('tanggalBerakhir', inputTanggalBerakhir.value);
-        formdata.append('kabKota', inputKabKota.value);
-        formdata.append('provinsi', inputProvinsi.value);
-        formdata.append('alamatLengkap', inputAlamatLengkap.value);
-        formdata.append('jumlahRelawan', inputJumlahRelawan.value);
-        formdata.append('penanggungJawab', inputPenanggungJawab.value);
-        formdata.append('noTelepon', inputNoTelepon.value);
-        formdata.append('pekerjaan', inputPekerjaan.value);
-        formdata.append('persyaratan', inputPersyaratan.value);
+          if (editPostingan) {
+            const formdata = new FormData();
 
-        await DataPostinganRelawan
-          .editPostinganRelawanWithPosterById(formdata, idPostinganRelawan);
-      }
-    });
+            formdata.append('judulPostingan', inputJudulPostingan.value);
+            formdata.append('tanggalMulai', inputTanggalMulai.value);
+            formdata.append('tanggalBerakhir', inputTanggalBerakhir.value);
+            formdata.append('kabKota', inputKabKota.value);
+            formdata.append('provinsi', inputProvinsi.value);
+            formdata.append('alamatLengkap', inputAlamatLengkap.value);
+            formdata.append('jumlahRelawan', inputJumlahRelawan.value);
+            formdata.append('linkGrup', inputLinkGrup.value);
+            formdata.append('penanggungJawab', inputPenanggungJawab.value);
+            formdata.append('noTelepon', inputNoTelepon.value);
+            formdata.append('pekerjaan', inputPekerjaan.value);
+            formdata.append('persyaratan', inputPersyaratan.value);
+
+            await DataPostinganRelawan
+              .editPostinganRelawanWithoutPosterById(formdata, idPostinganRelawan);
+          }
+        } else {
+          const editPostingan = await swal({
+            title: 'Memperbaharui Data',
+            text: 'Apakah anda ingin memperbaharui data donasi?',
+            icon: 'warning',
+            buttons: true,
+          });
+
+          if (editPostingan) {
+            const nameFile = `${id}_${inputPoster.files[0].name}`;
+
+            const formdata = new FormData();
+            formdata.append('judulPostingan', inputJudulPostingan.value);
+            formdata.append('poster', file, nameFile);
+            formdata.append('tanggalMulai', inputTanggalMulai.value);
+            formdata.append('tanggalBerakhir', inputTanggalBerakhir.value);
+            formdata.append('kabKota', inputKabKota.value);
+            formdata.append('provinsi', inputProvinsi.value);
+            formdata.append('alamatLengkap', inputAlamatLengkap.value);
+            formdata.append('jumlahRelawan', inputJumlahRelawan.value);
+            formdata.append('linkGrup', inputLinkGrup.value);
+            formdata.append('penanggungJawab', inputPenanggungJawab.value);
+            formdata.append('noTelepon', inputNoTelepon.value);
+            formdata.append('pekerjaan', inputPekerjaan.value);
+            formdata.append('persyaratan', inputPersyaratan.value);
+
+            await DataPostinganRelawan
+              .editPostinganRelawanWithPosterById(formdata, idPostinganRelawan);
+          }
+        }
+      });
+    }
   },
 };
 

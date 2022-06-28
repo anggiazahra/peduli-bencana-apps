@@ -8,9 +8,13 @@ class DataPostinganRelawan {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/relawan');
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Ditambahkan', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Ditambahkan', data.message, 'success');
+          window.location.replace(`#/relawan-detail/${data.data.idPostinganRelawan}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -56,9 +60,13 @@ class DataPostinganRelawan {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/relawan-detail/${idPostinganRelawan}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Diperbaharui', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Diperbaharui', data.message, 'success');
+          window.location.replace('#/relawan-riwayat');
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -74,9 +82,13 @@ class DataPostinganRelawan {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/relawan-detail/${idPostinganRelawan}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Diperbaharui', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Diperbaharui', data.message, 'success');
+          window.location.replace('#/relawan-riwayat');
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -91,9 +103,13 @@ class DataPostinganRelawan {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/relawan-riwayat');
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Dihapus', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Dihapus', data.message, 'success');
+          window.location.replace('#/relawan-riwayat');
+        }
       })
       .catch((error) => console.log('error', error));
 

@@ -35,12 +35,11 @@ const RelawanDetail = {
           text-align: center;
         }
         .relawan-detail {
+          padding-top: 20px;
+        }
+        .grid-row {
           display: grid;
           grid-template-columns: 3fr 4fr;
-          margin-top: 20px;
-        }
-        .btn {
-          margin-bottom: 15px;
         }
         .grid-btn {
           display: grid;
@@ -52,7 +51,7 @@ const RelawanDetail = {
           margin-bottom: 15px;
           align-items: center;
         }
-        .grid-row {
+        .grid-item-row {
           display: grid;
           grid-template-columns: 1fr 7fr;
           gap : 10px;
@@ -70,10 +69,18 @@ const RelawanDetail = {
           text-indent: 20px;
           margin-bottom: 0;
         }
+        .img-page-not-found {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          object-position: center;
+        }
         @media screen and (max-width: 600px) {
           .relawan-detail {
+            padding-top: 0;
+          }
+          .grid-row {
             grid-template-columns: 1fr;
-            margin-top: 0;
           }
           .box-1{
             padding: 0;
@@ -91,11 +98,14 @@ const RelawanDetail = {
             padding: 0 !important;
           }
           h2 {
-            font-size: 17px;
+            font-size: 14px;
+          }
+          .img-page-not-found {
+            height: 300px;
           }
         }
       </style>
-      <div class="relawan-detail">
+      <div class="relawan-detail grid-row" id="relawan-detail">
         <div class="box-1">
           <span id="posterRelawan"></span>
           <div class="sub-box">
@@ -127,7 +137,7 @@ const RelawanDetail = {
           <div class="card mb-3">
             <div class="card-body">
               <span>Lokasi Bencana</span>
-              <div class="grid-row mt-3">
+              <div class="grid-item-row mt-3">
                 <img src="./img-location.png" class="img-location">
                 <div id="lokasi-bencana"></div>
               </div>
@@ -136,7 +146,7 @@ const RelawanDetail = {
           <div class="card mb-3">
             <div class="card-body">
               <span>Penanggung Jawab</span>
-              <div class="grid-row mt-3">
+              <div class="grid-item-row mt-3">
                 <img src="./img-profile.png" class="img-profile">
                 <div id="penanggung-jawab"></div>
               </div>
@@ -157,6 +167,11 @@ const RelawanDetail = {
                   <td><span id="jumlah-relawan"></span></td>
                 </tr>
                 <tr>
+                  <td>Link Grup WA/Telegram</td>
+                  <td>:</td>
+                  <td><span id="link-grup"></span></td>
+                </tr>
+                <tr>
                   <td colspan="3">
                     <p id="persyaratan"></p>
                   </td>
@@ -173,62 +188,80 @@ const RelawanDetail = {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const idPostinganRelawan = url.id;
 
-    const result = await DataPostinganRelawan.getPostinganRelawanById(idPostinganRelawan);
-    const dataPostingan = result.data.relawan[0];
+    // Cek Id Postingan
+    const cekIdPostingan = async (idPostinganRelawan) => {
+      const result = await DataPostinganRelawan.getPostinganRelawanById(idPostinganRelawan);
+      return result;
+    };
+    const cekId = await cekIdPostingan(idPostinganRelawan);
 
-    const posterRelawan = document.querySelector('#posterRelawan');
-    posterRelawan.innerHTML = `
+    if (cekId.status === 'error') {
+      const relawanDetail = document.querySelector('#relawan-detail');
+      relawanDetail.classList.remove('grid-row');
+      relawanDetail.innerHTML = '';
+      relawanDetail.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found" alt="Halaman tidak ditemukan">';
+    }
+
+    if (cekId.status === 'success') {
+      const result = await DataPostinganRelawan.getPostinganRelawanById(idPostinganRelawan);
+      const dataPostingan = result.data.relawan[0];
+
+      const posterRelawan = document.querySelector('#posterRelawan');
+      posterRelawan.innerHTML = `
       <img src="./upload/relawan/${dataPostingan.poster}" alt="" class="img-detail">
     `;
 
-    const tombolDaftar = document.querySelector('#btn-daftar');
-    const loginSession = sessionStorage.getItem('loginSession');
+      const tombolDaftar = document.querySelector('#btn-daftar');
+      const loginSession = sessionStorage.getItem('loginSession');
 
-    if (loginSession === 'true') {
-      tombolDaftar.setAttribute('href', `#/relawan-daftar/${dataPostingan.id}`);
-    } else if (loginSession === 'false') {
-      tombolDaftar.setAttribute('href', '#/login');
-      tombolDaftar.innerHTML = 'Login untuk Mendaftar';
-    }
+      if (loginSession === 'true') {
+        tombolDaftar.setAttribute('href', `#/relawan-daftar/${dataPostingan.id}`);
+      } else if (loginSession === 'false') {
+        tombolDaftar.setAttribute('href', '#/login');
+        tombolDaftar.innerHTML = 'Login untuk Mendaftar';
+      }
 
-    const lokasiBencana = document.querySelector('#lokasi-bencana');
-    lokasiBencana.innerHTML = `
+      const lokasiBencana = document.querySelector('#lokasi-bencana');
+      lokasiBencana.innerHTML = `
       <h2>${dataPostingan.kabKota} - ${dataPostingan.provinsi}</h2>
       <span>${dataPostingan.alamatLengkap}</span>
     `;
 
-    const penanggungJawab = document.querySelector('#penanggung-jawab');
-    penanggungJawab.innerHTML = `
+      const penanggungJawab = document.querySelector('#penanggung-jawab');
+      penanggungJawab.innerHTML = `
       <h2>${dataPostingan.penanggungJawab}</h2>
       <span>${dataPostingan.pekerjaan} - ${dataPostingan.noTelepon}</span>
     `;
 
-    const judulPostingan = document.querySelector('#judul-postingan');
-    judulPostingan.innerHTML = `${dataPostingan.judulPostingan}`;
+      const judulPostingan = document.querySelector('#judul-postingan');
+      judulPostingan.innerHTML = `${dataPostingan.judulPostingan}`;
 
-    const tanggalPelaksanaan = document.querySelector('#tanggal-pelaksanaan');
-    tanggalPelaksanaan.innerHTML = `${dataPostingan.tanggalMulai} - ${dataPostingan.tanggalBerakhir}`;
+      const tanggalPelaksanaan = document.querySelector('#tanggal-pelaksanaan');
+      tanggalPelaksanaan.innerHTML = `${dataPostingan.tanggalMulai} - ${dataPostingan.tanggalBerakhir}`;
 
-    const jumlahRelawan = document.querySelector('#jumlah-relawan');
-    jumlahRelawan.innerHTML = `${dataPostingan.jumlahRelawan} orang`;
+      const jumlahRelawan = document.querySelector('#jumlah-relawan');
+      jumlahRelawan.innerHTML = `${dataPostingan.jumlahRelawan} orang`;
 
-    const persyaratan = document.querySelector('#persyaratan');
-    persyaratan.innerHTML = `${dataPostingan.persyaratan}`;
+      const linkGrup = document.querySelector('#link-grup');
+      linkGrup.innerHTML = `<a href='${dataPostingan.linkGrup}'>${dataPostingan.linkGrup}</a>`;
 
-    const dataPendaftaranRelawan = await DataPendaftaranRelawan.getAllPendaftaranRelawan();
-    const listRelawan = dataPendaftaranRelawan.data.relawan;
+      const persyaratan = document.querySelector('#persyaratan');
+      persyaratan.innerHTML = `${dataPostingan.persyaratan}`;
 
-    const relawanFilter = listRelawan.filter((relawan) => relawan.idPostinganRelawan
-      .toLowerCase() === idPostinganRelawan.toLowerCase());
+      const dataPendaftaranRelawan = await DataPendaftaranRelawan.getAllPendaftaranRelawan();
+      const listRelawan = dataPendaftaranRelawan.data.relawan;
 
-    if (relawanFilter.length > 0) {
-      listRelawan.forEach((data) => {
-        const idPostinganRelawanFormDatabase = `${data.idPostinganRelawan}`.toLowerCase();
-        if (idPostinganRelawanFormDatabase === idPostinganRelawan.toLowerCase()) {
-          const daftarRelawan = document.querySelector('#list-relawan');
-          const itemRelawan = document.createElement('div');
-          itemRelawan.classList.add('item-relawan');
-          itemRelawan.innerHTML = `
+      const relawanFilter = listRelawan.filter((relawan) => relawan.idPostinganRelawan
+        .toLowerCase() === idPostinganRelawan.toLowerCase());
+
+      if (relawanFilter.length > 0) {
+        listRelawan.forEach((data) => {
+          const idPostinganRelawanFormDatabase = `${data.idPostinganRelawan}`.toLowerCase();
+          if (idPostinganRelawanFormDatabase === idPostinganRelawan.toLowerCase()) {
+            const daftarRelawan = document.querySelector('#list-relawan');
+            const itemRelawan = document.createElement('div');
+            itemRelawan.classList.add('item-relawan');
+            itemRelawan.innerHTML = `
           <img src="./img-profile.png" class="img-profile"></img>
             <ul>
               <li><h6>${data.namaLengkap}</h6></li>
@@ -236,14 +269,15 @@ const RelawanDetail = {
               <li>Tanggal daftar : ${data.tanggalDaftar}</li>
             <ul>
           `;
-          daftarRelawan.appendChild(itemRelawan);
-        }
-      });
-    } else if (relawanFilter.length < 1) {
-      const message = document.querySelector('#message');
-      message.innerHTML = `
+            daftarRelawan.appendChild(itemRelawan);
+          }
+        });
+      } else if (relawanFilter.length < 1) {
+        const message = document.querySelector('#message');
+        message.innerHTML = `
         Belum ada partisipan yang mendaftar
       `;
+      }
     }
   },
 };

@@ -22,6 +22,7 @@ const addPostinganRelawanHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
+    linkGrup,
     penanggungJawab,
     noTelepon,
     pekerjaan,
@@ -111,6 +112,15 @@ const addPostinganRelawanHandler = async (request, h) => {
     return response;
   }
 
+  if (linkGrup === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal menambahkan data. Mohon isi link grup',
+    });
+    response.code(400);
+    return response;
+  }
+
   if (penanggungJawab === undefined) {
     const response = h.response({
       status: 'fail',
@@ -162,6 +172,7 @@ const addPostinganRelawanHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
+    linkGrup,
     penanggungJawab,
     noTelepon,
     pekerjaan,
@@ -182,9 +193,9 @@ const addPostinganRelawanHandler = async (request, h) => {
   if (results) {
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil ditambahkan',
+      message: 'Data postingan berhasil ditambahkan',
       data: {
-        postinganRelawanId: id,
+        idPostinganRelawan: id,
       },
     });
     response.code(201);
@@ -193,7 +204,7 @@ const addPostinganRelawanHandler = async (request, h) => {
 
   const response = h.response({
     status: 'error',
-    message: 'Data gagal ditambahkan',
+    message: 'Data postingan gagal ditambahkan',
   });
   response.code(500);
   return response;
@@ -229,8 +240,8 @@ const getPostinganRelawanByIdHandler = async (request, h) => {
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Data tidak ditemukan',
+    status: 'error',
+    message: 'Data postingan tidak ditemukan',
   });
   response.code(404);
   return response;
@@ -248,6 +259,7 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
+    linkGrup,
     penanggungJawab,
     noTelepon,
     pekerjaan,
@@ -328,6 +340,15 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
     return response;
   }
 
+  if (linkGrup === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi link grup',
+    });
+    response.code(400);
+    return response;
+  }
+
   if (penanggungJawab === undefined) {
     const response = h.response({
       status: 'fail',
@@ -376,6 +397,7 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
+    linkGrup,
     penanggungJawab,
     noTelepon,
     pekerjaan,
@@ -397,14 +419,14 @@ const editPostinganRelawanByIdHandler = async (request, h) => {
 
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil diperbarui',
+      message: 'Data postingan berhasil diperbarui',
     });
     response.code(200);
     return response;
   }
 
   const response = h.response({
-    status: 'fail',
+    status: 'error',
     message: 'Gagal memperbarui data. Id tidak ditemukan',
   });
   response.code(404);
@@ -422,6 +444,7 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
+    linkGrup,
     penanggungJawab,
     noTelepon,
     pekerjaan,
@@ -491,6 +514,15 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
     return response;
   }
 
+  if (linkGrup === undefined) {
+    const response = h.response({
+      status: 'fail',
+      message: 'Gagal memperbaharui data. Mohon isi link grup',
+    });
+    response.code(400);
+    return response;
+  }
+
   if (penanggungJawab === undefined) {
     const response = h.response({
       status: 'fail',
@@ -538,6 +570,7 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
     provinsi,
     alamatLengkap,
     jumlahRelawan,
+    linkGrup,
     penanggungJawab,
     noTelepon,
     pekerjaan,
@@ -552,14 +585,14 @@ const editPostinganRelawanWithoutPosterByIdHandler = async (request, h) => {
 
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil diperbarui',
+      message: 'Data postingan berhasil diperbarui',
     });
     response.code(200);
     return response;
   }
 
   const response = h.response({
-    status: 'fail',
+    status: 'error',
     message: 'Gagal memperbarui data. Id tidak ditemukan',
   });
   response.code(404);
@@ -576,15 +609,15 @@ const deletePostinganRelawanByIdHandler = async (request, h) => {
     await deletePostinganRelawanIdFromDatabase(postinganRelawanId);
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil dihapus',
+      message: 'Data postingan berhasil dihapus',
     });
     response.code(200);
     return response;
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Data gagal dihapus. Id tidak ditemukan',
+    status: 'error',
+    message: 'Data postingan gagal dihapus. Id tidak ditemukan',
   });
   response.code(404);
   return response;
