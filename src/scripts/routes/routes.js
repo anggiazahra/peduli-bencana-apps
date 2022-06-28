@@ -1,4 +1,6 @@
 import Home from '../views/pages/home';
+import Mitigasi from '../views/pages/mitigasi';
+import TentangKami from '../views/pages/tentang-kami';
 import DonasiPostingan from '../views/pages/donasiPostingan';
 import DonasiPostinganDetail from '../views/pages/donasiPostinganDetail';
 import DonasiPostinganTambah from '../views/pages/donasiPostinganTambah';
@@ -36,6 +38,8 @@ const routes = {
   '/relawan-tambah': RelawanTambah,
   '/relawan-edit/:id': RelawanEdit,
   '/relawan-riwayat': RelawanRiwayat,
+  '/mitigasi': Mitigasi,
+  '/tentang-kami': TentangKami,
 };
 
 export default routes;
