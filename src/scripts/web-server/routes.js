@@ -36,6 +36,15 @@ const {
   getAllPendaftaranRelawanHandler,
 } = require('./handler-pendaftaran-relawan');
 
+const {
+  addPostinganArtikelHandler,
+  getAllPostinganArtikelHandler,
+  getPostinganArtikelByIdHandler,
+  editPostinganArtikelByIdHandler,
+  editPostinganArtikelWithoutgambarArtikelByIdHandler,
+  deletePostinganArtikelByIdHandler,
+} = require('./handler-postingan-artikel');
+
 const routes = [
   {
     method: 'POST',
@@ -235,6 +244,63 @@ const routes = [
     method: 'GET',
     path: '/relawan/pendaftaran',
     handler: getAllPendaftaranRelawanHandler,
+  },
+  {
+    method: 'POST',
+    path: '/artikel/postingan',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        maxBytes: 2 * 2000 * 2000,
+        multipart: true,
+      },
+    },
+    handler: addPostinganArtikelHandler,
+  },
+  {
+    method: 'GET',
+    path: '/artikel/postingan',
+    handler: getAllPostinganArtikelHandler,
+  },
+  {
+    method: 'GET',
+    path: '/artikel/postingan/{postinganArtikelId}',
+    handler: getPostinganArtikelByIdHandler,
+  },
+  {
+    method: 'PUT',
+    path: '/artikel/postingan/{postinganArtikelId}',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        maxBytes: 2 * 2000 * 2000,
+        multipart: true,
+      },
+    },
+    handler: editPostinganArtikelByIdHandler,
+  },
+  {
+    method: 'PUT',
+    path: '/artikel/postingan-tanpa-gambarArtikel/{postinganArtikelId}',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: ['application/json', 'multipart/form-data', 'image/jpeg'],
+        maxBytes: 2 * 2000 * 2000,
+        multipart: true,
+      },
+    },
+    handler: editPostinganArtikelWithoutgambarArtikelByIdHandler,
+  },
+  {
+    method: 'DELETE',
+    path: '/artikel/postingan/{postinganArtikelId}',
+    handler: deletePostinganArtikelByIdHandler,
   },
 ];
 
