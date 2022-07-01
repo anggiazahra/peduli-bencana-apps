@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start-dev": "webpack-dev-server --config webpack.dev.js",
+    "start": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "start": "nodemon ./src/scripts/web-server/server",
+    "start-dev": "nodemon ./src/scripts/web-server/server",
     "lint": "eslint ./src"
   },
   "author": "",
