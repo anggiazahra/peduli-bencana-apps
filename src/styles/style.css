@@ -99,7 +99,8 @@ html {
     background-color: #dfdfdf !important;
     color: black;
     border-radius: 20px;
-    margin-bottom: 0;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 .swal-text {
@@ -147,6 +148,10 @@ html {
 
     .app-bar .app-bar__brand h1 {
         font-size: 27px;
+    }
+
+    .btn-logout, .btn-login {
+        margin: 0 20%;
     }
 }
 

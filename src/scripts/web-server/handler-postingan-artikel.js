@@ -9,7 +9,7 @@ const {
   editPostinganArtikelFromDatabase,
   editPostinganArtikelWithoutgambarArtikelFromDatabase,
   deletePostinganArtikelIdFromDatabase,
-} = require('../database/database-request');
+} = require('../database/database-request-artikel');
 
 const addPostinganArtikelHandler = async (request, h) => {
   const {
@@ -58,7 +58,7 @@ const addPostinganArtikelHandler = async (request, h) => {
   }
 
   const id = nanoid(16);
-  const insertedAt = new Date().toLocaleDateString();
+  const insertedAt = new Date().toISOString().split('T')[0];
   const updatedAt = insertedAt;
 
   const data = {
@@ -83,9 +83,9 @@ const addPostinganArtikelHandler = async (request, h) => {
   if (results) {
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil ditambahkan',
+      message: 'Postingan artikel berhasil ditambahkan',
       data: {
-        postinganArtikelId: id,
+        idPostinganArtikel: id,
       },
     });
     response.code(201);
@@ -94,7 +94,7 @@ const addPostinganArtikelHandler = async (request, h) => {
 
   const response = h.response({
     status: 'error',
-    message: 'Data gagal ditambahkan',
+    message: 'Postingan artikel gagal ditambahkan',
   });
   response.code(500);
   return response;
@@ -185,7 +185,7 @@ const editPostinganArtikelByIdHandler = async (request, h) => {
     return response;
   }
 
-  const updatedAt = new Date().toLocaleDateString();
+  const updatedAt = new Date().toISOString().split('T')[0];
 
   const data = {
     id: postinganArtikelId,
@@ -210,15 +210,15 @@ const editPostinganArtikelByIdHandler = async (request, h) => {
 
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil diperbarui',
+      message: 'Postingan artikel berhasil diperbarui',
     });
     response.code(200);
     return response;
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Gagal memperbarui data. Id tidak ditemukan',
+    status: 'error',
+    message: 'Gagal memperbarui postingan. Id tidak ditemukan',
   });
   response.code(404);
   return response;
@@ -260,7 +260,7 @@ const editPostinganArtikelWithoutgambarArtikelByIdHandler = async (request, h) =
     return response;
   }
 
-  const updatedAt = new Date().toLocaleDateString();
+  const updatedAt = new Date().toISOString().split('T')[0];
 
   const data = {
     id: postinganArtikelId,
@@ -277,15 +277,15 @@ const editPostinganArtikelWithoutgambarArtikelByIdHandler = async (request, h) =
 
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil diperbarui',
+      message: 'Postingan artikel berhasil diperbarui',
     });
     response.code(200);
     return response;
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Gagal memperbarui data. Id tidak ditemukan',
+    status: 'error',
+    message: 'Gagal memperbarui postingan. Id tidak ditemukan',
   });
   response.code(404);
   return response;
@@ -300,15 +300,15 @@ const deletePostinganArtikelByIdHandler = async (request, h) => {
     await deletePostinganArtikelIdFromDatabase(postinganArtikelId);
     const response = h.response({
       status: 'success',
-      message: 'Data berhasil dihapus',
+      message: 'Postingan artikel berhasil dihapus',
     });
     response.code(200);
     return response;
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Data gagal dihapus. Id tidak ditemukan',
+    status: 'error',
+    message: 'Postingan artikel gagal dihapus. Id tidak ditemukan',
   });
   response.code(404);
   return response;

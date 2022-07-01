@@ -1,5 +1,3 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-shadow */
 class DataPostinganArtikel {
   static async addPostinganArtikel(formdata) {
     const response = await fetch('http://localhost:5000/artikel/postingan', {
@@ -10,9 +8,13 @@ class DataPostinganArtikel {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/artikel');
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Ditambahkan', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Ditambahkan', data.message, 'success');
+          window.location.replace(`#/artikel-detail/${data.data.idPostinganArtikel}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -58,9 +60,13 @@ class DataPostinganArtikel {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/artikel-detail/${idPostinganArtikel}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Diperbaharui', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Diperbaharui', data.message, 'success');
+          window.location.replace(`#/artikel-detail/${idPostinganArtikel}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -76,9 +82,13 @@ class DataPostinganArtikel {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace(`#/artikel-detail/${idPostinganArtikel}`);
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal Diperbaharui', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil Diperbaharui', data.message, 'success');
+          window.location.replace(`#/artikel-detail/${idPostinganArtikel}`);
+        }
       })
       .catch((error) => console.log('error', error));
 
@@ -93,9 +103,13 @@ class DataPostinganArtikel {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
-        window.location.replace('#/artikel');
-        alert(data.message);
-        window.location.reload();
+        if (data.status === 'error') {
+          swal('Gagal', data.message, 'error');
+        }
+        if (data.status === 'success') {
+          swal('Berhasil', data.message, 'success');
+          window.location.replace('#/artikel');
+        }
       })
       .catch((error) => console.log('error', error));
 
