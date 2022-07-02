@@ -97,7 +97,10 @@ const DonasiPostingan = {
       }
     </style>
 
-    <img data-src="./donasi-utama.png" class="lazyload hero-img" alt="Hero image donasi utama" tabindex="0">
+    <picture>
+      <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/donasi-utama-small.jpg" class="hero-img" tabindex="0">
+      <img data-src="./heros/donasi-utama-large.jpg" class="lazyload hero-img" alt="Hero image donasi utama" tabindex="0">
+    </picture>
     <div class="d-flex flex-row-reverse" id="btn-list">
       <a href="#/donasi-postingan-tambah" class="btn btn-tambah p-2" id="btn-tambah">Tambah Data</a>
     </div>

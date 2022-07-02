@@ -24,7 +24,10 @@ const LandingPage = {
           <p>Belum punya akun?</p>
           <a href="#/registrasi"class="btn">Registrasi Sekarang</a>
         </div>
-        <img data-src="./people-think.jpg" class="lazyload" alt="people think" tabindex="0">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/people-think-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/people-think-large.jpg" class="lazyload hero-img" alt="Hero image landing page" tabindex="0">
+        </picture>
       </div>
         
     `;

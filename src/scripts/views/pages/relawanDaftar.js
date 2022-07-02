@@ -70,7 +70,10 @@ const RelawanDaftar = {
         }
       </style>
       <div class="relawan-daftar" id="relawan-daftar">
-        <img data-src="./daftar-relawan.png" class="lazyload hero-img" alt="Gambar daftar relawan" tabindex="0">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/daftar-relawan-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/daftar-relawan-large.jpg" class="lazyload hero-img" alt="Hero image daftar relawan" tabindex="0">
+        </picture>
         <form enctype="multipart/form-data">
           <div class="card">
             <div class="card-body">

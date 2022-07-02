@@ -9,7 +9,6 @@ const TentangKami = {
                 width: 100% !important;
                 max-width: 100% !important;
                 padding: 0;
-                min-height: 500px;
                 margin: 0 !important;
             }
             .grid-1 {
@@ -205,7 +204,10 @@ const TentangKami = {
             <div>
                 <h1 tabindex="0">Tentang Kami</h1>
             </div>
-            <img data-src="./tentang-kami.jpg" class="lazyload" alt="hero image tentang kami" tabindex="0">
+            <picture>
+                <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/tentang-kami-small.jpg" class="hero-img" tabindex="0">
+                <img data-src="./heros/tentang-kami-large.jpg" class="lazyload hero-img" alt="image tentang kami" tabindex="0">
+            </picture>
         </div>
         <div class="description">
             <div class="grid-2">
@@ -218,7 +220,10 @@ const TentangKami = {
         <h2 tabindex="0">Tim Kami</h2>
         <div class="list-biodata grid-3">
             <div class="card">
-                <img data-src="./foto-tim/anggi.png" class="lazyload card-img-top" alt="foto anggi" tabindex="0">
+                <picture>
+                    <source type="image/webp" srcset="./foto-tim/anggi.webp">
+                    <img data-src="./foto-tim/anggi.png" class="lazyload card-img-top" alt="foto anggi" tabindex="0">
+                </picture>
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Ketua</p>
@@ -228,7 +233,10 @@ const TentangKami = {
                 </div>
             </div>
             <div class="card">
-                <img data-src="./foto-tim/annisya.png" class="lazyload card-img-top" alt="foto annisya" tabindex="0">
+                <picture>
+                    <source type="image/webp" srcset="./foto-tim/annisya.webp">
+                    <img data-src="./foto-tim/annisya.png" class="lazyload card-img-top" alt="foto annisya" tabindex="0">
+                </picture>
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Anggota</p>
@@ -238,7 +246,10 @@ const TentangKami = {
                 </div>
             </div>
             <div class="card">
-                <img data-src="./foto-tim/misha.png" class="lazyload card-img-top" alt="foto misha" tabindex="0">
+                <picture>
+                    <source type="image/webp" srcset="./foto-tim/misha.webp">
+                    <img data-src="./foto-tim/misha.png" class="lazyload card-img-top" alt="foto misha" tabindex="0">
+                </picture>
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Anggota</p>
@@ -248,7 +259,10 @@ const TentangKami = {
                 </div>
             </div>
             <div class="card">
-                <img data-src="./foto-tim/isti.png" class="lazyload card-img-top" alt="foto isti" tabindex="0">
+                <picture>
+                    <source type="image/webp" srcset="./foto-tim/isti.webp">
+                    <img data-src="./foto-tim/isti.png" class="lazyload card-img-top" alt="foto isti" tabindex="0">
+                </picture>
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Anggota</p>

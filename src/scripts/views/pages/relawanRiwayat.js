@@ -182,7 +182,12 @@ const RelawanRiwayat = {
 
     const riwayatPostingan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<img data-src="./riwayat-postingan-relawan.png" class="lazyload hero-img" alt="Gambar riwayat postingan" tabindex="0">';
+      detailRiwayat.innerHTML = `
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/riwayat-postingan-relawan-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/riwayat-postingan-relawan-large.jpg" class="lazyload hero-img" alt="Hero image riwayat postingan relawan" tabindex="0">
+        </picture>
+      `;
 
       const listPostinganRelawan = document.createElement('div');
       listPostinganRelawan.setAttribute('class', 'grid-row');

@@ -57,7 +57,10 @@ const RelawanTambah = {
         }
     </style>
     <div class="relawan-tambah">
-        <img data-src="./tambah-postingan-relawan.png" class="lazyload hero-img" alt"Gambar tambah postingan relawan" tabindex="0">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/tambah-postingan-relawan-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/tambah-postingan-relawan-large.jpg" class="lazyload hero-img" alt="Hero image tambah postingan relawan" tabindex="0">
+        </picture>
         <form enctype="multipart/form-data">
             <div class="grid-row">
                 <div class="card">

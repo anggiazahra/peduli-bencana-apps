@@ -64,7 +64,10 @@ const ArtikelTambah = {
         </style>
 
         <div class="artikel-tambah">
-            <img data-src="./tambah-postingan-artikel.png" class="lazyload hero-img" alt="Tambah postingan artikel" tabindex="0">
+            <picture>
+                <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/tambah-postingan-artikel-small.jpg" class="hero-img" tabindex="0">
+                <img data-src="./heros/tambah-postingan-artikel-large.jpg" class="lazyload hero-img" alt="Hero image tambah postingan artikel" tabindex="0">
+            </picture>
             <div class="card">
                 <div class="card-body">
                 <form enctype="multipart/form-data">

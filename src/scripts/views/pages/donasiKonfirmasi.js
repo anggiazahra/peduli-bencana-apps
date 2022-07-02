@@ -77,7 +77,10 @@ const DonasiKonfirmasi = {
         }
       </style>
       <div id="donasi-konfirmasi" class="donasi-konfirmasi">
-        <img data-src="./konfirmasi-donasi2.png" class="lazyload hero-img" alt="Gambar konfirmasi donasi" tabindex="0">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/konfirmasi-donasi2-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/konfirmasi-donasi2-large.jpg" class="lazyload hero-img" alt="Hero image konfirmasi donasi" tabindex="0">
+        </picture>
         <div class="grid-row">
           <div id="belum-dikonfirmasi">
             <h2 tabindex="0">Belum Dikonfirmasi</h2>

@@ -70,7 +70,10 @@ const DonasiTambah = {
       }
     </style>
       <div class="donasi-tambah" id="donasi-tambah">
-        <img data-src="./tambah-donasi.png" class="lazyload hero-img" alt="Image hero tambah donasi" tabindex="0">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/tambah-donasi-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/tambah-donasi-large.jpg" class="lazyload hero-img" alt="Hero image tambah postingan donasi" tabindex="0">
+        </picture>
         <form enctype="multipart/form-data">
           <div class="card">
             <div class="card-body">

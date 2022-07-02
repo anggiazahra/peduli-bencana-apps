@@ -92,7 +92,10 @@ const Relawan = {
         }
       </style>
       
-      <img data-src="./relawan-utama.png" class="lazyload hero-img" alt="Gambar relawan utama"  tabindex="0">
+      <picture>
+        <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/relawan-utama-small.jpg" class="hero-img" tabindex="0">
+        <img data-src="./heros/relawan-utama-large.jpg" class="lazyload hero-img" alt="Hero image relawan utama" tabindex="0">
+      </picture>
       <div class="d-flex flex-row-reverse" id="btn-list">
           <a href="#/relawan-tambah" class="btn btn-tambah p-2 me-2" id="btn-tambah">Tambah Data</a>
       </div>

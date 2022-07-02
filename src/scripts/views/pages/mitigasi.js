@@ -144,7 +144,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Banjir</h1>
-            <img data-src="./mitigasi/banjir.jpg" class="lazyload hero-img" alt="Animasi banjir" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/banjir.webp">
+                <img data-src="./mitigasi/banjir.jpg" class="lazyload hero-img" alt="Animasi banjir" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/flood-disaster'>Flood disaster vector created by upklyak - www.freepik.com</a>
             </div>
@@ -205,7 +208,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Tanah Longsor</h1>
-            <img data-src="./mitigasi/tanah-longsor.jpg" class="lazyload hero-img" alt="Animasi tanah longsor" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/tanah-longsor.webp">
+                <img data-src="./mitigasi/tanah-longsor.jpg" class="lazyload hero-img" alt="Animasi tanah longsor" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:<span> <a href='https://www.freepik.com/vectors/grass-ground'>Grass ground vector created by brgfx - www.freepik.com</a>
             </div>
@@ -265,7 +271,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Gempa Bumi</h1>
-            <img data-src="./mitigasi/gempa-bumi.jpg" class="lazyload hero-img" alt="Animasi gempa bumi" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/gempa-bumi.webp">
+                <img data-src="./mitigasi/gempa-bumi.jpg" class="lazyload hero-img" alt="Animasi gempa bumi" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/tree-clipart'>Tree clipart vector created by brgfx - www.freepik.com</a>
             </div>
@@ -325,7 +334,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Tsunami</h1>
-            <img data-src="./mitigasi/tsunami.jpg" class="lazyload hero-img" alt="Animasi tsunami" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/tsunami.webp">
+                <img data-src="./mitigasi/tsunami.jpg" class="lazyload hero-img" alt="Animasi tsunami" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/park-background'>Park background vector created by brgfx - www.freepik.com</a>
             </div>
@@ -374,7 +386,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Gunung Meletus</h1>
-            <img data-src="./mitigasi/gunung-meletus.jpg" class="lazyload hero-img" alt="Animasi gunung meletus" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/gunung-meletus.webp">
+                <img data-src="./mitigasi/gunung-meletus.jpg" class="lazyload hero-img" alt="Animasi gunung meletus" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/volcan'>Volcan vector created by brgfx - www.freepik.com</a>
             </div>
@@ -411,7 +426,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Abrasi dan Gelombang Tinggi</h1>
-            <img data-src="./mitigasi/abrasi-gelombang-tinggi.jpg" class="lazyload hero-img" alt="Animasi abrasi dan gelombang tinggi" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/abrasi-gelombang-tinggi.webp">
+                <img data-src="./mitigasi/abrasi-gelombang-tinggi.jpg" class="lazyload hero-img" alt="Animasi abrasi dan gelombang tinggi" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/disaster'>Disaster vector created by macrovector - www.freepik.com</a>
             </div>
@@ -459,7 +477,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Angin Ribut</h1>
-            <img data-src="./mitigasi/angin-ribut.jpg" class="lazyload hero-img" alt="Animasi angin ribut" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/angin-ribut.webp">
+                <img data-src="./mitigasi/angin-ribut.jpg" class="lazyload hero-img" alt="Animasi angin ribut" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/disaster'>Disaster vector created by macrovector - www.freepik.com</a>
             </div>
@@ -496,7 +517,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Kekeringan</h1>
-            <img data-src="./mitigasi/kekeringan.jpg" class="lazyload hero-img" alt="Animasi kekeringan" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/kekeringant.webp">
+                <img data-src="./mitigasi/kekeringan.jpg" class="lazyload hero-img" alt="Animasi kekeringan" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/deforestation'>Deforestation vector created by brgfx - www.freepik.com</a>
             </div>
@@ -533,7 +557,10 @@ const Mitigasi = {
       content.innerHTML = `
         <div class="card-body">
             <h1 tabindex="0">Kebakaran</h1>
-            <img data-src="./mitigasi/kebakaran.jpg" class="lazyload hero-img" alt="Animasi kebakaran" tabindex="0">
+            <picture>
+                <source type="image/webp" srcset="./mitigasi/kebakaran.webp">
+                <img data-src="./mitigasi/kebakaran.jpg" class="lazyload hero-img" alt="Animasi kebakaran" tabindex="0">
+            </picture>
             <div class="sumber-gambar">
                 <span tabindex="0">Sumber gambar:</span> <a href='https://www.freepik.com/vectors/hydrant'>Hydrant vector created by macrovector - www.freepik.com</a>
             </div>

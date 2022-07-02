@@ -107,11 +107,18 @@ const Artikel = {
       </style>
 
       <section id="berita">
-        <img data-src="./artikel-utama.png" class="lazyload hero-img" alt="Hero image artikel">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/artikel-utama-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/artikel-utama-large.jpg" class="lazyload hero-img" alt="Hero image artikel" tabindex="0">
+        </picture>
+        
         <h1 tabindex="0">Berita Terkini</h1>
         <div class="grid-row">
           <div class="card">
-            <img data-src="./images/gambar-1.jpeg" class="lazyload card-img-top" alt="Gambar banjir rob" tabindex="0">
+            <picture>
+              <source type="image/webp" srcset="./images/gambar-1.webp">
+              <img data-src="./images/gambar-1.jpeg" class="lazyload card-img-top" alt="Gambar banjir rob" tabindex="0">
+            </picture>
             <div class="card-body">
               <h2 class="card-title" tabindex="0">Banjir Rob</h2>
               <p class="card-text" tabindex="0">Sejumlah warga terdampak rob di Desa Sriwulan, Kecamatan Sayung, Demak, saat ini ...</p>
@@ -119,7 +126,10 @@ const Artikel = {
             </div>
           </div>
           <div class="card">
-            <img data-src="./images/gambar-2.jpg" class="lazyload card-img-top" alt="Gambar gempa" tabindex="0">
+            <picture>
+              <source type="image/webp" srcset="./images/gambar-2.webp">
+              <img data-src="./images/gambar-2.jpg" class="lazyload card-img-top" alt="Gambar gempa" tabindex="0">
+            </picture>
             <div class="card-body">
               <h2 class="card-title" tabindex="0">Gempa</h2>
               <p class="card-text" tabindex="0">mengguncang Pangandaran dan beberapa daerah di sekitarnya di pesisir selatan Jawa Barat...</p>
@@ -127,7 +137,10 @@ const Artikel = {
             </div>
           </div>
           <div class="card">
-            <img data-src="./images/gambar-3.jpg" class="lazyload card-img-top" alt="Gambar hujan deras" tabindex="0">
+            <picture>
+              <source type="image/webp" srcset="./images/gambar-3.webp">
+              <img data-src="./images/gambar-3.jpg" class="lazyload card-img-top" alt="Gambar hujan deras" tabindex="0">
+            </picture>
             <div class="card-body">
               <h2 class="card-title" tabindex="0">Hujan Deras</h2>
               <p class="card-text" tabindex="0">Hujan deras yang melanda sejak pagi mengakibatkan banjir kembali melanda dua...</p>
@@ -135,7 +148,10 @@ const Artikel = {
             </div>
           </div>
           <div class="card">
-            <img data-src="./images/gambar-6.jpg" class="lazyload card-img-top" alt="Gambar puting beliung" tabindex="0">
+            <picture>
+              <source type="image/webp" srcset="./images/gambar-6.webp">
+              <img data-src="./images/gambar-6.jpg" class="lazyload card-img-top" alt="Gambar puting beliung" tabindex="0">
+            </picture>
             <div class="card-body">
               <h2 class="card-title" tabindex="0">Puting Beliung</h2>
               <p class="card-text" tabindex="0">Warga mencari harta benda di dalam rumahnya yang roboh akibat...</p>

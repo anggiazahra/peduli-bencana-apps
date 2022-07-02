@@ -78,7 +78,10 @@ const DonasiPostinganEdit = {
       </style>
 
       <div class="donasi-edit" id="donasi-edit">
-        <img data-src="./edit-postingan-donasi.png" class="lazyload hero-img" alt="Gambar edit postingan donasi" tabindex="0">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/edit-postingan-donasi-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/edit-postingan-donasi-large.jpg" class="lazyload hero-img" alt="Hero image edit postingan donasi" tabindex="0">
+        </picture>
         <form enctype="multipart/form-data">
           <div class="grid-row">
             <div class="card">

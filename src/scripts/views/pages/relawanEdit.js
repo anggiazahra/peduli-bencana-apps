@@ -69,7 +69,10 @@ const RelawanEdit = {
         }
       </style>
       <div class="relawan-edit" id="relawan-edit">
-        <img data-src="./edit-postingan-relawan.png" class="lazyload hero-img" alt="Gambar edit postingan relawan" tabindex="0">
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/edit-postingan-relawan-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/edit-postingan-relawan-large.jpg" class="lazyload hero-img" alt="Hero image edit postingan relawan" tabindex="0">
+        </picture>
         <form enctype="multipart/form-data">
           <div class="grid-row">
             <div class="card">

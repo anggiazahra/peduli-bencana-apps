@@ -181,7 +181,12 @@ const DonasiRiwayat = {
 
     const riwayatPostingan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<img data-src="./riwayat-postingan-donasi.png" class="lazyload hero-img" alt="Gambar riwayat postingan donasi" tabindex="0">';
+      detailRiwayat.innerHTML = `
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/riwayat-postingan-donasi-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/riwayat-postingan-donasi-large.jpg" class="lazyload hero-img" alt="Hero image riwayat postingan donasi" tabindex="0">
+        </picture>
+      `;
 
       const listPostinganDonasi = document.createElement('div');
       listPostinganDonasi.setAttribute('class', 'grid-row');
