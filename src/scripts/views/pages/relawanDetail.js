@@ -35,7 +35,7 @@ const RelawanDetail = {
           text-align: center;
         }
         .relawan-detail {
-          padding-top: 20px;
+          padding: 20px 0 50px 0;
         }
         .grid-row {
           display: grid;
@@ -109,7 +109,7 @@ const RelawanDetail = {
         <div class="box-1">
           <span id="posterRelawan"></span>
           <div class="sub-box">
-            <h1 class="mb-4" id="judul-postingan"></h1>
+            <h1 class="mb-4" id="judul-postingan" tabindex="0"></h1>
             <div class="grid-btn">
               <a class="btn btn-max" id="btn-daftar">Daftar Jadi Relawan</a>
               <button type="button" class="btn btn-max" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Lihat Partisipan</button>
@@ -121,11 +121,11 @@ const RelawanDetail = {
             <div class="modal-dialog modal-dialog-scrollable">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Partisipan</h5>
+                  <h5 class="modal-title" id="staticBackdropLabel" tabindex="0">Partisipan</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <h6 id="message" class="message"></h6>
+                  <h6 id="message" class="message" tabindex="0"></h6>
                   <div id="list-relawan"></div>
                 </div>
               </div>
@@ -136,44 +136,44 @@ const RelawanDetail = {
         <div class="box-2">
           <div class="card mb-3">
             <div class="card-body">
-              <span>Lokasi Bencana</span>
+              <span tabindex="0">Lokasi Bencana</span>
               <div class="grid-item-row mt-3">
-                <img src="./img-location.png" class="img-location">
+                <img data-src="./img-location.png" class="lazyload img-location" alt="Icon lokasi">
                 <div id="lokasi-bencana"></div>
               </div>
             </div>
           </div>
           <div class="card mb-3">
             <div class="card-body">
-              <span>Penanggung Jawab</span>
+              <span tabindex="0">Penanggung Jawab</span>
               <div class="grid-item-row mt-3">
-                <img src="./img-profile.png" class="img-profile">
+                <img data-src="./img-profile.png" class="lazyload img-profile" alt="Icon profile">
                 <div id="penanggung-jawab"></div>
               </div>
             </div>
           </div>
           <div class="card mb-3">
             <div class="card-body">
-              <h2 class="desc mb-2">Detail Relawan</h2>
+              <h2 class="desc mb-2" tabindex="0">Detail Relawan</h2>
               <table class="table table-borderless">
                 <tr>
-                  <td>Pelaksanaan</td>
+                  <td tabindex="0">Pelaksanaan</td>
                   <td>:</td>
-                  <td><span id="tanggal-pelaksanaan"></span></td>
+                  <td><span id="tanggal-pelaksanaan" tabindex="0"></span></td>
                 </tr>
                 <tr>
-                  <td>Relawan yang Dibutuhkan</td>
+                  <td tabindex="0">Relawan yang Dibutuhkan</td>
                   <td>:</td>
-                  <td><span id="jumlah-relawan"></span></td>
+                  <td><span id="jumlah-relawan" tabindex="0"></span></td>
                 </tr>
                 <tr>
-                  <td>Link Grup WA/Telegram</td>
+                  <td tabindex="0">Link Grup WA/Telegram</td>
                   <td>:</td>
                   <td><span id="link-grup"></span></td>
                 </tr>
                 <tr>
                   <td colspan="3">
-                    <p id="persyaratan"></p>
+                    <p id="persyaratan" tabindex="0"></p>
                   </td>
                 </tr>
               </table>
@@ -199,7 +199,7 @@ const RelawanDetail = {
       const relawanDetail = document.querySelector('#relawan-detail');
       relawanDetail.classList.remove('grid-row');
       relawanDetail.innerHTML = '';
-      relawanDetail.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found" alt="Halaman tidak ditemukan">';
+      relawanDetail.innerHTML = '<img data-src="./halaman-tidak-ditemukan.png" class="lazyload img-page-not-found" alt="Halaman tidak ditemukan" tabindex="0">';
     }
 
     if (cekId.status === 'success') {
@@ -208,7 +208,7 @@ const RelawanDetail = {
 
       const posterRelawan = document.querySelector('#posterRelawan');
       posterRelawan.innerHTML = `
-      <img src="./upload/relawan/${dataPostingan.poster}" alt="" class="img-detail">
+      <img src="./upload/relawan/${dataPostingan.poster}" alt="Poster postingan relawan" class="img-detail" tabindex="0">
     `;
 
       const tombolDaftar = document.querySelector('#btn-daftar');
@@ -223,14 +223,14 @@ const RelawanDetail = {
 
       const lokasiBencana = document.querySelector('#lokasi-bencana');
       lokasiBencana.innerHTML = `
-      <h2>${dataPostingan.kabKota} - ${dataPostingan.provinsi}</h2>
-      <span>${dataPostingan.alamatLengkap}</span>
+      <h2 tabindex="0">${dataPostingan.kabKota} - ${dataPostingan.provinsi}</h2>
+      <span tabindex="0">${dataPostingan.alamatLengkap}</span>
     `;
 
       const penanggungJawab = document.querySelector('#penanggung-jawab');
       penanggungJawab.innerHTML = `
-      <h2>${dataPostingan.penanggungJawab}</h2>
-      <span>${dataPostingan.pekerjaan} - ${dataPostingan.noTelepon}</span>
+      <h2 tabindex="0">${dataPostingan.penanggungJawab}</h2>
+      <span tabindex="0">${dataPostingan.pekerjaan} - ${dataPostingan.noTelepon}</span>
     `;
 
       const judulPostingan = document.querySelector('#judul-postingan');
@@ -262,11 +262,11 @@ const RelawanDetail = {
             const itemRelawan = document.createElement('div');
             itemRelawan.classList.add('item-relawan');
             itemRelawan.innerHTML = `
-          <img src="./img-profile.png" class="img-profile"></img>
+          <img data-src="./img-profile.png" class="lazyload img-profile" alt="Icon profile"></img>
             <ul>
-              <li><h6>${data.namaLengkap}</h6></li>
-              <li>${data.kabKota} - ${data.provinsi}</li>
-              <li>Tanggal daftar : ${data.tanggalDaftar}</li>
+              <li tabindex="0"><h6>${data.namaLengkap}</h6></li>
+              <li tabindex="0">${data.kabKota} - ${data.provinsi}</li>
+              <li tabindex="0">Tanggal daftar : ${data.tanggalDaftar}</li>
             <ul>
           `;
             daftarRelawan.appendChild(itemRelawan);

@@ -64,24 +64,24 @@ const ArtikelTambah = {
         </style>
 
         <div class="artikel-tambah">
-            <img data-src="./tambah-postingan-artikel.png" class="lazyload hero-img" alt="Tambah postingan artikel">
+            <img data-src="./tambah-postingan-artikel.png" class="lazyload hero-img" alt="Tambah postingan artikel" tabindex="0">
             <div class="card">
                 <div class="card-body">
                 <form enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Judul Artikel</label>
+                        <label for="judul" class="form-label" tabindex="0">Judul Artikel</label>
                         <input type="email" class="form-control" id="judul">
                     </div>
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Sumber Artikel</label>
+                        <label for="judul" class="form-label" tabindex="0">Sumber Artikel</label>
                         <input type="email" class="form-control" id="sumber">
                     </div>
                     <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label">Gambar Artikel</label>
+                        <label for="formFileMultiple" class="form-label" tabindex="0">Gambar Artikel</label>
                         <input class="form-control" type="file" id="gambarArtikel" multiple>
                     </div>
                     <div class="mb-3">
-                        <label for="isiArtikel" class="form-label">Isi Artikel</label>
+                        <label for="isiArtikel" class="form-label" tabindex="0">Isi Artikel</label>
                         <textarea class="form-control" id="isiArtikel" rows="8"></textarea>
                     </div>
                     <td colspan="3">

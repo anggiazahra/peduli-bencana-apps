@@ -4,6 +4,9 @@ const RelawanTambah = {
   async render() {
     return `
     <style>
+        .relawan-tambah {
+            padding-bottom: 50px;
+        }
         .hero-img {
             width: 100%;
             height: 400px;
@@ -53,13 +56,13 @@ const RelawanTambah = {
             }
         }
     </style>
-    <div class="relawan-daftar" id="main-content">
-        <img src="./tambah-postingan-relawan.png" class="hero-img">
+    <div class="relawan-tambah">
+        <img data-src="./tambah-postingan-relawan.png" class="lazyload hero-img" alt"Gambar tambah postingan relawan" tabindex="0">
         <form enctype="multipart/form-data">
             <div class="grid-row">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Judul Postingan</h2>
+                        <h2 tabindex="0">Judul Postingan</h2>
                         <div class="mb-3">
                             <input type="text" class="form-control" id="judul-postingan" placeholder="Judul Postingan">
                         </div>
@@ -67,7 +70,7 @@ const RelawanTambah = {
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h2>Gambar/Poster</h2>
+                        <h2 tabindex="0">Gambar/Poster</h2>
                         <div class="mb-3">
                             <input type="file" class="form-control" id="poster" placeholder="Gambar/Poster">
                         </div>
@@ -76,17 +79,17 @@ const RelawanTambah = {
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h2>Tanggal Pelaksanaan</h2>
+                    <h2 tabindex="0">Tanggal Pelaksanaan</h2>
                     <div class="grid-row">
                         <div class="box-1">
                             <div class="mb-3">
-                                <label class="form-label">Tanggal Mulai</label>
+                                <label class="form-label" tabindex="0">Tanggal Mulai</label>
                                 <input type="date" class="form-control" id="tanggal-mulai">
                             </div>
                         </div>
                         <div class="box-2">
                             <div class="mb-3">
-                                <label class="form-label">Tanggal Berakhir</label>
+                                <label class="form-label" tabindex="0">Tanggal Berakhir</label>
                                 <input type="date" class="form-control" id="tanggal-berakhir">
                             </div>
                         </div>
@@ -95,21 +98,21 @@ const RelawanTambah = {
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h2>Lokasi Bencana</h2>
+                    <h2 tabindex="0">Lokasi Bencana</h2>
                     <div class="grid-row">
                         <div class="box-1">
                         <div class="mb-3">
-                            <label class="form-label">Kabupaten/Kota</label>
+                            <label class="form-label" tabindex="0">Kabupaten/Kota</label>
                             <input type="text" class="form-control" id="kab-kota" placeholder="Kabupaten/Kota">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Provinsi</label>
+                            <label class="form-label" tabindex="0">Provinsi</label>
                             <input type="text" class="form-control" id="provinsi" placeholder="Provinsi">
                         </div>
                         </div>
                         <div class="box-2">
                         <div class="mb-3">
-                            <label class="form-label">Alamat Lengkap</label>
+                            <label class="form-label" tabindex="0">Alamat Lengkap</label>
                             <textarea class="form-control" id="alamat-lengkap" rows="5" placeholder="Alamat Lengkap"></textarea>
                         </div>
                         </div>
@@ -119,7 +122,7 @@ const RelawanTambah = {
             <div class="grid-row">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Jumlah Relawan yang Dibutuhkan</h2>
+                        <h2 tabindex="0">Jumlah Relawan yang Dibutuhkan</h2>
                         <div class="mb-3">
                             <input type="number" class="form-control" id="jumlah-relawan" placeholder="Jumlah relawan yang dibutuhkan (dalam angka)">
                         </div>
@@ -127,7 +130,7 @@ const RelawanTambah = {
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h2>Link grup Whatsapp/Telegram</h2>
+                        <h2 tabindex="0">Link grup Whatsapp/Telegram</h2>
                         <div class="mb-3">
                             <input type="text" class="form-control" id="link-grup" placeholder="Link grup Whatsapp/Telegram">
                         </div>
@@ -136,21 +139,21 @@ const RelawanTambah = {
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h2>Identitas Penanggung Jawab</h2>
+                    <h2 tabindex="0">Identitas Penanggung Jawab</h2>
                     <div class="grid-row">
                         <div class="box-1">
                         <div class="mb-3">
-                            <label class="form-label">Nama Penanggung Jawab</label>
+                            <label class="form-label" tabindex="0">Nama Penanggung Jawab</label>
                             <input type="text" class="form-control" id="penanggung-jawab" placeholder="Nama Penanggung Jawab">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">No Telepon</label>
+                            <label class="form-label" tabindex="0">No Telepon</label>
                             <input type="text" class="form-control" id="no-telepon" placeholder="No Telepon">
                         </div>
                         </div>
                         <div class="box-2">
                         <div class="mb-3">
-                            <label class="form-label">Pekerjaan</label>
+                            <label class="form-label" tabindex="0">Pekerjaan</label>
                             <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan">
                         </div>
                         </div>
@@ -159,7 +162,7 @@ const RelawanTambah = {
             </div>
             <div class="card">
                 <div class="card-body">
-                <h2>Persyaratan</h2>
+                <h2 tabindex="0">Persyaratan</h2>
                 <div class="mb-3">
                     <textarea class="form-control" id="persyaratan" rows="4" placeholder="Persyaratan"></textarea>
                 </div>

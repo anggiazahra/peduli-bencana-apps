@@ -83,25 +83,25 @@ const ArtikelEdit = {
     </style>
 
     <div class="artikel-edit" id="artikel-edit">
-      <img data-src="./edit-postingan-artikel.png" class="lazyload hero-img" alt="Edit postingan artikel">
+      <img data-src="./edit-postingan-artikel.png" class="lazyload hero-img" alt="Edit postingan artikel" tabindex="0">
       <div class="card">
         <div class="card-body">
           <form enctype="multipart/form-data">
               <div class="mb-3">
-                <label for="judul" class="form-label">Judul Artikel</label>
+                <label for="judul" class="form-label" tabindex="0">Judul Artikel</label>
                 <input type="email" class="form-control" id="judul-artikel">
               </div>
               <div class="mb-3">
-                <label for="judul" class="form-label">Sumber Artikel</label>
+                <label for="judul" class="form-label" tabindex="0">Sumber Artikel</label>
                 <input type="email" class="form-control" id="sumber">
               </div>
               <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">Gambar Artikel</label>
+                <label for="formFileMultiple" class="form-label" tabindex="0">Gambar Artikel</label>
                 <input class="form-control" type="file" id="gambarArtikel" multiple>
                 <p>Kosongkan file jika tidak ingin mengubah gambar artikel</p>
               </div>
               <div class="mb-3">
-                <label for="isiArtikel" class="form-label">Isi Artikel</label>
+                <label for="isiArtikel" class="form-label" tabindex="0">Isi Artikel</label>
                 <textarea class="form-control" id="isiArtikel" rows="15"></textarea>
               </div>
               <div>
@@ -135,7 +135,7 @@ const ArtikelEdit = {
       const artikelEdit = document.querySelector('#artikel-edit');
       artikelEdit.classList.remove('grid-row');
       artikelEdit.innerHTML = '';
-      artikelEdit.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found">';
+      artikelEdit.innerHTML = '<img data-src="./halaman-tidak-ditemukan.png" class="lazyload img-page-not-found" tabindex="0">';
     }
 
     if (cekId.status === 'success') {

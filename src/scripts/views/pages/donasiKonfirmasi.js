@@ -77,13 +77,13 @@ const DonasiKonfirmasi = {
         }
       </style>
       <div id="donasi-konfirmasi" class="donasi-konfirmasi">
-        <img src="./konfirmasi-donasi2.png" class="hero-img">
+        <img data-src="./konfirmasi-donasi2.png" class="lazyload hero-img" alt="Gambar konfirmasi donasi" tabindex="0">
         <div class="grid-row">
           <div id="belum-dikonfirmasi">
-            <h2>Belum Dikonfirmasi</h2>
+            <h2 tabindex="0">Belum Dikonfirmasi</h2>
           </div>
           <div id="sudah-dikonfirmasi">
-            <h2>Sudah Dikonfirmasi</h2>
+            <h2 tabindex="0">Sudah Dikonfirmasi</h2>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ const DonasiKonfirmasi = {
       const donasiKonfirmasi = document.querySelector('#donasi-konfirmasi');
       donasiKonfirmasi.classList.remove('grid-row');
       donasiKonfirmasi.innerHTML = '';
-      donasiKonfirmasi.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found">';
+      donasiKonfirmasi.innerHTML = '<img data-src="./halaman-tidak-ditemukan.png" class="lazyload img-page-not-found" alt="Gambar halaman tidak ditemukan" tabindex="0">';
     }
 
     if (cekId.status === 'success') {
@@ -144,7 +144,7 @@ const DonasiKonfirmasi = {
         const dataBelumDikonfirmasi = await donasiBelumDikonfirmasi(idPostinganDonasi);
         const listBelumDikonfirmasi = document.querySelector('#belum-dikonfirmasi');
         listBelumDikonfirmasi.innerHTML = '';
-        listBelumDikonfirmasi.innerHTML = '<h2>Belum Dikonfirmasi</h2>';
+        listBelumDikonfirmasi.innerHTML = '<h2 tabindex="0">Belum Dikonfirmasi</h2>';
 
         if (dataBelumDikonfirmasi.length > 0) {
           dataBelumDikonfirmasi.forEach((data) => {
@@ -152,15 +152,15 @@ const DonasiKonfirmasi = {
             itemList.classList.add('card');
             itemList.innerHTML = `
               <div class="card-body item-grid">
-                <img src="./img-profile.png" class="img-profile"></img>
+                <img data-src="./img-profile.png" class="lazyload img-profile" alt="Icon profile">
                 <div>
-                  <div>${data.tanggalDonasi}</div>
-                  <div>Atas nama <span class="text-bold">${data.atasNama}</span></div>
-                  <div>${data.namaBank} - ${data.noRekening}</div>
-                  <div>Berdonasi sebesar ${formatToCurrency(parseInt(data.jumlahDonasi))}</div>
-                  <div>Status <span class="text-danger">${data.status}</span></div>
-                  <div>Bukti pembayaran:</div>
-                  <img class="bukti-pembayaran" src="./upload/bukti-pembayaran/${data.buktiPembayaran}">
+                  <div tabindex="0">${data.tanggalDonasi}</div>
+                  <div tabindex="0">Atas nama <span class="text-bold">${data.atasNama}</span></div>
+                  <div tabindex="0">${data.namaBank} - ${data.noRekening}</div>
+                  <div tabindex="0">Berdonasi sebesar ${formatToCurrency(parseInt(data.jumlahDonasi))}</div>
+                  <div tabindex="0">Status <span class="text-danger">${data.status}</span></div>
+                  <div tabindex="0">Bukti pembayaran:</div>
+                  <img class="bukti-pembayaran" src="./upload/bukti-pembayaran/${data.buktiPembayaran}" alt="Bukti pembayaran" tabindex="0">
                   <div class="d-flex flex-row-reverse">
                     <button class="btn mt-2 p-2" id="btn-konfirmasi-${data.id}">Konfirmasi</button>
                   </div>
@@ -185,8 +185,8 @@ const DonasiKonfirmasi = {
           });
         } else if (dataBelumDikonfirmasi.length < 1) {
           listBelumDikonfirmasi.innerHTML = `
-            <h2>Belum Dikonfirmasi</h2>
-            <div class="message">Semua donasi telah dikonfirmasi</div>
+            <h2 tabindex="0">Belum Dikonfirmasi</h2>
+            <div class="message" tabindex="0">Semua donasi telah dikonfirmasi</div>
           `;
         }
       };
@@ -196,20 +196,20 @@ const DonasiKonfirmasi = {
         const dataSudahDikonfirmasi = await donasiSudahDikonfirmasi(idPostinganDonasi);
         const listSudahDikonfirmasi = document.querySelector('#sudah-dikonfirmasi');
         listSudahDikonfirmasi.innerHTML = '';
-        listSudahDikonfirmasi.innerHTML = '<h2>Sudah Dikonfirmasi</h2>';
+        listSudahDikonfirmasi.innerHTML = '<h2 tabindex="0">Sudah Dikonfirmasi</h2>';
         if (dataSudahDikonfirmasi.length > 0) {
           dataSudahDikonfirmasi.forEach((data) => {
             const itemList = document.createElement('div');
             itemList.classList.add('card');
             itemList.innerHTML = `
               <div class="card-body item-grid">
-                <img src="./img-profile.png" class="img-profile"></img>
+                <img data-src="./img-profile.png" class="lazyload img-profile" alt="Icon profile">
                 <div>
-                  <div>${data.tanggalDonasi}</div>
-                  <div>Atas nama <span class="text-bold">${data.atasNama}</span></div>
-                  <div>${data.namaBank} - ${data.noRekening}</div>
-                  <div>Berdonasi sebesar ${formatToCurrency(parseInt(data.jumlahDonasi))}</div>
-                  <div>Status <span class="text-danger">${data.status}</span></div>
+                  <div tabindex="0">${data.tanggalDonasi}</div>
+                  <div tabindex="0">Atas nama <span class="text-bold">${data.atasNama}</span></div>
+                  <div tabindex="0">${data.namaBank} - ${data.noRekening}</div>
+                  <div tabindex="0">Berdonasi sebesar ${formatToCurrency(parseInt(data.jumlahDonasi))}</div>
+                  <div tabindex="0">Status <span class="text-danger">${data.status}</span></div>
                   <div class="d-flex flex-row-reverse">
                     <button class="btn mt-2 p-2" id="btn-batal-konfirmasi-${data.id}">Batal Konfirmasi</button>
                   </div>
@@ -234,8 +234,8 @@ const DonasiKonfirmasi = {
           });
         } else if (dataSudahDikonfirmasi.length < 1) {
           listSudahDikonfirmasi.innerHTML = `
-            <h2>Sudah Dikonfirmasi</h2>
-            <div class="message">Belum ada donasi yang dikonfirmasi</div>
+            <h2 tabindex="0">Sudah Dikonfirmasi</h2>
+            <div class="message" tabindex="0">Belum ada donasi yang dikonfirmasi</div>
           `;
         }
       };
@@ -246,15 +246,15 @@ const DonasiKonfirmasi = {
         const listBelumDikonfirmasi = document.querySelector('#belum-dikonfirmasi');
         listBelumDikonfirmasi.innerHTML = '';
         listBelumDikonfirmasi.innerHTML = `
-          <h2>Belum Dikonfirmasi</h2>
-          <div class="message">Belum ada donasi yang masuk</div>
+          <h2 tabindex="0">Belum Dikonfirmasi</h2>
+          <div class="message" tabindex="0">Belum ada donasi yang masuk</div>
         `;
 
         const listSudahDikonfirmasi = document.querySelector('#sudah-dikonfirmasi');
         listSudahDikonfirmasi.innerHTML = '';
         listSudahDikonfirmasi.innerHTML = `
-          <h2>Sudah Dikonfirmasi</h2>
-          <div class="message">Belum ada donasi yang masuk</div>
+          <h2 tabindex="0">Sudah Dikonfirmasi</h2>
+          <div class="message" tabindex="0">Belum ada donasi yang masuk</div>
         `;
       }
     }

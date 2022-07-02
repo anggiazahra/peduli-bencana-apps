@@ -6,7 +6,7 @@ const DonasiRiwayat = {
     return `
       <style>
         .donasi-riwayat {
-          padding-top: 30px;
+          padding: 30px 0 50px 0;
         }
         .hero-img {
           width: 100%;
@@ -181,7 +181,7 @@ const DonasiRiwayat = {
 
     const riwayatPostingan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<img src="./riwayat-postingan-donasi.png" class="hero-img">';
+      detailRiwayat.innerHTML = '<img data-src="./riwayat-postingan-donasi.png" class="lazyload hero-img" alt="Gambar riwayat postingan donasi" tabindex="0">';
 
       const listPostinganDonasi = document.createElement('div');
       listPostinganDonasi.setAttribute('class', 'grid-row');
@@ -195,10 +195,10 @@ const DonasiRiwayat = {
           itemPostinganDonasi.classList.add('card');
           itemPostinganDonasi.innerHTML = `
             <div class="card-body">
-              <h2>${data.judulPostingan}</h2>
-              <div>Periode donasi : ${data.tanggalMulai} - ${data.tanggalBerakhir}</div>
-              <div>Lokasi bencana :</div>
-              <div>${data.alamatLengkap}, ${data.kabKota} - ${data.provinsi}</div>
+              <h2 tabindex="0">${data.judulPostingan}</h2>
+              <div tabindex="0">Periode donasi : ${data.tanggalMulai} - ${data.tanggalBerakhir}</div>
+              <div tabindex="0">Lokasi bencana :</div>
+              <div tabindex="0">${data.alamatLengkap}, ${data.kabKota} - ${data.provinsi}</div>
               <div class="d-flex flex-row-reverse mt-4">
                 <a href="#/donasi-postingan-detail/${data.id}" class="btn btn-detail p-2 ms-2">Detail</a>
                 <a href="#/donasi-konfirmasi/${data.id}" class="btn btn-color p-2 ms-2">Konfirmasi Donasi</a>
@@ -226,7 +226,7 @@ const DonasiRiwayat = {
         });
       } else if (postinganDonasiByUsername.length < 1) {
         const message = document.createElement('div');
-        message.innerHTML = '<div class="message">Anda belum pernah membuat postingan donasi</div>';
+        message.innerHTML = '<div class="message" tabindex="0">Anda belum pernah membuat postingan donasi</div>';
         detailRiwayat.appendChild(message);
       }
     };
@@ -234,7 +234,7 @@ const DonasiRiwayat = {
 
     const riwayatDonasi = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<img src="./riwayat-donasi.png" class="hero-img">';
+      detailRiwayat.innerHTML = '<img data-src="./riwayat-donasi.png" class="lazyload hero-img" alt="Gambar riwayat donasi" tabindex="0">';
 
       const listDonasi = document.createElement('div');
       listDonasi.setAttribute('class', 'grid-row');
@@ -252,13 +252,13 @@ const DonasiRiwayat = {
           itemDonasi.classList.add('card');
           itemDonasi.innerHTML = `
               <div class="card-body item-donasi-grid">
-                <img src="./img-profile.png" class="img-profile"></img>
+                <img data-src="./img-profile.png" class="lazyload img-profile" alt="Icon profile"></img>
                 <div>
-                  <h2>${postinganDonasi.judulPostingan}</h2>
-                  <div>Atas nama <span class="text-bold">${data.atasNama}</span></div>
-                  <div>${data.namaBank} - ${data.noRekening}</div>
-                  <div>Berdonasi sebesar ${formatToCurrency(parseInt(data.jumlahDonasi))}</div>
-                  <div>Status <span class="text-danger">${data.status}<span></div>
+                  <h2 tabindex="0">${postinganDonasi.judulPostingan}</h2>
+                  <div tabindex="0">Atas nama <span class="text-bold">${data.atasNama}</span></div>
+                  <div tabindex="0">${data.namaBank} - ${data.noRekening}</div>
+                  <div tabindex="0">Berdonasi sebesar ${formatToCurrency(parseInt(data.jumlahDonasi))}</div>
+                  <div tabindex="0">Status <span class="text-danger">${data.status}<span></div>
                   <div class="d-flex flex-row-reverse">
                     <a class="btn btn-color p-2 mt-2" href="#/donasi-postingan-detail/${data.idPostinganDonasi}">Detail Donasi</a>
                   </div>
@@ -269,7 +269,7 @@ const DonasiRiwayat = {
         });
       } else if (listDonasiByUsername.length < 1) {
         const message = document.createElement('div');
-        message.innerHTML = '<div class="message">Anda belum pernah melakukan donasi</div>';
+        message.innerHTML = '<div class="message" tabindex="0">Anda belum pernah melakukan donasi</div>';
         detailRiwayat.appendChild(message);
       }
     };

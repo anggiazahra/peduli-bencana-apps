@@ -8,17 +8,12 @@ const Home = {
         section {
           margin-bottom: 25px;
         }
-        .home {
-          min-height: 35vh;
-        }
         .btn-fitur {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr 1fr;
           gap: 20px;
         }
         .btn-fitur-main {
-          background: #1C4966;
-          color: white;
           padding: 30px;
           min-width: 44px;
           min-height: 44px;
@@ -45,35 +40,27 @@ const Home = {
           color: white;
           box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.2);
         }
+        p {
+          font-size: 19px;
+        }
         
         /* Section Fitur */
-        .grid-row-1 {
-          align-items: center;
-          display: grid;
-          grid-template-columns: 3fr 2fr;
-          width: 100%;
-        }
-        .grid-row-2 {
-          align-items: center;
-          display: grid;
-          grid-template-columns: 2fr 3fr;
-          width: 100%;
-        }
-        .grid-row-1 p, .grid-row-2 p {
-          margin-right: 30px;
-        }
-        .grid-row-1 img, .grid-row-2 img {
-          width: 100%;
-        }
-        .fitur-fitur{
-          min-height: 55vh;
+        .grid-row {
           text-align: center;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 50px;
+        }
+        .grid-row img {
+          height: 200px;
+          width: auto;
+          margin-bottom: 30px;
+        }
+        #fitur-relawan {
+          margin-bottom: 50px;
         }
 
         /* Landing Page */
-        .landing-page {
-          min-height: 50vh;
-        }
         .landing-main {
           display: grid;
           grid-template-columns: 2.5fr 2fr;
@@ -100,9 +87,6 @@ const Home = {
           h1 {
             font-size: 24px;
           }
-          .landing-page {
-            min-height: 15vh;
-          }
           .landing-left {
             margin-top: 10px;
           }
@@ -116,11 +100,15 @@ const Home = {
             padding: 20px;
             width: 100%;
           }
-          #fitur-artikel img {
-            width: 100%;
+          .grid-row {
+            grid-template-columns: 1fr;
           }
-          #fitur-relawan img {
-            width: 80%;
+          .grid-row img {
+            width: 60%;
+            height: auto;
+          }
+          p {
+            font-size: 14px;
           }
         }
         @media screen and (max-width: 540px) {
@@ -158,8 +146,8 @@ const Home = {
             width: 80%;
             margin-left: 20%;
           }
-          .grid-row-1, .grid-row-2 {
-            grid-template-columns: 1fr;
+          .grid-row img {
+            width: 100%;
           }
         }
       </style>
@@ -167,82 +155,82 @@ const Home = {
       <section class="landing-page">
         <div class="landing-main">
           <div class="landing-left">
-            <h1>Peduli Bencana</h1>
-            <p>Peduli Bencana merupakan website yang memberikan informasi dan layanan yang berkaitan dengan bencana yang terjadi di Indonesia</p>
+            <h1 tabindex="0">Peduli Bencana</h1>
+            <p tabindex="0">Peduli Bencana merupakan website yang memberikan informasi dan layanan yang berkaitan dengan bencana yang terjadi di Indonesia</p>
             <a class="btn btn-add p-2" disabled>Get Started</a>
           </div>
           <div class="image-landing">
-            <img src="./img/landingPage.svg" class="card-img-top" alt="">
+            <img data-src="./img/landingPage.svg" class="lazyload card-img-top" alt="Gambar landing page" tabindex="0">
           </div>
         </div>
       </section>
      
       <section class="home" id="home">
-        <h1 style="text-align:center;">Our Service</h1>
+        <h1 style="text-align:center;" tabindex="0">Our Service</h1>
         <div class="btn-fitur">
           <div class="fitur">
             <a href="#/mitigasi" class="btn btn-fitur-main">
-            <img src="./img/solutions.png" class="card-img-top" alt="Gambar Berita">
+            <img data-src="./img/solutions.png" class="lazyload card-img-top" alt="Gambar fitur mitigasi" tabindex="0">
             Mitigasi</a>
           </div>
           <div class="fitur">
             <a href="#/artikel" class="btn btn-fitur-main">
-            <img src="./img/copywriting.png" class="card-img-top" alt="Gambar Berita">
+            <img data-src="./img/copywriting.png" class="lazyload card-img-top" alt="Gambar fitur artikel" tabindex="0">
             Artikel</a>
           </div>
           <div class="fitur">
             <a href="#/donasi-postingan" class="btn btn-fitur-main">
-            <img src="./img/donate.png" class="card-img-top" alt="Gambar Berita">
+            <img data-src="./img/donate.png" class="lazyload card-img-top" alt="Gambar fitur donasi" tabindex="0">
             Donasi</a>
           </div>
           <div class="fitur">
             <a href="#/relawan" class="btn btn-fitur-main">
-            <img src="./img/volunteer.png" class="card-img-top" alt="Gambar Berita">
+            <img data-src="./img/volunteer.png" class="lazyload card-img-top" alt="Gambar fitur relawan" tabindex="0">
             Relawan</a>
           </div>
         </div>
       </section>
 
       <!-- Section Fitur -->
-      <section tabindex="0" id="fitur-mitigasi" class="fitur-fitur">
-        <h1>Apa itu fitur Mitigasi?</h1>
-        <hr class="mb-4">
-        <div class="grid-row-1">
-          <p>Fitur mitigasi berfungsi untuk memberikan informasi mengenai upaya yang dapat dilakukan untuk mengurangi risiko dan dampak yang diakibatkan oleh bencana yang terjadi. 
-          </p>
-          <img src="./img/mitigasi.svg">
-        </div>
-      </section>
+      <div class="grid-row">
+        <section id="fitur-mitigasi" class="fitur-fitur">
+          <h1 tabindex="0">Apa itu fitur Mitigasi?</h1>
+          <div>
+            <img data-src="./img/mitigasi.svg" class="lazyload" alt="Gambar mitigasi" tabindex="0">
+            <p tabindex="0">Fitur mitigasi memberikan informasi seputar mitigasi bencana. Diantaranya yaitu mengenai upaya yang dapat dilakukan untuk mengurangi risiko dan dampak yang diakibatkan oleh bencana yang terjadi. 
+            </p>
+          </div>
+        </section>
 
-      <section id="fitur-artikel" class="fitur-fitur">
-        <h1>Apa itu fitur Artikel?</h1>
-        <hr class="mb-4">
-        <div class="grid-row-2">
-          <img src="./img/artikel.svg"> 
-          <p>Fitur artikel berfungsi untuk memberikan informasi terkini tentang bencana yang terjadi dan user bisa membuat artikel mengenai bencana yang terjadi.
-          </p>
-        </div>
-      </section>
+        <section id="fitur-artikel" class="fitur-fitur">
+          <h1 tabindex="0">Apa itu fitur Artikel?</h1>
+          <div>
+            <img data-src="./img/artikel.svg" class="lazyload" alt="Gambar artikel" tabindex="0"> 
+            <p tabindex="0">Fitur artikel memberikan informasi terkini tentang bencana yang terjadi di Indonesia.
+            </p>
+          </div>
+        </section>
+      </div>
 
-      <section id="fitur-donasi" class="fitur-fitur">
-        <h1>Apa itu fitur Donasi?</h1>
-        <hr class="mb-4">
-        <div class="grid-row-1">
-          <p>Fitur donasi berfungsi untuk menyediakan informasi seputar donasi yang memudahkan para donatur untuk memberikan bantuannya.
-          </p>
-          <img src="./img/donation.svg"> 
-        </div>
-      </section>
+      <div class="grid-row">
+        <section id="fitur-donasi" class="fitur-fitur">
+          <h1 tabindex="0">Apa itu fitur Donasi?</h1>
+          <div>
+            <img data-src="./img/donation.svg" class="lazyload" alt="Gambar donasi" tabindex="0"> 
+            <p tabindex="0">Fitur donasi menyediakan informasi dan layanan seputar donasi guna memberikan kemudahan bagi mereka yang ingin memberikan donasi bagi para korban bencana.
+            </p>
+          </div>
+        </section>
 
-      <section id="fitur-relawan" class="fitur-fitur">
-        <h1>Apa itu fitur Relawan?</h1>
-        <hr class="mb-4">
-        <div class="grid-row-2">
-          <img src="./img/relawan.svg"> 
-          <p>fitur relawan berfungsi untuk menyediakan informasi dan pendaftaran bagi yang ingin menjadi relawan di daerah yang terkena bencana.
-          </p>
-        </div>
-      </section>
+        <section id="fitur-relawan" class="fitur-fitur">
+          <h1 tabindex="0">Apa itu fitur Relawan?</h1>
+          <div>
+            <img data-src="./img/relawan.svg" class="lazyload" alt="Gambar relawan" tabindex="0"> 
+            <p tabindex="0">Fitur relawan menyediakan informasi dan layanan seputar relawan guna memberikan kemudahan bagi mereka yang ingin terjun langsung untuk menjadi relawan di tempat terjadinya bencana.
+            </p>
+          </div>
+        </section>
+      </div>
     `;
   },
 

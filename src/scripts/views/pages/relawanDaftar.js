@@ -6,6 +6,9 @@ const RelawanDaftar = {
   async render() {
     return `
       <style>
+        .relawan-daftar {
+          padding-bottom: 50px;
+        }
         .hero-img {
           width: 100%;
           height: 400px; 
@@ -67,21 +70,21 @@ const RelawanDaftar = {
         }
       </style>
       <div class="relawan-daftar" id="relawan-daftar">
-        <img src="./daftar-relawan.png" class="hero-img">
+        <img data-src="./daftar-relawan.png" class="lazyload hero-img" alt="Gambar daftar relawan" tabindex="0">
         <form enctype="multipart/form-data">
           <div class="card">
             <div class="card-body">
-              <h2>Data Diri</h2>
+              <h2 tabindex="0">Data Diri</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Nama Lengkap</label>
+                    <label class="form-label" tabindex="0">Nama Lengkap</label>
                     <input type="text" class="form-control" id="nama-lengkap" placeholder="Nama Lengkap">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">No Telepon Whatsapp Aktif</label>
+                    <label class="form-label" tabindex="0">No Telepon Whatsapp Aktif</label>
                     <input type="text" class="form-control" id="no-telepon" placeholder="No Telepon Whatsapp Aktif">
                   </div>
                 </div>
@@ -90,17 +93,17 @@ const RelawanDaftar = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Domisili</h2>
+              <h2 tabindex="0">Domisili</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Kabupaten/Kota</label>
+                    <label class="form-label" tabindex="0">Kabupaten/Kota</label>
                     <input type="text" class="form-control" id="kab-kota" placeholder="Kabupaten/Kota">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Provinsi</label>
+                    <label class="form-label" tabindex="0">Provinsi</label>
                     <input type="text" class="form-control" id="provinsi" placeholder="Provinsi">
                   </div>
                 </div>
@@ -139,7 +142,7 @@ const RelawanDaftar = {
     if (cekId.status === 'error') {
       const relawanDaftar = document.querySelector('#relawan-daftar');
       relawanDaftar.innerHTML = '';
-      relawanDaftar.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found">';
+      relawanDaftar.innerHTML = '<img data-src="./halaman-tidak-ditemukan.png" class="lazyload img-page-not-found" alt="Gambar halaman tidak ditemukan" tabindex="0">';
     }
 
     if (cekId.status === 'success') {

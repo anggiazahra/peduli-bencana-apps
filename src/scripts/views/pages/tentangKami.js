@@ -61,10 +61,9 @@ const TentangKami = {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 gap: 20px;
-                margin: 20px 0;
             }
             .list-biodata {
-                margin: 0 10%;
+                margin: 20px 10% 50px 10%;
             }
             .card {
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -206,11 +205,11 @@ const TentangKami = {
             <div>
                 <h1 tabindex="0">Tentang Kami</h1>
             </div>
-            <img data-src="./tentang-kami.jpg" class="lazyload" alt="hero image tentang kami">
+            <img data-src="./tentang-kami.jpg" class="lazyload" alt="hero image tentang kami" tabindex="0">
         </div>
         <div class="description">
             <div class="grid-2">
-                <img data-src="./foto-tim/peduli-bencana.png" class="lazyload" alt="Logo Peduli Bencana">
+                <img data-src="./foto-tim/peduli-bencana.png" class="lazyload" alt="Logo Peduli Bencana" tabindex="0">
                 <p tabindex="0">
                     Website Peduli Bencana merupakan website yang memberikan informasi dan layanan yang berkaitan dengan bencana yang terjadi di Indonesia. Dalam website ini dapat ditemukan panduan mitigasi bencana, berita terkini seputar bencana, dan juga layanan donasi dan relawan yang memberikan kemudahan bagi mereka yang ingin menyalurkan bantuan untuk korban bencana
                 </p>
@@ -219,7 +218,7 @@ const TentangKami = {
         <h2 tabindex="0">Tim Kami</h2>
         <div class="list-biodata grid-3">
             <div class="card">
-                <img data-src="./foto-tim/anggi.png" class="lazyload card-img-top" alt="foto anggi">
+                <img data-src="./foto-tim/anggi.png" class="lazyload card-img-top" alt="foto anggi" tabindex="0">
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Ketua</p>
@@ -229,7 +228,7 @@ const TentangKami = {
                 </div>
             </div>
             <div class="card">
-                <img data-src="./foto-tim/annisya.png" class="lazyload card-img-top" alt="foto annisya">
+                <img data-src="./foto-tim/annisya.png" class="lazyload card-img-top" alt="foto annisya" tabindex="0">
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Anggota</p>
@@ -239,7 +238,7 @@ const TentangKami = {
                 </div>
             </div>
             <div class="card">
-                <img data-src="./foto-tim/misha.png" class="lazyload card-img-top" alt="foto misha">
+                <img data-src="./foto-tim/misha.png" class="lazyload card-img-top" alt="foto misha" tabindex="0">
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Anggota</p>
@@ -249,7 +248,7 @@ const TentangKami = {
                 </div>
             </div>
             <div class="card">
-                <img data-src="./foto-tim/isti.png" class="lazyload card-img-top" alt="foto isti">
+                <img data-src="./foto-tim/isti.png" class="lazyload card-img-top" alt="foto isti" tabindex="0">
                 <div class="card-body">
                     <h5>Biodata</h5>
                     <p class="btn-tim" tabindex="0">Anggota</p>

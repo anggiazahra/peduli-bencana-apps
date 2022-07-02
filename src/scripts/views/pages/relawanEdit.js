@@ -5,6 +5,9 @@ const RelawanEdit = {
   async render() {
     return `
       <style>
+        .relawan-edit {
+          padding-bottom: 50px;
+        }
         .hero-img {
           width: 100%;
           height: 400px;
@@ -66,12 +69,12 @@ const RelawanEdit = {
         }
       </style>
       <div class="relawan-edit" id="relawan-edit">
-        <img src="./edit-postingan-relawan.png" class="hero-img">
+        <img data-src="./edit-postingan-relawan.png" class="lazyload hero-img" alt="Gambar edit postingan relawan" tabindex="0">
         <form enctype="multipart/form-data">
           <div class="grid-row">
             <div class="card">
               <div class="card-body">
-                <h2>Judul Postingan</h2>
+                <h2 tabindex="0">Judul Postingan</h2>
                 <div class="mb-3">
                   <input type="text" class="form-control" id="judul-postingan">
                 </div>
@@ -79,27 +82,27 @@ const RelawanEdit = {
             </div>
             <div class="card">
               <div class="card-body">
-                <h2>Gambar/Poster</h2>
+                <h2 tabindex="0">Gambar/Poster</h2>
                 <div class="mb-3">
                   <input type="file" class="form-control" id="poster">
-                  <div class="mt-2">Kosongkan jika tidak ingin mengubah gambar poster</div>
+                  <div class="mt-2" tabindex="0">Kosongkan jika tidak ingin mengubah gambar poster</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Tanggal Pelaksanaan</h2>
+              <h2 tabindex="0">Tanggal Pelaksanaan</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Tanggal Mulai</label>
+                    <label class="form-label" tabindex="0">Tanggal Mulai</label>
                     <input type="date" class="form-control" id="tanggal-mulai">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Tanggal Berakhir</label>
+                    <label class="form-label" tabindex="0">Tanggal Berakhir</label>
                     <input type="date" class="form-control" id="tanggal-berakhir">
                   </div>
                 </div>
@@ -108,21 +111,21 @@ const RelawanEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Lokasi Bencana</h2>
+              <h2 tabindex="0">Lokasi Bencana</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Kabupaten/Kota</label>
+                    <label class="form-label" tabindex="0">Kabupaten/Kota</label>
                     <input type="text" class="form-control" id="kab-kota">
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">Provinsi</label>
+                    <label class="form-label" tabindex="0">Provinsi</label>
                     <input type="text" class="form-control" id="provinsi">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Alamat Lengkap</label>
+                    <label class="form-label" tabindex="0">Alamat Lengkap</label>
                     <textarea class="form-control" id="alamat-lengkap" rows="5"></textarea>
                   </div>
                 </div>
@@ -132,7 +135,7 @@ const RelawanEdit = {
           <div class="grid-row">
             <div class="card">
               <div class="card-body">
-                <h2>Jumlah Relawan yang Dibutuhkan</h2>
+                <h2 tabindex="0">Jumlah Relawan yang Dibutuhkan</h2>
                 <div class="mb-3">
                   <input type="number" class="form-control" id="jumlah-relawan">
                 </div>
@@ -140,7 +143,7 @@ const RelawanEdit = {
             </div>
             <div class="card">
               <div class="card-body">
-                <h2>Link grup Whatsapp/Telegram</h2>
+                <h2 tabindex="0">Link grup Whatsapp/Telegram</h2>
                 <div class="mb-3">
                   <input type="text" class="form-control" id="link-grup">
                 </div>
@@ -149,21 +152,21 @@ const RelawanEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Identitas Penanggung Jawab</h2>
+              <h2 tabindex="0">Identitas Penanggung Jawab</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Nama Penanggung Jawab</label>
+                    <label class="form-label" tabindex="0">Nama Penanggung Jawab</label>
                     <input type="text" class="form-control" id="penanggung-jawab">
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">No Telepon</label>
+                    <label class="form-label" tabindex="0">No Telepon</label>
                     <input type="text" class="form-control" id="no-telepon">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Pekerjaan</label>
+                    <label class="form-label" tabindex="0">Pekerjaan</label>
                     <input type="text" class="form-control" id="pekerjaan">
                   </div>
                 </div>
@@ -172,7 +175,7 @@ const RelawanEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Persyaratan</h2>
+              <h2 tabindex="0">Persyaratan</h2>
               <div class="mb-3">
                 <textarea class="form-control" id="persyaratan" rows="4"></textarea>
               </div>
@@ -204,7 +207,7 @@ const RelawanEdit = {
     if (cekId.status === 'error') {
       const relawanEdit = document.querySelector('#relawan-edit');
       relawanEdit.innerHTML = '';
-      relawanEdit.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found" alt="Halaman tidak ditemukan">';
+      relawanEdit.innerHTML = '<img data-src="./halaman-tidak-ditemukan.png" class="lazyload img-page-not-found" alt="Halaman tidak ditemukan" tabindex="0">';
     }
 
     if (cekId.status === 'success') {

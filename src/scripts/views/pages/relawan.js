@@ -4,6 +4,9 @@ const Relawan = {
   async render() {
     return `
       <style>
+        .list-relawan {
+          padding-bottom: 50px;
+        }
         .hero-img {
           width: 100%;
           height: 400px;
@@ -42,6 +45,12 @@ const Relawan = {
         .message {
           text-align : center;
           margin-top: 40px;
+        }
+        .grid-icon {
+          display: grid;
+          grid-template-columns: 1fr 9fr;
+          gap: 5px;
+          margin: 10px 0;
         }
         @media screen and (max-width: 1000px) {
           .grid-row {
@@ -83,7 +92,7 @@ const Relawan = {
         }
       </style>
       
-      <img src="./relawan-utama.png" class="hero-img">
+      <img data-src="./relawan-utama.png" class="lazyload hero-img" alt="Gambar relawan utama"  tabindex="0">
       <div class="d-flex flex-row-reverse" id="btn-list">
           <a href="#/relawan-tambah" class="btn btn-tambah p-2 me-2" id="btn-tambah">Tambah Data</a>
       </div>
@@ -126,10 +135,17 @@ const Relawan = {
         relawanItem.classList.add('card');
 
         relawanItem.innerHTML = `
-        <img src="./upload/relawan/${data.poster}" class="card-img-top" alt="...">
+        <img src="./upload/relawan/${data.poster}" class="card-img-top" alt="Poster relawan" tabindex="0">
         <div class="card-body">
-          <h5 class="card-title">${data.judulPostingan}</h5>
-          <p class="card-text">${data.kabKota}, ${data.provinsi}</p>
+          <h5 class="card-title" tabindex="0">${data.judulPostingan}</h5>
+          <div class="grid-icon">
+            <i class="bi bi-geo-alt-fill"></i>
+            <span tabindex="0">${data.kabKota}, ${data.provinsi}</span>
+          </div>
+          <div class="grid-icon">
+            <i class="bi bi-calendar-date-fill"></i>
+            <span tabindex="0">${data.tanggalMulai} - ${data.tanggalBerakhir}</span>
+          </div>
           <a href="#/relawan-detail/${data.id}" class="btn btn-max">Detail</a>
         </div>
       `;
@@ -141,6 +157,7 @@ const Relawan = {
       const listRelawan = document.querySelector('#list-relawan');
       const message = document.createElement('div');
       message.classList.add('message');
+      message.setAttribute('tabindex', '0');
       message.innerHTML = 'Belum ada postingan relawan';
       listRelawan.appendChild(message);
     }

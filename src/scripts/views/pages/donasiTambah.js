@@ -7,7 +7,7 @@ const DonasiTambah = {
     return `
     <style>
       .donasi-tambah {
-        padding-bottom: 30px;
+        padding-bottom: 50px;
       }
       .hero-img {
         width: 100%;
@@ -70,11 +70,11 @@ const DonasiTambah = {
       }
     </style>
       <div class="donasi-tambah" id="donasi-tambah">
-        <img src="./tambah-donasi.png" class="hero-img">
+        <img data-src="./tambah-donasi.png" class="lazyload hero-img" alt="Image hero tambah donasi" tabindex="0">
         <form enctype="multipart/form-data">
           <div class="card">
             <div class="card-body">
-              <h2>Nama Donatur</h2>
+              <h2 tabindex="0">Nama Donatur</h2>
               <div class="mb-3">
                 <input type="text" class="form-control" id="nama-donatur" placeholder="Diperbolehkan memakai nama samaran">
               </div>
@@ -82,25 +82,25 @@ const DonasiTambah = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Informasi Transfer Donasi</h2>
+              <h2 tabindex="0">Informasi Transfer Donasi</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Nama Bank</label>
+                    <label class="form-label" tabindex="0">Nama Bank</label>
                     <input type="text" class="form-control" id="nama-bank" placeholder="Nama Bank">
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">No Rekening</label>
+                    <label class="form-label" tabindex="0">No Rekening</label>
                     <input type="text" class="form-control" id="no-rekening" placeholder="No Rekening">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Atas Nama</label>
+                    <label class="form-label" tabindex="0">Atas Nama</label>
                     <input type="text" class="form-control" id="atas-nama" placeholder="Atas Nama">
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">Jumlah Donasi</label>
+                    <label class="form-label" tabindex="0">Jumlah Donasi</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Rp</span>
@@ -114,7 +114,7 @@ const DonasiTambah = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Bukti Pembayaran</h2>
+              <h2 tabindex="0">Bukti Pembayaran</h2>
               <div class="mb-3">
                 <input type="file" class="form-control" id="bukti-pembayaran" placeholder="Bukti Pembayaran">
               </div>
@@ -147,7 +147,7 @@ const DonasiTambah = {
       const donasiTambah = document.querySelector('#donasi-tambah');
       donasiTambah.classList.remove('grid-row');
       donasiTambah.innerHTML = '';
-      donasiTambah.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found">';
+      donasiTambah.innerHTML = '<img data-src="./halaman-tidak-ditemukan.png" class="lazyload  img-page-not-found" alt="Gambar halaman tidak ditemukan" tabindex="0">';
     }
 
     if (cekId.status === 'success') {

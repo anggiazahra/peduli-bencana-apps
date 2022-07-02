@@ -6,7 +6,7 @@ const RelawanRiwayat = {
     return `
       <style>
         .relawan-riwayat {
-          padding-top: 30px;
+          padding: 30px 0 50px 0;
         }
         .hero-img {
           width: 100%;
@@ -128,13 +128,13 @@ const RelawanRiwayat = {
         }
       </style>
 
-        <div class="relawan-riwayat">
-          <div class="grid-btn btn-border">
-            <button class="btn btn-max sub-title" id="btn-postingan">Postingan Relawan</button>
-            <button class="btn btn-max sub-title" id="btn-relawan">Relawan</button>
-          </div>
-          <div id="detail-riwayat"></div>
+      <div class="relawan-riwayat">
+        <div class="grid-btn btn-border">
+          <button class="btn btn-max sub-title" id="btn-postingan">Postingan Relawan</button>
+          <button class="btn btn-max sub-title" id="btn-relawan">Relawan</button>
         </div>
+        <div id="detail-riwayat"></div>
+      </div>
     `;
   },
 
@@ -182,7 +182,7 @@ const RelawanRiwayat = {
 
     const riwayatPostingan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<img src="./riwayat-postingan-relawan.png" class="hero-img">';
+      detailRiwayat.innerHTML = '<img data-src="./riwayat-postingan-relawan.png" class="lazyload hero-img" alt="Gambar riwayat postingan" tabindex="0">';
 
       const listPostinganRelawan = document.createElement('div');
       listPostinganRelawan.setAttribute('class', 'grid-row');
@@ -195,10 +195,10 @@ const RelawanRiwayat = {
           itemPostinganRelawan.classList.add('card');
           itemPostinganRelawan.innerHTML = `
             <div class="card-body">
-              <h2>${data.judulPostingan}</h2>
-              <div>Periode relawan : ${data.tanggalMulai} - ${data.tanggalBerakhir}</div>
-              <div>Lokasi bencana :</div>
-              <div>${data.alamatLengkap}, ${data.kabKota} - ${data.provinsi}</div>
+              <h2 tabindex="0">${data.judulPostingan}</h2>
+              <div tabindex="0">Periode relawan : ${data.tanggalMulai} - ${data.tanggalBerakhir}</div>
+              <div tabindex="0">Lokasi bencana :</div>
+              <div tabindex="0">${data.alamatLengkap}, ${data.kabKota} - ${data.provinsi}</div>
               <div class="d-flex flex-row-reverse mt-4">
                 <a href="#/relawan-detail/${data.id}" class="btn btn-color p-2 ms-2">Detail</a>
                 <button type="button" class="btn btn-color p-2 ms-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop${data.id}" id="btn-list-relawan-${data.id}">Lihat Relawan</button>
@@ -212,7 +212,7 @@ const RelawanRiwayat = {
               <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Daftar Relawan</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel" tabindex="0">Daftar Relawan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" id="modal-body">
@@ -250,19 +250,19 @@ const RelawanRiwayat = {
               postinganRelawanFilterById.forEach((data) => {
                 listRelawan.innerHTML = '';
                 listRelawan.innerHTML = `
-                  <div class="confirm-title">Jumlah relawan yang mendaftar : ${jumlahRelawan}</div>
+                  <div class="confirm-title" tabindex="0">Jumlah relawan yang mendaftar : ${jumlahRelawan}</div>
                 `;
 
                 const itemRelawan = document.createElement('div');
                 itemRelawan.classList.add('card');
                 itemRelawan.innerHTML = `
                 <div class="card-body item-relawan-grid">
-                  <img src="./img-profile.png" class="img-profile"></img>
+                  <img data-src="./img-profile.png" class="lazyload img-profile" alt="Icon profile">
                   <div>
-                    <div><span class="text-bold">${data.namaLengkap}</span></div>
-                    <div>No telepon : ${data.noTelepon}</div>
-                    <div>Domisili : ${data.kabKota}, ${data.provinsi}</div>
-                    <div>Tanggal daftar : ${data.tanggalDaftar}</div>
+                    <div tabindex="0"><span class="text-bold">${data.namaLengkap}</span></div>
+                    <div tabindex="0">No telepon : ${data.noTelepon}</div>
+                    <div tabindex="0">Domisili : ${data.kabKota}, ${data.provinsi}</div>
+                    <div tabindex="0">Tanggal daftar : ${data.tanggalDaftar}</div>
                   </div>
                 </div>
               `;
@@ -273,7 +273,7 @@ const RelawanRiwayat = {
           } else if (postinganRelawanFilterById.length < 1) {
             listRelawan.innerHTML = '';
             listRelawan.innerHTML = `
-              <div class="confirm-title">Jumlah relawan yang mendaftar : ${jumlahRelawan}</div>
+              <div class="confirm-title" tabindex="0">Jumlah relawan yang mendaftar : ${jumlahRelawan}</div>
             `;
 
             const message = document.createElement('div');
@@ -283,7 +283,7 @@ const RelawanRiwayat = {
         });
       } else if (postinganRelawanByUsername.length < 1) {
         const message = document.createElement('div');
-        message.innerHTML = '<div class="message">Anda belum pernah membuat postingan relawan</div>';
+        message.innerHTML = '<div class="message" tabindex="0">Anda belum pernah membuat postingan relawan</div>';
         detailRiwayat.appendChild(message);
       }
     };
@@ -291,7 +291,7 @@ const RelawanRiwayat = {
 
     const riwayatRelawan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<img src="./riwayat-kegiatan-relawan.png" class="hero-img">';
+      detailRiwayat.innerHTML = '<img data-src="./riwayat-kegiatan-relawan.png" class="lazyload hero-img" alt="Gambar riwayat kegiatan relawan" tabindex="0">';
 
       const listRelawan = document.createElement('div');
       listRelawan.setAttribute('class', 'grid-row');
@@ -309,12 +309,12 @@ const RelawanRiwayat = {
             itemRelawan.classList.add('card');
             itemRelawan.innerHTML = `
               <div class="card-body item-relawan-grid">
-                <img src="./img-profile.png" class="img-profile"></img>
+                <img data-src="./img-profile.png" class="lazyload img-profile" alt="Icon profile"></img>
                 <div>
-                  <div>Menjadi relawan pada kegiatan :<div>
-                  <div class="text-bold">${postinganRelawan.judulPostingan}</div>
-                  <div>Atas nama ${data.namaLengkap}</div>
-                  <div>Tanggal daftar : ${data.tanggalDaftar}</div>
+                  <div tabindex="0">Menjadi relawan pada kegiatan :</div>
+                  <div class="text-bold" tabindex="0">${postinganRelawan.judulPostingan}</div>
+                  <div tabindex="0">Atas nama ${data.namaLengkap}</div>
+                  <div tabindex="0">Tanggal daftar : ${data.tanggalDaftar}</div>
                   <div class="d-flex flex-row-reverse">
                     <a class="btn btn-color p-2 mt-2" href="#/relawan-detail/${postinganRelawan.id}">Detail Kegiatan</a>
                   </div>
@@ -326,7 +326,7 @@ const RelawanRiwayat = {
         });
       } else if (listRelawanByUsername.length < 1) {
         const message = document.createElement('div');
-        message.innerHTML = '<div class="message">Anda belum pernah mengikuti kegiatan relawan</div>';
+        message.innerHTML = '<div class="message" tabindex="0">Anda belum pernah mengikuti kegiatan relawan</div>';
         detailRiwayat.appendChild(message);
       }
     };

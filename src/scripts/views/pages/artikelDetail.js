@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import DataPostinganArtikel from '../../web-server/request-postingan-artikel';
 import UrlParser from '../../routes/url-parser';
 
@@ -15,18 +13,8 @@ const ArtikelDetail = {
           margin : 10px 0 20px 0;
           font-size: 28px;
         }
-        .btn-edit{
-          text-decoration: none;
-          padding: 10px 20px;
-          margin: 0;
-          border: none;
-          border-radius: 5px;
-          background: #1C4966;
-          color: #fff;
-        }
         .btn {
           margin: 0 5px;
-          padding: 10px 12px;
         }
         #posterArtikel img {
           width: 100%;
@@ -97,7 +85,7 @@ const ArtikelDetail = {
     dataPostinganArtikel.forEach((data) => {
       const posterArtikel = document.querySelector('#posterArtikel');
       posterArtikel.innerHTML = `
-        <img data-src="./upload/artikel/${data.gambarArtikel}" alt="Gambar artikel" class="lazyload img-detail">
+        <img data-src="./upload/artikel/${data.gambarArtikel}" alt="Gambar artikel" class="lazyload img-detail" tabindex="0">
       `;
 
       const judulPostingan = document.querySelector('#judul-postingan');
@@ -111,7 +99,7 @@ const ArtikelDetail = {
 
       const buttonGrid = document.querySelector('#btn-grid');
       const tombolEdit = document.createElement('a');
-      tombolEdit.classList.add('btn-edit');
+      tombolEdit.classList.add('btn', 'btn-edit');
       tombolEdit.innerHTML = 'Edit';
       tombolEdit.setAttribute('href', `#/artikel-edit/${idPostinganArtikel}`);
 

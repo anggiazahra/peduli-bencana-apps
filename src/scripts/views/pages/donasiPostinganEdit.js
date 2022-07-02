@@ -12,7 +12,7 @@ const DonasiPostinganEdit = {
           object-position: center;
         }
         .donasi-edit {
-          padding: 20px 0;
+          padding: 20px 0 50px 0;
         }
         .grid-row {
           display: grid;
@@ -78,12 +78,12 @@ const DonasiPostinganEdit = {
       </style>
 
       <div class="donasi-edit" id="donasi-edit">
-        <img src="./edit-postingan-donasi.png" class="hero-img">
+        <img data-src="./edit-postingan-donasi.png" class="lazyload hero-img" alt="Gambar edit postingan donasi" tabindex="0">
         <form enctype="multipart/form-data">
           <div class="grid-row">
             <div class="card">
               <div class="card-body">
-                <h2>Judul Postingan</h2>
+                <h2 tabindex="0">Judul Postingan</h2>
                 <div class="mb-3">
                   <input type="text" class="form-control" id="judul-postingan">
                 </div>
@@ -91,27 +91,27 @@ const DonasiPostinganEdit = {
             </div>
             <div class="card">
               <div class="card-body">
-                <h2>Gambar/Poster</h2>
+                <h2 tabindex="0">Gambar/Poster</h2>
                 <div class="mb-3">
                   <input type="file" class="form-control" id="poster">
-                  <div class="message">Kosongkan jika tidak ingin mengubah gambar poster</div>
+                  <div class="message" tabindex="0">Kosongkan jika tidak ingin mengubah gambar poster</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Periode Donasi</h2>
+              <h2 tabindex="0">Periode Donasi</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Tanggal Mulai</label>
+                    <label class="form-label" tabindex="0">Tanggal Mulai</label>
                     <input type="date" class="form-control" id="tanggal-mulai" date-format="mm/dd/yyyy">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Tanggal Berakhir</label>
+                    <label class="form-label" tabindex="0">Tanggal Berakhir</label>
                     <input type="date" class="form-control" id="tanggal-berakhir" date-format="mm/dd/yyyy">
                   </div>
                 </div>
@@ -120,21 +120,21 @@ const DonasiPostinganEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Lokasi Bencana</h2>
+              <h2 tabindex="0">Lokasi Bencana</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Kabupaten/Kota</label>
+                    <label class="form-label" tabindex="0">Kabupaten/Kota</label>
                     <input type="text" class="form-control" id="kab-kota">
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">Provinsi</label>
+                    <label class="form-label" tabindex="0">Provinsi</label>
                     <input type="text" class="form-control" id="provinsi">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Alamat Lengkap</label>
+                    <label class="form-label" tabindex="0">Alamat Lengkap</label>
                     <textarea class="form-control" id="alamat-lengkap" rows="5"></textarea>
                   </div>
                 </div>
@@ -143,21 +143,21 @@ const DonasiPostinganEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Identitas Penanggung Jawab</h2>
+              <h2 tabindex="0">Identitas Penanggung Jawab</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                      <label class="form-label">Nama Penanggung Jawab</label>
+                      <label class="form-label" tabindex="0">Nama Penanggung Jawab</label>
                       <input type="text" class="form-control" id="penanggung-jawab">
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">No Telepon</label>
+                    <label class="form-label" tabindex="0">No Telepon</label>
                     <input type="text" class="form-control" id="no-telepon">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Pekerjaan</label>
+                    <label class="form-label" tabindex="0">Pekerjaan</label>
                     <input type="text" class="form-control" id="pekerjaan">
                   </div>
                 </div>
@@ -166,21 +166,21 @@ const DonasiPostinganEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Pembayaran</h2>
+              <h2 tabindex="0">Pembayaran</h2>
               <div class="grid-row">
                 <div class="box-1">
                   <div class="mb-3">
-                    <label class="form-label">Nama Bank</label>
+                    <label class="form-label" tabindex="0">Nama Bank</label>
                     <input type="text" class="form-control" id="nama-bank">
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">No Rekening</label>
+                    <label class="form-label" tabindex="0">No Rekening</label>
                     <input type="text" class="form-control" id="no-rekening">
                   </div>
                 </div>
                 <div class="box-2">
                   <div class="mb-3">
-                    <label class="form-label">Atas Nama</label>
+                    <label class="form-label" tabindex="0">Atas Nama</label>
                     <input type="text" class="form-control" id="atas-nama">
                   </div>
                 </div>
@@ -189,7 +189,7 @@ const DonasiPostinganEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Target Donasi</h2>
+              <h2 tabindex="0">Target Donasi</h2>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Rp</span>
@@ -200,7 +200,7 @@ const DonasiPostinganEdit = {
           </div>
           <div class="card">
             <div class="card-body">
-              <h2>Deskripsi Donasi</h2>
+              <h2 tabindex="0">Deskripsi Donasi</h2>
               <div class="mb-3">
                 <textarea class="form-control" id="deskripsi-donasi" rows="4"></textarea>
               </div>
@@ -233,7 +233,7 @@ const DonasiPostinganEdit = {
       const donasiEdit = document.querySelector('#donasi-edit');
       donasiEdit.classList.remove('grid-row');
       donasiEdit.innerHTML = '';
-      donasiEdit.innerHTML = '<img src="./halaman-tidak-ditemukan.png" class="img-page-not-found">';
+      donasiEdit.innerHTML = '<img data-src="./halaman-tidak-ditemukan.png" class="lazyload img-page-not-found" alt="Gambar halaman tidak ditemukan" tabindex="0">';
     }
 
     if (cekId.status === 'success') {

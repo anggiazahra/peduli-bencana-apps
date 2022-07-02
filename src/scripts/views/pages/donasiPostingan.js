@@ -4,9 +4,6 @@ const DonasiPostingan = {
   async render() {
     return `
     <style>
-      .container {
-        padding-top: 20px;
-      }
       .hero-img {
         width: 100%;
         height: 400px;
@@ -31,7 +28,9 @@ const DonasiPostingan = {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 20px;
-        margin: 20px 0;
+      }
+      .list-donasi {
+        margin: 20px 0 50px 0;
       }
       .card img {
         width: 100%;
@@ -48,6 +47,15 @@ const DonasiPostingan = {
       .message {
         text-align : center;
         margin-top: 40px;
+      }
+      i {
+        font-style: normal;
+      }
+      .grid-icon {
+        display: grid;
+        grid-template-columns: 1fr 9fr;
+        gap: 5px;
+        margin: 10px 0;
       }
       @media screen and (max-width: 1000px) {
         .grid-row {
@@ -89,14 +97,11 @@ const DonasiPostingan = {
       }
     </style>
 
-    <img src="./donasi-utama.png" class="hero-img">
+    <img data-src="./donasi-utama.png" class="lazyload hero-img" alt="Hero image donasi utama" tabindex="0">
     <div class="d-flex flex-row-reverse" id="btn-list">
       <a href="#/donasi-postingan-tambah" class="btn btn-tambah p-2" id="btn-tambah">Tambah Data</a>
     </div>
-        
-    <div class="list-donasi grid-row" id="list-donasi">
-
-    </div>
+    <div class="list-donasi grid-row" id="list-donasi"></div>
     `;
   },
 
@@ -134,10 +139,17 @@ const DonasiPostingan = {
         donasiItem.classList.add('card');
 
         donasiItem.innerHTML = `
-        <img src="./upload/donasi/${data.namaPoster}" class="card-img-top" alt="...">
+        <img data-src="./upload/donasi/${data.namaPoster}" class="lazyload card-img-top" alt="Poster donasi" tabindex="0">
         <div class="card-body">
-          <h2 class="card-title">${data.judulPostingan}</h2>
-          <p class="card-text">${data.kabKota}, ${data.provinsi}</p>
+          <h2 class="card-title" tabindex="0">${data.judulPostingan}</h2>
+          <div class="grid-icon">
+            <i class="bi bi-geo-alt-fill"></i>
+            <span tabindex="0">${data.kabKota}, ${data.provinsi}</span>
+          </div>
+          <div class="grid-icon">
+            <i class="bi bi-calendar-date-fill"></i>
+            <span tabindex="0">${data.tanggalMulai} - ${data.tanggalBerakhir}</span>
+          </div>
           <a href="#/donasi-postingan-detail/${data.id}" class="btn btn-max">Detail</a>
         </div>
       `;
@@ -149,6 +161,7 @@ const DonasiPostingan = {
       const listDonasi = document.querySelector('#list-donasi');
       const message = document.createElement('div');
       message.classList.add('message');
+      message.setAttribute('tabindex', '0');
       message.innerHTML = 'Belum ada postingan donasi';
       listDonasi.appendChild(message);
     }

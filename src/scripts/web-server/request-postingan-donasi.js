@@ -65,7 +65,7 @@ class DataPostinganDonasi {
         }
         if (data.status === 'success') {
           swal('Berhasil Diperbaharui', data.message, 'success');
-          window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
+          window.location.replace('#/donasi-riwayat');
         }
       })
       .catch((error) => console.log('error', error));
@@ -87,7 +87,7 @@ class DataPostinganDonasi {
         }
         if (data.status === 'success') {
           swal('Berhasil Diperbaharui', data.message, 'success');
-          window.location.replace(`#/donasi-postingan-detail/${idPostinganDonasi}`);
+          window.location.replace('#/donasi-riwayat');
         }
       })
       .catch((error) => console.log('error', error));

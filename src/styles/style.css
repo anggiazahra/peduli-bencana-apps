@@ -91,8 +91,9 @@ html {
 }
 
 .btn {
-    background-color: #0353A0;
+    background-color: #1C4966;
     color: white;
+    padding: 9px 12px
 }
 
 .btn-logout, .btn-login {
@@ -100,11 +101,33 @@ html {
     color: black;
     border-radius: 20px;
     margin: 0;
-    margin-bottom: 10px;
 }
 
 .swal-text {
     text-align: center;
+}
+
+.container {
+    max-width: 100% !important;
+    width: 90%;
+}
+
+footer {
+    color: whitesmoke;
+    background-color: #1C4966;
+}
+footer h5 {
+    color: whitesmoke;
+}
+footer a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+footer i {
+    margin: 7px;
+}
+footer .container {
+    padding-top: 20px;
 }
 
 @media screen and (max-width: 820px) {
@@ -151,7 +174,7 @@ html {
     }
 
     .btn-logout, .btn-login {
-        margin: 0 20%;
+        margin: 0 20% 10px 20%;
     }
 }
 
@@ -162,6 +185,13 @@ html {
 
     .app-bar .app-bar__brand h1 {
         font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .container {
+        width: 100%;
+        padding: 0 20px;
     }
 }
 

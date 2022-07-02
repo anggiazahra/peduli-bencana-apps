@@ -22,7 +22,7 @@ const Login = {
         }
         .card {
           width: 50%;
-          margin: 30px auto;
+          margin: 40px auto 100px auto;
         }
         input {
           height: 44px;
@@ -50,18 +50,18 @@ const Login = {
       <div class="card">
         <div class="card-body">
           <form enctype="multipart/form-data">
-            <h1>Login</h1>
+            <h1 tabindex="0">Login</h1>
             <div class="mb-3">
-              <label class="form-label">Username</label>
+              <label class="form-label" tabindex="0">Username</label>
               <input type="text" class="form-control" id="username" placeholder="Username">
             </div>
             <div class="mb-3">
-              <label class="form-label">Password</label>
+              <label class="form-label" tabindex="0">Password</label>
               <input type="password" class="form-control" id="password" placeholder="Passsword" autocomplete="on">
             </div>
             <div>
               <button class="btn btn-max" type="submit" id="button-submit">Login</button>
-              <div class="text-center">Belum punya akun? Registrasi sekarang juga!</div>
+              <div class="text-center" tabindex="0">Belum punya akun? Registrasi sekarang juga!</div>
               <a class="btn btn-max" href="#/registrasi" id="button-login">Registrasi</a>
             </div>
           </form>
