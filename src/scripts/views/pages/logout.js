@@ -10,7 +10,7 @@ const Logout = {
     });
 
     if (logout) {
-      window.location.replace('#/login');
+      window.location.replace('#/landing-page');
       window.location.reload();
     }
   },

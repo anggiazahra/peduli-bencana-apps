@@ -82,6 +82,7 @@ class DataPostinganArtikel {
       .then((response) => response.text())
       .then((result) => {
         const data = JSON.parse(result);
+        console.log(data);
         if (data.status === 'error') {
           swal('Gagal Diperbaharui', data.message, 'error');
         }

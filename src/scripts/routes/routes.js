@@ -25,6 +25,7 @@ import ArtikelEdit from '../views/pages/artikelEdit';
 
 const routes = {
   '/': LandingPage, // default page
+  '/landing-page': LandingPage,
   '/login': Login,
   '/logout': Logout,
   '/registrasi': Registrasi,

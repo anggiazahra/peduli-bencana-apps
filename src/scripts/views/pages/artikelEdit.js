@@ -83,7 +83,10 @@ const ArtikelEdit = {
     </style>
 
     <div class="artikel-edit" id="artikel-edit">
-      <img data-src="./edit-postingan-artikel.png" class="lazyload hero-img" alt="Edit postingan artikel" tabindex="0">
+      <picture>
+        <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/edit-postingan-artikell-small.jpg" class="hero-img" tabindex="0">
+        <img data-src="./heros/edit-postingan-artikel-large.jpg" class="lazyload hero-img" alt="Hero image edit postingan artikel" tabindex="0">
+      </picture>
       <div class="card">
         <div class="card-body">
           <form enctype="multipart/form-data">

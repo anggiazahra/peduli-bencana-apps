@@ -389,24 +389,27 @@ const DonasiPostinganDetail = {
           arrayDonasi.push(parseInt(item.jumlahDonasi));
         });
 
-        // Menghitung total donasi yang terkumpul
-        const totalDonasi = arrayDonasi.reduce((total, num) => total + num);
-
         const donasiTerkumpul = document.querySelector('#donasi-terkumpul');
-        donasiTerkumpul.innerHTML = `${formatToCurrency(totalDonasi)}`;
-
-        const progressBar = document.querySelector('#progress-bar');
-        const presentase = (totalDonasi / dataPostingan.targetDonasi) * 100;
-        progressBar.setAttribute('aria-valuenow', presentase.toFixed(1));
-
         const progressValue = document.querySelector('#progress-value');
+        const progressBar = document.querySelector('#progress-bar');
 
-        if (presentase < 100) {
-          progressBar.style.width = `${presentase.toFixed(1)}%`;
-          progressValue.innerHTML = `${presentase.toFixed(1)}%`;
-        } else if (presentase >= 100) {
-          progressBar.style.width = '100%';
-          progressValue.innerHTML = '100%';
+        if (listDonasiSudahDikonfirmasi.length > 0) {
+          const totalDonasi = arrayDonasi.reduce((total, num) => total + num);
+          donasiTerkumpul.innerHTML = `${formatToCurrency(totalDonasi)}`;
+          const presentase = (totalDonasi / dataPostingan.targetDonasi) * 100;
+          progressBar.setAttribute('aria-valuenow', presentase.toFixed(1));
+
+          if (presentase < 100) {
+            progressBar.style.width = `${presentase.toFixed(1)}%`;
+            progressValue.innerHTML = `${presentase.toFixed(1)}%`;
+          } else if (presentase >= 100) {
+            progressBar.style.width = '100%';
+            progressValue.innerHTML = '100%';
+          }
+        } else if (listDonasiSudahDikonfirmasi.length < 1) {
+          donasiTerkumpul.innerHTML = 'Rp 0';
+          progressBar.style.width = '0';
+          progressValue.innerHTML = '0%';
         }
       };
       const tampilDonasiSudahDikonfirmasi = (listDonasiSudahDikonfirmasi) => {

@@ -518,7 +518,7 @@ const Mitigasi = {
         <div class="card-body">
             <h1 tabindex="0">Kekeringan</h1>
             <picture>
-                <source type="image/webp" srcset="./mitigasi/kekeringant.webp">
+                <source type="image/webp" srcset="./mitigasi/kekeringan.webp">
                 <img data-src="./mitigasi/kekeringan.jpg" class="lazyload hero-img" alt="Animasi kekeringan" tabindex="0">
             </picture>
             <div class="sumber-gambar">

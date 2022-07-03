@@ -171,6 +171,15 @@ const RelawanRiwayat = {
       return listPostingan;
     };
 
+    // Data pendaftaran berdasarkan idPostinganRelawan
+    const dataRelawanByIdPostinganRelawan = async (idPostinganRelawan) => {
+      const resultTambahDonasi = await DataPendaftaranRelawan.getAllPendaftaranRelawan();
+      const listTambahDonasi = resultTambahDonasi.data.relawan;
+      const listRelawan = listTambahDonasi.filter((item) => item.idPostinganRelawan.toLowerCase()
+      === idPostinganRelawan.toLowerCase());
+      return listRelawan;
+    };
+
     // Data pendaftaran berdasarkan session username
     const dataRelawanByUsername = async () => {
       const resultTambahDonasi = await DataPendaftaranRelawan.getAllPendaftaranRelawan();
@@ -241,18 +250,19 @@ const RelawanRiwayat = {
 
             if (hapusPostingan) {
               await DataPostinganRelawan.deletePostinganRelawanById(data.id);
+              riwayatPostingan();
             }
           });
 
-          // Memfilter data relawan
-          const postinganRelawanFilterById = await dataPostinganRelawanById(data.id);
+          // Memfilter data relawan berdasarkan id
+          const pendaftaranRelawanById = await dataRelawanByIdPostinganRelawan(data.id);
 
           const listRelawan = document.querySelector(`#list-relawan-${data.id}`);
-          const jumlahRelawan = postinganRelawanFilterById.length;
+          const jumlahRelawan = pendaftaranRelawanById.length;
 
-          if (postinganRelawanFilterById.length > 0) {
+          if (pendaftaranRelawanById.length > 0) {
             const listPendaftaranRelawan = () => {
-              postinganRelawanFilterById.forEach((data) => {
+              pendaftaranRelawanById.forEach((data) => {
                 listRelawan.innerHTML = '';
                 listRelawan.innerHTML = `
                   <div class="confirm-title" tabindex="0">Jumlah relawan yang mendaftar : ${jumlahRelawan}</div>
@@ -275,7 +285,7 @@ const RelawanRiwayat = {
               });
             };
             listPendaftaranRelawan();
-          } else if (postinganRelawanFilterById.length < 1) {
+          } else if (pendaftaranRelawanById.length < 1) {
             listRelawan.innerHTML = '';
             listRelawan.innerHTML = `
               <div class="confirm-title" tabindex="0">Jumlah relawan yang mendaftar : ${jumlahRelawan}</div>
@@ -296,7 +306,12 @@ const RelawanRiwayat = {
 
     const riwayatRelawan = async () => {
       detailRiwayat.innerHTML = '';
-      detailRiwayat.innerHTML = '<img data-src="./riwayat-kegiatan-relawan.png" class="lazyload hero-img" alt="Gambar riwayat kegiatan relawan" tabindex="0">';
+      detailRiwayat.innerHTML = `
+        <picture>
+          <source media="(max-width: 600px)" type="image/jpeg" srcset="./heros/riwayat-kegiatan-relawan-small.jpg" class="hero-img" tabindex="0">
+          <img data-src="./heros/riwayat-kegiatan-relawan-large.jpg" class="lazyload hero-img" alt="Gambar riwayat relawan" tabindex="0">
+        </picture>
+      `;
 
       const listRelawan = document.createElement('div');
       listRelawan.setAttribute('class', 'grid-row');

@@ -94,6 +94,7 @@ const ArtikelDetail = {
       const table = document.querySelector('#card-text');
       table.innerHTML = `
         <p tabindex="0">${data.isiArtikel}</p>
+        <p tabindex="0">Diposting tanggal ${data.insertedAt}</p>
         <p tabindex="0">Sumber: ${data.sumber}</p>
       `;
 
